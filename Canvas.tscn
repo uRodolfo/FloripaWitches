@@ -1,0 +1,222 @@
+[gd_scene format=3 uid="uid://bxobo1wcgiahr"]
+
+[ext_resource type="Texture2D" uid="uid://bgngy124lk0ty" path="res://Notepad Assets/bloco.png" id="1_82ir8"]
+[ext_resource type="Script" uid="uid://cq87jg4ojbv48" path="res://Canvas.gd" id="1_w0rvv"]
+[ext_resource type="Texture2D" uid="uid://b126tiusvuh3y" path="res://Notepad Assets/bloco pintado.png" id="3_4cguh"]
+[ext_resource type="Script" uid="uid://bqt73l1wpbbac" path="res://canvas_6.gd" id="4_dr104"]
+[ext_resource type="Script" uid="uid://0weo6164joej" path="res://canvas_7.gd" id="5_t4x2o"]
+[ext_resource type="Script" uid="uid://bv4thtudbdy27" path="res://canvas_9.gd" id="7_tyhjp"]
+[ext_resource type="Script" uid="uid://flt6ppdg7a53" path="res://canvas_12.gd" id="9_642ur"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_82ir8"]
+size = Vector2(76, 76)
+
+[node name="Node2D" type="Node2D" unique_id=2132040481]
+
+[node name="Canvas" type="Area2D" parent="." unique_id=374812129]
+script = ExtResource("1_w0rvv")
+normal = ExtResource("1_82ir8")
+pintado = ExtResource("3_4cguh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Canvas" unique_id=1274966433]
+shape = SubResource("RectangleShape2D_82ir8")
+
+[node name="Sprite2D" type="Sprite2D" parent="Canvas" unique_id=3553343]
+texture = ExtResource("1_82ir8")
+
+[node name="Canvas2" type="Area2D" parent="." unique_id=1816544101]
+position = Vector2(76, 0)
+script = ExtResource("1_w0rvv")
+normal = ExtResource("1_82ir8")
+pintado = ExtResource("3_4cguh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Canvas2" unique_id=274654740]
+shape = SubResource("RectangleShape2D_82ir8")
+
+[node name="Sprite2D" type="Sprite2D" parent="Canvas2" unique_id=373644302]
+texture = ExtResource("1_82ir8")
+
+[node name="Canvas3" type="Area2D" parent="." unique_id=1153610606]
+position = Vector2(152, 0)
+script = ExtResource("1_w0rvv")
+normal = ExtResource("1_82ir8")
+pintado = ExtResource("3_4cguh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Canvas3" unique_id=1510773872]
+shape = SubResource("RectangleShape2D_82ir8")
+
+[node name="Sprite2D" type="Sprite2D" parent="Canvas3" unique_id=388638063]
+texture = ExtResource("1_82ir8")
+
+[node name="Canvas4" type="Area2D" parent="." unique_id=1766660218]
+position = Vector2(228, 0)
+script = ExtResource("1_w0rvv")
+normal = ExtResource("1_82ir8")
+pintado = ExtResource("3_4cguh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Canvas4" unique_id=1764599268]
+shape = SubResource("RectangleShape2D_82ir8")
+
+[node name="Sprite2D" type="Sprite2D" parent="Canvas4" unique_id=1032049397]
+texture = ExtResource("1_82ir8")
+
+[node name="Canvas5" type="Area2D" parent="." unique_id=921966174]
+position = Vector2(0, 76)
+script = ExtResource("1_w0rvv")
+normal = ExtResource("1_82ir8")
+pintado = ExtResource("3_4cguh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Canvas5" unique_id=1749835502]
+shape = SubResource("RectangleShape2D_82ir8")
+
+[node name="Sprite2D" type="Sprite2D" parent="Canvas5" unique_id=2023900421]
+texture = ExtResource("1_82ir8")
+
+[node name="Canvas6" type="Area2D" parent="." unique_id=1295660800]
+position = Vector2(76, 76)
+script = ExtResource("4_dr104")
+normal = ExtResource("1_82ir8")
+pintado = ExtResource("3_4cguh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Canvas6" unique_id=1368600160]
+shape = SubResource("RectangleShape2D_82ir8")
+
+[node name="Sprite2D" type="Sprite2D" parent="Canvas6" unique_id=1548948046]
+texture = ExtResource("1_82ir8")
+
+[node name="Canvas7" type="Area2D" parent="." unique_id=403008807]
+position = Vector2(152, 76)
+script = ExtResource("5_t4x2o")
+normal = ExtResource("1_82ir8")
+pintado = ExtResource("3_4cguh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Canvas7" unique_id=1703826810]
+shape = SubResource("RectangleShape2D_82ir8")
+
+[node name="Sprite2D" type="Sprite2D" parent="Canvas7" unique_id=751776238]
+texture = ExtResource("1_82ir8")
+
+[node name="Canvas8" type="Area2D" parent="." unique_id=762377734]
+position = Vector2(228, 76)
+script = ExtResource("1_w0rvv")
+normal = ExtResource("1_82ir8")
+pintado = ExtResource("3_4cguh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Canvas8" unique_id=1071981306]
+shape = SubResource("RectangleShape2D_82ir8")
+
+[node name="Sprite2D" type="Sprite2D" parent="Canvas8" unique_id=1807896902]
+texture = ExtResource("1_82ir8")
+
+[node name="Canvas9" type="Area2D" parent="." unique_id=706297293]
+position = Vector2(0, 152)
+script = ExtResource("7_tyhjp")
+normal = ExtResource("1_82ir8")
+pintado = ExtResource("3_4cguh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Canvas9" unique_id=1321132494]
+shape = SubResource("RectangleShape2D_82ir8")
+
+[node name="Sprite2D" type="Sprite2D" parent="Canvas9" unique_id=1150844982]
+texture = ExtResource("1_82ir8")
+
+[node name="Canvas10" type="Area2D" parent="." unique_id=1954956982]
+position = Vector2(76, 152)
+script = ExtResource("1_w0rvv")
+normal = ExtResource("1_82ir8")
+pintado = ExtResource("3_4cguh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Canvas10" unique_id=1529654365]
+shape = SubResource("RectangleShape2D_82ir8")
+
+[node name="Sprite2D" type="Sprite2D" parent="Canvas10" unique_id=282380245]
+texture = ExtResource("1_82ir8")
+
+[node name="Canvas11" type="Area2D" parent="." unique_id=218949105]
+position = Vector2(152, 152)
+script = ExtResource("1_w0rvv")
+normal = ExtResource("1_82ir8")
+pintado = ExtResource("3_4cguh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Canvas11" unique_id=1102519607]
+shape = SubResource("RectangleShape2D_82ir8")
+
+[node name="Sprite2D" type="Sprite2D" parent="Canvas11" unique_id=675298497]
+texture = ExtResource("1_82ir8")
+
+[node name="Canvas12" type="Area2D" parent="." unique_id=949370453]
+position = Vector2(228, 152)
+script = ExtResource("9_642ur")
+normal = ExtResource("1_82ir8")
+pintado = ExtResource("3_4cguh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Canvas12" unique_id=1615862255]
+shape = SubResource("RectangleShape2D_82ir8")
+
+[node name="Sprite2D" type="Sprite2D" parent="Canvas12" unique_id=2084442908]
+texture = ExtResource("1_82ir8")
+
+[node name="Canvas13" type="Area2D" parent="." unique_id=2000241800]
+position = Vector2(0, 228)
+script = ExtResource("1_w0rvv")
+normal = ExtResource("1_82ir8")
+pintado = ExtResource("3_4cguh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Canvas13" unique_id=1445621175]
+shape = SubResource("RectangleShape2D_82ir8")
+
+[node name="Sprite2D" type="Sprite2D" parent="Canvas13" unique_id=691740882]
+texture = ExtResource("1_82ir8")
+
+[node name="Canvas14" type="Area2D" parent="." unique_id=315655940]
+position = Vector2(76, 228)
+script = ExtResource("1_w0rvv")
+normal = ExtResource("1_82ir8")
+pintado = ExtResource("3_4cguh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Canvas14" unique_id=1364890322]
+shape = SubResource("RectangleShape2D_82ir8")
+
+[node name="Sprite2D" type="Sprite2D" parent="Canvas14" unique_id=410389184]
+texture = ExtResource("1_82ir8")
+
+[node name="Canvas15" type="Area2D" parent="." unique_id=2028998774]
+position = Vector2(152, 228)
+script = ExtResource("1_w0rvv")
+normal = ExtResource("1_82ir8")
+pintado = ExtResource("3_4cguh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Canvas15" unique_id=1894737191]
+shape = SubResource("RectangleShape2D_82ir8")
+
+[node name="Sprite2D" type="Sprite2D" parent="Canvas15" unique_id=392206932]
+texture = ExtResource("1_82ir8")
+
+[node name="Canvas16" type="Area2D" parent="." unique_id=708909821]
+position = Vector2(228, 228)
+script = ExtResource("1_w0rvv")
+normal = ExtResource("1_82ir8")
+pintado = ExtResource("3_4cguh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Canvas16" unique_id=886939582]
+shape = SubResource("RectangleShape2D_82ir8")
+
+[node name="Sprite2D" type="Sprite2D" parent="Canvas16" unique_id=293399578]
+texture = ExtResource("1_82ir8")
+
+[connection signal="mouse_entered" from="Canvas" to="Canvas" method="_on_mouse_entered"]
+[connection signal="mouse_entered" from="Canvas2" to="Canvas2" method="_on_mouse_entered"]
+[connection signal="mouse_entered" from="Canvas3" to="Canvas3" method="_on_mouse_entered"]
+[connection signal="mouse_entered" from="Canvas4" to="Canvas4" method="_on_mouse_entered"]
+[connection signal="mouse_entered" from="Canvas5" to="Canvas5" method="_on_mouse_entered"]
+[connection signal="mouse_entered" from="Canvas6" to="Canvas6" method="_on_mouse_entered"]
+[connection signal="mouse_entered" from="Canvas7" to="Canvas7" method="_on_mouse_entered"]
+[connection signal="mouse_entered" from="Canvas8" to="Canvas8" method="_on_mouse_entered"]
+[connection signal="mouse_entered" from="Canvas9" to="Canvas9" method="_on_mouse_entered"]
+[connection signal="mouse_entered" from="Canvas10" to="Canvas10" method="_on_mouse_entered"]
+[connection signal="mouse_entered" from="Canvas11" to="Canvas11" method="_on_mouse_entered"]
+[connection signal="mouse_entered" from="Canvas12" to="Canvas12" method="_on_mouse_entered"]
+[connection signal="mouse_entered" from="Canvas13" to="Canvas13" method="_on_mouse_entered"]
+[connection signal="mouse_entered" from="Canvas14" to="Canvas14" method="_on_mouse_entered"]
+[connection signal="mouse_entered" from="Canvas15" to="Canvas15" method="_on_mouse_entered"]
+[connection signal="mouse_entered" from="Canvas16" to="Canvas16" method="_on_mouse_entered"]
