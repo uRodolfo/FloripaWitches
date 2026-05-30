@@ -757,7 +757,7 @@ script = ExtResource("1_0xm2m")
 position = Vector2(398, 502)
 
 [node name="Player" parent="." unique_id=1032195059 instance=ExtResource("3_h2yge")]
-position = Vector2(346, 284)
+position = Vector2(215, 195)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=2090874047]
 tile_map_data = PackedByteArray(0, 0, 28, 0, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 26, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 28, 0, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0)
