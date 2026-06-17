@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://qg0cm33v5qei"]
+
+[ext_resource type="Script" uid="uid://concb4awmiftn" path="res://Scripts/enemy.gd" id="1_1f0kj"]
+[ext_resource type="Texture2D" uid="uid://crj13u3jwqqka" path="res://Assets/Sprites/Placeholders/icon.svg" id="1_hghv2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1f0kj"]
+size = Vector2(18, 8)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_afpow"]
+radius = 88.20431
+
+[node name="Enemy" type="CharacterBody2D" unique_id=140973024]
+script = ExtResource("1_1f0kj")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2003387887]
+scale = Vector2(0.14453125, 0.06661987)
+texture = ExtResource("1_hghv2")
+
+[node name="Hurtbox" type="CollisionShape2D" parent="." unique_id=305782812]
+shape = SubResource("RectangleShape2D_1f0kj")
+
+[node name="SightArea" type="Area2D" parent="." unique_id=1796072777]
+
+[node name="SightSize" type="CollisionShape2D" parent="SightArea" unique_id=1503122958]
+shape = SubResource("CircleShape2D_afpow")
+
+[connection signal="body_entered" from="SightArea" to="." method="_on_sight_area_body_entered"]

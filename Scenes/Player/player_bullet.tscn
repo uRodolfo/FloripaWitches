@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://xm0rajyiecnv"]
+
+[ext_resource type="Script" uid="uid://b47on4fteuk6x" path="res://Scripts/player_bullet.gd" id="1_jf7v0"]
+[ext_resource type="Texture2D" uid="uid://dep8ed60gkic7" path="res://Assets/Sprites/Placeholders/Red Bullet.png" id="1_vghvw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vghvw"]
+size = Vector2(6, 8)
+
+[node name="player_bullet" type="Area2D" unique_id=1231129046]
+script = ExtResource("1_jf7v0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=884910315]
+shape = SubResource("RectangleShape2D_vghvw")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=414803050]
+texture = ExtResource("1_vghvw")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1642533715]
+rect = Rect2(-2, -2, 4, 4)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

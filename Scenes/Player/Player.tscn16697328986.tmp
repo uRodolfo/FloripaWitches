@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://ccp40osaucduh"]
+
+[ext_resource type="Script" uid="uid://bo8odi78sqg6r" path="res://Scripts/Player.gd" id="1_kpjcp"]
+[ext_resource type="Texture2D" uid="uid://dmuspfsfa8vgx" path="res://Assets/Sprites/18x38_original.png" id="2_kpjcp"]
+[ext_resource type="Script" uid="uid://d0t88v42355xu" path="res://Scripts/shooting_component.gd" id="3_h54ih"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kpjcp"]
+size = Vector2(16, 16)
+
+[node name="Node2D" type="CharacterBody2D" unique_id=896445057 groups=["Player"]]
+input_pickable = true
+script = ExtResource("1_kpjcp")
+
+[node name="18x38Original" type="Sprite2D" parent="." unique_id=1708053447]
+texture = ExtResource("2_kpjcp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2010125955]
+z_as_relative = false
+shape = SubResource("RectangleShape2D_kpjcp")
+
+[node name="ShootingComponent" type="Node2D" parent="." unique_id=2125502849]
+script = ExtResource("3_h54ih")
+metadata/_custom_type_script = "uid://d0t88v42355xu"

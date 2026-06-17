@@ -1,0 +1,62 @@
+[gd_scene format=4 uid="uid://8o50nkobnbia"]
+
+[ext_resource type="PackedScene" uid="uid://ccp40osaucduh" path="res://Scenes/Player/Player.tscn" id="1_8gbba"]
+[ext_resource type="Texture2D" uid="uid://dudnmgxmoucq" path="res://Assets/Sprites/16x16 v4.png" id="2_jjvhh"]
+[ext_resource type="PackedScene" uid="uid://he6ahc8jvt1t" path="res://Scenes/Camera.tscn" id="3_kry3j"]
+[ext_resource type="PackedScene" uid="uid://qg0cm33v5qei" path="res://Scenes/enemy.tscn" id="4_jjvhh"]
+
+[sub_resource type="GDScript" id="GDScript_21xkr"]
+script/source = "extends Control
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lquwl"]
+texture = ExtResource("2_jjvhh")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_7mycd"]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_lquwl")
+
+[sub_resource type="GDScript" id="GDScript_1bvp3"]
+script/source = "extends TileMapLayer
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[node name="Main" type="Control" unique_id=1794517050]
+layout_mode = 3
+anchors_preset = 0
+script = SubResource("GDScript_21xkr")
+
+[node name="Player" parent="." unique_id=1032195059 instance=ExtResource("1_8gbba")]
+position = Vector2(78, 119)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=2090874047]
+z_index = -10
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAACAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAHAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAJAAAAAAAAAAAAAAAKAAAAAAAAAAAAAAALAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAANAAAAAAAAAAAAAAAOAAAAAAAAAAAAAAAPAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA4AAAAAAAAAAAABAA4AAAAAAAAAAAACAA4AAAAAAAAAAAADAA4AAAAAAAAAAAAEAA4AAAAAAAAAAAAFAA4AAAAAAAAAAAAGAA4AAAAAAAAAAAAHAA4AAAAAAAAAAAAIAA4AAAAAAAAAAAAJAA4AAAAAAAAAAAAKAA4AAAAAAAAAAAALAA4AAAAAAAAAAAAMAA4AAAAAAAAAAAANAA4AAAAAAAAAAAAOAA4AAAAAAAAAAAAPAA4AAAAAAAAAAAAQAA4AAAAAAAAAAAARAA4AAAAAAAAAAAASAA4AAAAAAAAAAAATAA4AAAAAAAAAAAATAA0AAAAAAAAAAAATAAwAAAAAAAAAAAATAAsAAAAAAAAAAAATAAoAAAAAAAAAAAAQAAAAAAAAAAAAAAARAAAAAAAAAAAAAAASAAAAAAAAAAAAAAATAAAAAAAAAAAAAAATAAEAAAAAAAAAAAATAAIAAAAAAAAAAAATAAMAAAAAAAAAAAATAAQAAAAAAAAAAAATAAUAAAAAAAAAAAATAAYAAAAAAAAAAAAJAAEAAAAAAAAAAAAKAAIAAAAAAAAAAAALAAMAAAAAAAAAAAAMAAQAAAAAAAAAAAAMAAUAAAAAAAAAAAAMAAYAAAAAAAAAAAAMAAoAAAAAAAAAAAAMAAsAAAAAAAAAAAAKAA0AAAAAAAAAAAALAAwAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_7mycd")
+script = SubResource("GDScript_1bvp3")
+
+[node name="Node2D" parent="." unique_id=1969811154 instance=ExtResource("3_kry3j")]
+
+[node name="Enemy" parent="." unique_id=140973024 groups=["Enemy"] instance=ExtResource("4_jjvhh")]
+position = Vector2(263, 127)
