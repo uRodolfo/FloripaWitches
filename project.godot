@@ -25,14 +25,15 @@ window/stretch/mode="viewport"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/editor_theme_explorer/plugin.cfg")
+enabled=PackedStringArray()
 
 [file_customization]
 
 folder_colors={
 "res://Assets/": "red",
+"res://Resources/": "pink",
 "res://Scenes/": "purple",
-"res://Scripts/": "pink"
+"res://Scripts/": "blue"
 }
 
 [global_group]

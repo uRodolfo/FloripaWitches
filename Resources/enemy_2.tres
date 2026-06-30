@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="EnemyStats" format=3 uid="uid://bnp0p2h275p6u"]
+
+[ext_resource type="Script" uid="uid://sgf1wkvbnibr" path="res://Resources/Scripts/enemy_stats.gd" id="1_kwgfh"]
+[ext_resource type="Texture2D" uid="uid://bgngy124lk0ty" path="res://Assets/Sprites/Placeholders/bloco.png" id="2_fbna1"]
+
+[resource]
+script = ExtResource("1_kwgfh")
+max_health = 20.0
+speed = 90.0
+sprite_texture = ExtResource("2_fbna1")
+metadata/_custom_type_script = "uid://sgf1wkvbnibr"

@@ -1,46 +1,42 @@
 extends CharacterBody2D
 
-const SPEED = 40
-var hp = 3
-var target = null
-@export var damage = 1
+var target: Node2D = null
 
-@onready var health := $EnemyHealthComponent
+@export var stats: EnemyStats
+@onready var health: EnemyHealthComponent = $EnemyHealthComponent
+@onready var sprite: Sprite2D = $Sprite2D
+
+func _ready() -> void:
+	if stats == null:
+		push_error("EnemyStats não foi definido.")
+		return
+
+	health.start(stats.max_health)
+	health.died.connect(_on_died)
+ 
+	if stats.sprite_texture:
+		sprite.texture = stats.sprite_texture
 
 func _physics_process(delta: float) -> void:
 	if target:
-		followPlayer(delta)
+		follow_player(delta)
 	else:
 		velocity = Vector2.ZERO
-
-	if hp <= 0:
-		queue_free()
 
 	move_and_slide()
 
 
-func followPlayer(delta: float):
+func follow_player(delta: float):
 	var direction = (target.global_position - global_position).normalized()
-	velocity = direction * SPEED
-
-
-
-func _on_sight_area_body_entered(body: Node2D) -> void:
-	if body.name == "Player":
-		target = body
-
-
-#func _on_hurtbox_area_body_entered(body: Node2D) -> void:
-	#if body.is_in_group("Player"):
-		#body.damage(2)
-
-
-
+	velocity = direction * stats.speed
+	
 func _on_hurtbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("PlayerBullet"):
 		health._damage(5)
-	## Em vez do 5 aqui, seria melhor passar o dano da bala do player.
-	
-func _damage():
-	
-	pass
+
+func _on_died() -> void:
+	queue_free()
+
+func _on_sight_area_body_entered(body: Node2D) -> void:
+		if body.name == "Player":
+			target = body

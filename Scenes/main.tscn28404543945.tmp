@@ -4,8 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://b2gvt66f4wkat" path="res://Assets/Sprites/24x24 v2.png" id="2_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://he6ahc8jvt1t" path="res://Scenes/Camera.tscn" id="3_kry3j"]
 [ext_resource type="PackedScene" uid="uid://qg0cm33v5qei" path="res://Scenes/enemy.tscn" id="4_jjvhh"]
-[ext_resource type="Resource" uid="uid://dsh84jose4y5k" path="res://Resources/enemy_1.tres" id="5_kry3j"]
-[ext_resource type="Resource" uid="uid://bnp0p2h275p6u" path="res://Resources/enemy_2.tres" id="6_21xkr"]
 
 [sub_resource type="GDScript" id="GDScript_21xkr"]
 script/source = "extends Control
@@ -52,7 +50,7 @@ anchors_preset = 0
 script = SubResource("GDScript_21xkr")
 
 [node name="Player" parent="." unique_id=1032195059 instance=ExtResource("1_8gbba")]
-position = Vector2(48, 141)
+position = Vector2(78, 119)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=2090874047]
 z_index = -10
@@ -63,9 +61,4 @@ script = SubResource("GDScript_1bvp3")
 [node name="Node2D" parent="." unique_id=1969811154 instance=ExtResource("3_kry3j")]
 
 [node name="Enemy" parent="." unique_id=140973024 instance=ExtResource("4_jjvhh")]
-position = Vector2(173, 69)
-stats = ExtResource("5_kry3j")
-
-[node name="Enemy2" parent="." unique_id=1869677523 instance=ExtResource("4_jjvhh")]
-position = Vector2(184, 159)
-stats = ExtResource("6_21xkr")
+position = Vector2(161, 72)

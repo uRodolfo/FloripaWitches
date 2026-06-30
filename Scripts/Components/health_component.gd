@@ -1,18 +1,17 @@
 extends Node2D
 class_name HealthComponent
 
-@export var MAX_HEALTH : float = 10.0
-var health: float
+signal died
 
-func _ready():
-	start()
-	
+var max_health: float = 0
+var health: float = 0
 
-func damage(damage: float):
-	health -= damage
+func start(value: float) -> void:
+	max_health = value
+	health = max_health
+
+func damage(amount: float) -> void:
+	health -= amount
 	
 	if health <= 0:
-		get_parent().queue_free()
-
-func start():
-	health = MAX_HEALTH
+		died.emit()
