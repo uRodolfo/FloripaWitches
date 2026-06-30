@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://bo8odi78sqg6r" path="res://Scripts/Player.gd" id="1_kpjcp"]
 [ext_resource type="Texture2D" uid="uid://dmuspfsfa8vgx" path="res://Assets/Sprites/18x38_original.png" id="2_kpjcp"]
-[ext_resource type="Script" uid="uid://d0t88v42355xu" path="res://Scripts/shooting_component.gd" id="3_h54ih"]
+[ext_resource type="Script" uid="uid://d0t88v42355xu" path="res://Scripts/Components/shooting_component.gd" id="3_h54ih"]
 [ext_resource type="PackedScene" uid="uid://xm0rajyiecnv" path="res://Scenes/Player/player_bullet.tscn" id="4_ude3g"]
+[ext_resource type="Script" uid="uid://dnffgylu1rt7y" path="res://Scripts/Components/player_health_component.gd" id="5_jmcll"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kpjcp"]
-size = Vector2(16, 16)
+[sub_resource type="CircleShape2D" id="CircleShape2D_jmcll"]
 
 [node name="Node2D" type="CharacterBody2D" unique_id=896445057 groups=["Player"]]
 input_pickable = true
@@ -17,7 +17,7 @@ texture = ExtResource("2_kpjcp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2010125955]
 z_as_relative = false
-shape = SubResource("RectangleShape2D_kpjcp")
+shape = SubResource("CircleShape2D_jmcll")
 
 [node name="ShootingComponent" type="Node2D" parent="." unique_id=2125502849]
 script = ExtResource("3_h54ih")
@@ -28,5 +28,14 @@ metadata/_custom_type_script = "uid://d0t88v42355xu"
 wait_time = 0.265
 
 [node name="Spawnpos" type="Marker2D" parent="ShootingComponent" unique_id=28439972]
+
+[node name="PlayerHealthComponent" type="Node2D" parent="." unique_id=1137579430]
+script = ExtResource("5_jmcll")
+
+[node name="IFramesTimer" type="Timer" parent="PlayerHealthComponent" unique_id=859940221]
+wait_time = 3.0
+
+[node name="IFramesBlinkInterval" type="Timer" parent="PlayerHealthComponent" unique_id=244980994]
+wait_time = 0.1
 
 [connection signal="timeout" from="ShootingComponent/Shootspeed" to="." method="_on_shootspeed_timeout"]

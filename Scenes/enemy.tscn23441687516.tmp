@@ -10,13 +10,10 @@ size = Vector2(18, 8)
 [sub_resource type="CircleShape2D" id="CircleShape2D_afpow"]
 radius = 88.20431
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_afpow"]
-size = Vector2(18, 8)
-
 [node name="Enemy" type="CharacterBody2D" unique_id=140973024 groups=["Enemy"]]
 script = ExtResource("1_1f0kj")
 
-[node name="Collisor" type="CollisionShape2D" parent="." unique_id=305782812]
+[node name="Hurtbox" type="CollisionShape2D" parent="." unique_id=305782812]
 shape = SubResource("RectangleShape2D_1f0kj")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2003387887]
@@ -32,10 +29,4 @@ shape = SubResource("CircleShape2D_afpow")
 script = ExtResource("3_afpow")
 metadata/_custom_type_script = "uid://b1lkhedpa50kg"
 
-[node name="Hurtbox" type="Area2D" parent="." unique_id=1365588004 groups=["Enemy"]]
-
-[node name="HurtboxSize" type="CollisionShape2D" parent="Hurtbox" unique_id=1125726350]
-shape = SubResource("RectangleShape2D_afpow")
-
 [connection signal="body_entered" from="SightArea" to="." method="_on_sight_area_body_entered"]
-[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

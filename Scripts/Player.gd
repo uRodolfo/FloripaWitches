@@ -1,23 +1,23 @@
 extends CharacterBody2D
 class_name Player
 
-#Player Attributes
-var speed = 300                  #Velocidade atual do jogador
-@export var baseSpeed = 80      #Velocidade Base do jogador
+var speed = 300
+@export var baseSpeed = 80
 var direction = Vector2.ZERO
+@export var starting_hp: float = 3
 
-
-#Nodes
-@onready var _player_shooting := $ShootingComponent #Lógica de tiros do jogador
-#@onready var _shoot_key_interval := $ShootKeyInterval #Tempo para segurar o botão para alternar o modo de tiro
-#@onready var health_component := $HealthComponent #Componente que faz a lógica de vida
+@onready var _player_shooting := $ShootingComponent
+@onready var player_health_component := $PlayerHealthComponent
 
 func _ready() -> void:
+	player_health_component.health = starting_hp
 	
-	pass
+func damage(amount: float) -> void:
+	player_health_component.damage(amount)
 	
 func _physics_process(delta):
 	velocity = direction.normalized() * speed
+	print(player_health_component.health)
 	move_and_slide()
 
 func _process(delta):

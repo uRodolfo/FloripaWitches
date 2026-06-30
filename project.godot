@@ -17,7 +17,7 @@ config/icon="res://Assets/Sprites/Placeholders/icon.svg"
 
 [display]
 
-window/size/viewport_width=320
+window/size/viewport_width=312
 window/size/viewport_height=240
 window/size/mode=2
 window/size/borderless=true
@@ -39,6 +39,7 @@ folder_colors={
 
 Player=""
 Enemy=""
+PlayerBullet=""
 
 [input]
 
