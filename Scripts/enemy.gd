@@ -5,6 +5,7 @@ var target: Node2D = null
 @export var stats: EnemyStats
 @onready var health: EnemyHealthComponent = $EnemyHealthComponent
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var contact_damage: ContactDamageComponent = $ContactDamageComponent
 
 func _ready() -> void:
 	if stats == null:
@@ -33,6 +34,7 @@ func follow_player(delta: float):
 func _on_hurtbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("PlayerBullet"):
 		health._damage(5)
+##trocar esse 5 por dano passado pelo player
 
 func _on_died() -> void:
 	queue_free()
@@ -40,3 +42,9 @@ func _on_died() -> void:
 func _on_sight_area_body_entered(body: Node2D) -> void:
 		if body.name == "Player":
 			target = body
+			
+func _on_contact_area_body_entered(body: Node2D) -> void:
+	contact_damage.start_damage(body)
+
+func _on_contact_area_body_exited(body: Node2D) -> void:
+	contact_damage.stop_damage(body)

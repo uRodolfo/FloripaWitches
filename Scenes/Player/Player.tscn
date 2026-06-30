@@ -29,7 +29,7 @@ wait_time = 0.265
 
 [node name="Spawnpos" type="Marker2D" parent="ShootingComponent" unique_id=28439972]
 
-[node name="PlayerHealthComponent" type="Node2D" parent="." unique_id=1137579430]
+[node name="PlayerHealthComponent" type="Node2D" parent="." unique_id=1137579430 groups=["Player"]]
 script = ExtResource("5_jmcll")
 
 [node name="IFramesTimer" type="Timer" parent="PlayerHealthComponent" unique_id=859940221]
@@ -39,3 +39,7 @@ wait_time = 3.0
 wait_time = 0.1
 
 [connection signal="timeout" from="ShootingComponent/Shootspeed" to="." method="_on_shootspeed_timeout"]
+[connection signal="timeout" from="PlayerHealthComponent/IFramesTimer" to="." method="_on_i_frames_timer_timeout"]
+[connection signal="timeout" from="PlayerHealthComponent/IFramesTimer" to="PlayerHealthComponent" method="_on_i_frames_timer_timeout"]
+[connection signal="timeout" from="PlayerHealthComponent/IFramesBlinkInterval" to="." method="_on_i_frames_blink_interval_timeout"]
+[connection signal="timeout" from="PlayerHealthComponent/IFramesBlinkInterval" to="PlayerHealthComponent" method="_on_i_frames_blink_interval_timeout"]

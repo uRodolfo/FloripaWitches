@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://concb4awmiftn" path="res://Scripts/enemy.gd" id="1_1f0kj"]
 [ext_resource type="Texture2D" uid="uid://crj13u3jwqqka" path="res://Assets/Sprites/Placeholders/icon.svg" id="1_hghv2"]
 [ext_resource type="Script" uid="uid://b1lkhedpa50kg" path="res://Scripts/Components/enemy_health_component.gd" id="3_afpow"]
+[ext_resource type="Script" uid="uid://bmnv7cmajsb7k" path="res://Scripts/Components/contact_damage_component.gd" id="4_287tu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1f0kj"]
 size = Vector2(18, 8)
@@ -12,6 +13,9 @@ radius = 88.20431
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_afpow"]
 size = Vector2(18, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0830c"]
+size = Vector2(20, 10)
 
 [node name="Enemy" type="CharacterBody2D" unique_id=140973024 groups=["Enemy"]]
 script = ExtResource("1_1f0kj")
@@ -37,5 +41,18 @@ metadata/_custom_type_script = "uid://b1lkhedpa50kg"
 [node name="HurtboxSize" type="CollisionShape2D" parent="Hurtbox" unique_id=1125726350]
 shape = SubResource("RectangleShape2D_afpow")
 
+[node name="ContactDamageComponent" type="Node2D" parent="." unique_id=750953379]
+script = ExtResource("4_287tu")
+metadata/_custom_type_script = "uid://bmnv7cmajsb7k"
+
+[node name="Timer" type="Timer" parent="ContactDamageComponent" unique_id=1551347041]
+
+[node name="ContactArea" type="Area2D" parent="ContactDamageComponent" unique_id=637009746]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ContactDamageComponent/ContactArea" unique_id=469522486]
+shape = SubResource("RectangleShape2D_0830c")
+
 [connection signal="body_entered" from="SightArea" to="." method="_on_sight_area_body_entered"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="body_entered" from="ContactDamageComponent/ContactArea" to="." method="_on_contact_area_body_entered"]
+[connection signal="body_exited" from="ContactDamageComponent/ContactArea" to="." method="_on_contact_area_body_exited"]

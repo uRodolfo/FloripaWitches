@@ -1,25 +1,44 @@
-#Variação de HealthComponent que aplica a lógica de tomar dano do player
-
 extends HealthComponent
+class_name PlayerHealthComponent
 
-@onready var _iframes_timer : Timer = $IFramesTimer
-@onready var _iframes_blink_interval : Timer = $IFramesBlinkInterval
+@export var iframe_duration: float = 1.0
+@export var blink_interval: float = 0.1
 
-var invincible : bool = false
+@onready var _iframes_timer: Timer = $IFramesTimer
+@onready var _iframes_blink_interval: Timer = $IFramesBlinkInterval
 
-func damage(damage: float):
-	if !invincible:                     #Checar se o player não está invencível (iframes) para aplicar o dano
-		super.damage(damage)                   #Chamar o método da classe herdada
-	
-		#Aplicar IFrames
-		invincible = true
-		_iframes_timer.start()
-		_iframes_blink_interval.start()
+var invincible: bool = false
+
+func _ready() -> void:
+	_iframes_timer.wait_time = iframe_duration
+	_iframes_timer.one_shot = true
+
+	_iframes_blink_interval.wait_time = blink_interval
+	_iframes_blink_interval.one_shot = false
+
+func damage(amount: float) -> void:
+	if invincible:
+		return
+
+	super.damage(amount)
+
+	if dead:
+		return
+
+	start_iframes()
+
+func start_iframes() -> void:
+	invincible = true
+	_iframes_timer.start()
+	_iframes_blink_interval.start()
 
 func _on_i_frames_timer_timeout() -> void:
 	invincible = false
 	_iframes_blink_interval.stop()
-	owner.visible = true
+
+	if owner:
+		owner.visible = true
 
 func _on_i_frames_blink_interval_timeout() -> void:
-	owner.visible = !owner.visible
+	if owner:
+		owner.visible = !owner.visible
