@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://mmo1w3vu5nc5"]
+
+[ext_resource type="Script" uid="uid://b6j67k0nbgcpk" path="res://Scripts/Components/mouse_detector_area.gd" id="1_5btrq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nbd64"]
+radius = 31.016125
+
+[node name="MouseDetectorArea" type="Area2D" unique_id=1223588117]
+script = ExtResource("1_5btrq")
+
+[node name="MouseDetectorSize" type="CollisionShape2D" parent="." unique_id=507235471]
+shape = SubResource("CircleShape2D_nbd64")

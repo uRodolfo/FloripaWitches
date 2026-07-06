@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://crj13u3jwqqka" path="res://Assets/Sprites/Placeholders/icon.svg" id="1_hghv2"]
 [ext_resource type="Script" uid="uid://b1lkhedpa50kg" path="res://Scripts/Components/enemy_health_component.gd" id="3_afpow"]
 [ext_resource type="Script" uid="uid://bmnv7cmajsb7k" path="res://Scripts/Components/contact_damage_component.gd" id="4_287tu"]
+[ext_resource type="Script" uid="uid://b6j67k0nbgcpk" path="res://Scripts/Components/mouse_detector_area.gd" id="5_0830c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1f0kj"]
 size = Vector2(18, 8)
@@ -16,6 +17,9 @@ size = Vector2(18, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0830c"]
 size = Vector2(20, 10)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ghaa6"]
+radius = 23.021729
 
 [node name="Enemy" type="CharacterBody2D" unique_id=140973024 groups=["Enemy"]]
 script = ExtResource("1_1f0kj")
@@ -51,6 +55,13 @@ metadata/_custom_type_script = "uid://bmnv7cmajsb7k"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ContactDamageComponent/ContactArea" unique_id=469522486]
 shape = SubResource("RectangleShape2D_0830c")
+
+[node name="MouseDetector" type="Area2D" parent="." unique_id=1193551411]
+script = ExtResource("5_0830c")
+metadata/_custom_type_script = "uid://b6j67k0nbgcpk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MouseDetector" unique_id=348363237]
+shape = SubResource("CircleShape2D_ghaa6")
 
 [connection signal="body_entered" from="SightArea" to="." method="_on_sight_area_body_entered"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

@@ -20,6 +20,13 @@ func damage(amount: float) -> void:
 func _physics_process(delta):
 	velocity = direction.normalized() * speed
 	print(player_health_component.health)
+	print(
+		"PLAYER REAL: ",
+		get_path(),
+		" | POS: ",
+		global_position
+	)
+
 	move_and_slide()
 
 func _process(delta):

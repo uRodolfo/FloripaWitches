@@ -7,5 +7,6 @@
 script = ExtResource("1_kwgfh")
 max_health = 20.0
 speed = 90.0
+damage = 5.0
 sprite_texture = ExtResource("2_fbna1")
 metadata/_custom_type_script = "uid://sgf1wkvbnibr"

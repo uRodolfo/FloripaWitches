@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://qg0cm33v5qei" path="res://Scenes/enemy.tscn" id="4_jjvhh"]
 [ext_resource type="Resource" uid="uid://dsh84jose4y5k" path="res://Resources/enemy_1.tres" id="5_kry3j"]
 [ext_resource type="Resource" uid="uid://bnp0p2h275p6u" path="res://Resources/enemy_2.tres" id="6_21xkr"]
+[ext_resource type="PackedScene" uid="uid://7h11giytrw4j" path="res://Scenes/Mofas/Mofas.tscn" id="7_6bp64"]
 
 [sub_resource type="GDScript" id="GDScript_21xkr"]
 script/source = "extends Control
@@ -52,7 +53,8 @@ anchors_preset = 0
 script = SubResource("GDScript_21xkr")
 
 [node name="Player" parent="." unique_id=1032195059 instance=ExtResource("1_8gbba")]
-position = Vector2(48, 141)
+position = Vector2(47, 146)
+starting_hp = 5.0
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=2090874047]
 z_index = -10
@@ -69,3 +71,6 @@ stats = ExtResource("5_kry3j")
 [node name="Enemy2" parent="." unique_id=1869677523 instance=ExtResource("4_jjvhh")]
 position = Vector2(184, 159)
 stats = ExtResource("6_21xkr")
+
+[node name="Mofas" parent="." unique_id=557517622 instance=ExtResource("7_6bp64")]
+position = Vector2(380, 115)

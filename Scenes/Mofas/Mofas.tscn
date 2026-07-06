@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://7h11giytrw4j"]
+
+[ext_resource type="Script" uid="uid://b1dk2oib644ds" path="res://Scripts/mofas.gd" id="1_6sxjv"]
+[ext_resource type="Texture2D" uid="uid://cu8nyyrfm0hoy" path="res://Assets/Sprites/mofas.png" id="2_7wsa7"]
+[ext_resource type="Script" uid="uid://bvffcldfuo2xe" path="res://Scenes/Mofas/state_machine.gd" id="3_4m2g8"]
+[ext_resource type="Script" uid="uid://hlesmyt4wkpp" path="res://Scenes/Mofas/follow_player_state.gd" id="4_6sxjv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k12ds"]
+radius = 18.027756
+
+[node name="Mofas" type="CharacterBody2D" unique_id=557517622]
+script = ExtResource("1_6sxjv")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1929018939]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_7wsa7")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=169417576]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=223462055]
+shape = SubResource("CircleShape2D_k12ds")
+
+[node name="State Machine" type="Node" parent="." unique_id=1045722260 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_4m2g8")
+initial_state = NodePath("FollowPlayer")
+
+[node name="FollowPlayer" type="Node" parent="State Machine" unique_id=1540522616]
+script = ExtResource("4_6sxjv")

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ccp40osaucduh"]
 
 [ext_resource type="Script" uid="uid://bo8odi78sqg6r" path="res://Scripts/Player.gd" id="1_kpjcp"]
-[ext_resource type="Texture2D" uid="uid://dmuspfsfa8vgx" path="res://Assets/Sprites/18x38_original.png" id="2_kpjcp"]
+[ext_resource type="Texture2D" uid="uid://dmuspfsfa8vgx" path="res://Assets/Sprites/Placeholders/18x38_original.png" id="2_kpjcp"]
 [ext_resource type="Script" uid="uid://d0t88v42355xu" path="res://Scripts/Components/shooting_component.gd" id="3_h54ih"]
 [ext_resource type="PackedScene" uid="uid://xm0rajyiecnv" path="res://Scenes/Player/player_bullet.tscn" id="4_ude3g"]
 [ext_resource type="Script" uid="uid://dnffgylu1rt7y" path="res://Scripts/Components/player_health_component.gd" id="5_jmcll"]
@@ -29,7 +29,7 @@ wait_time = 0.265
 
 [node name="Spawnpos" type="Marker2D" parent="ShootingComponent" unique_id=28439972]
 
-[node name="PlayerHealthComponent" type="Node2D" parent="." unique_id=1137579430 groups=["Player"]]
+[node name="PlayerHealthComponent" type="Node2D" parent="." unique_id=1137579430]
 script = ExtResource("5_jmcll")
 
 [node name="IFramesTimer" type="Timer" parent="PlayerHealthComponent" unique_id=859940221]
