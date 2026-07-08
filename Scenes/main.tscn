@@ -62,7 +62,8 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAACAAAAAAAAAAA
 tile_set = SubResource("TileSet_7mycd")
 script = SubResource("GDScript_1bvp3")
 
-[node name="Node2D" parent="." unique_id=1969811154 instance=ExtResource("3_kry3j")]
+[node name="Node2D" parent="." unique_id=1969811154 node_paths=PackedStringArray("player_node") instance=ExtResource("3_kry3j")]
+player_node = NodePath("../Player")
 
 [node name="Enemy" parent="." unique_id=140973024 instance=ExtResource("4_jjvhh")]
 position = Vector2(173, 69)
