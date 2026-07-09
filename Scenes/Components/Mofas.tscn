@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://7h11giytrw4j"]
+
+[ext_resource type="Script" uid="uid://b1dk2oib644ds" path="res://Scripts/mofas.gd" id="1_6sxjv"]
+[ext_resource type="Texture2D" uid="uid://cu8nyyrfm0hoy" path="res://Assets/Sprites/mofas.png" id="2_7wsa7"]
+[ext_resource type="Script" uid="uid://bvffcldfuo2xe" path="res://Scenes/Mofas/state_machine.gd" id="3_4m2g8"]
+[ext_resource type="Script" uid="uid://hlesmyt4wkpp" path="res://Scenes/Mofas/follow_player_state.gd" id="4_6sxjv"]
+[ext_resource type="Script" uid="uid://cuptdwisb1vjw" path="res://Scenes/Mofas/mofas_attack_state.gd" id="5_bn8xf"]
+[ext_resource type="Script" uid="uid://bmnv7cmajsb7k" path="res://Scripts/Components/contact_damage_component.gd" id="6_tq8be"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_w8tas"]
+radius = 14.035668
+
+[node name="Mofas" type="CharacterBody2D" unique_id=557517622 groups=["Mofas"]]
+script = ExtResource("1_6sxjv")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1929018939]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_7wsa7")
+
+[node name="State Machine" type="Node" parent="." unique_id=1045722260 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_4m2g8")
+initial_state = NodePath("FollowPlayer")
+
+[node name="FollowPlayer" type="Node" parent="State Machine" unique_id=1540522616]
+script = ExtResource("4_6sxjv")
+
+[node name="Attack" type="Node" parent="State Machine" unique_id=1887322639]
+script = ExtResource("5_bn8xf")
+
+[node name="ContactDamageComponent" type="Node2D" parent="." unique_id=496397896]
+script = ExtResource("6_tq8be")
+target_group = &"Enemy"
+health_component_name = &"EnemyHealthComponent"
+metadata/_custom_type_script = "uid://bmnv7cmajsb7k"
+
+[node name="Timer" type="Timer" parent="ContactDamageComponent" unique_id=1193690706]
+
+[node name="ContactArea" type="Area2D" parent="ContactDamageComponent" unique_id=210929721]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ContactDamageComponent/ContactArea" unique_id=1987610082]
+shape = SubResource("CircleShape2D_w8tas")

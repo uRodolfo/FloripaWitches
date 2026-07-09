@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://qg0cm33v5qei" path="res://Scenes/enemy.tscn" id="4_jjvhh"]
 [ext_resource type="Resource" uid="uid://dsh84jose4y5k" path="res://Resources/enemy_1.tres" id="5_kry3j"]
 [ext_resource type="Resource" uid="uid://bnp0p2h275p6u" path="res://Resources/enemy_2.tres" id="6_21xkr"]
-[ext_resource type="PackedScene" uid="uid://7h11giytrw4j" path="res://Scenes/Mofas/Mofas.tscn" id="7_6bp64"]
+[ext_resource type="PackedScene" uid="uid://7h11giytrw4j" path="res://Scenes/Components/Mofas.tscn" id="7_6bp64"]
 
 [sub_resource type="GDScript" id="GDScript_21xkr"]
 script/source = "extends Control
@@ -74,4 +74,4 @@ position = Vector2(184, 159)
 stats = ExtResource("6_21xkr")
 
 [node name="Mofas" parent="." unique_id=557517622 instance=ExtResource("7_6bp64")]
-position = Vector2(380, 115)
+position = Vector2(48, 193)

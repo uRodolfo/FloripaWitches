@@ -4,7 +4,7 @@ class_name ShootingComponent
 var canshoot := true
 
 @export var bullet_scene: PackedScene
-@export var bullet_speed: float = 90
+@export var bullet_speed: float 
 
 @onready var spawnpos: Marker2D = $Spawnpos
 @onready var shootspeed: Timer = $Shootspeed

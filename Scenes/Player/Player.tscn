@@ -22,6 +22,7 @@ shape = SubResource("CircleShape2D_jmcll")
 [node name="ShootingComponent" type="Node2D" parent="." unique_id=2125502849]
 script = ExtResource("3_h54ih")
 bullet_scene = ExtResource("4_ude3g")
+bullet_speed = 250.0
 metadata/_custom_type_script = "uid://d0t88v42355xu"
 
 [node name="Shootspeed" type="Timer" parent="ShootingComponent" unique_id=680605521]
@@ -33,7 +34,7 @@ wait_time = 0.265
 script = ExtResource("5_jmcll")
 
 [node name="IFramesTimer" type="Timer" parent="PlayerHealthComponent" unique_id=859940221]
-wait_time = 3.0
+wait_time = 1.5
 
 [node name="IFramesBlinkInterval" type="Timer" parent="PlayerHealthComponent" unique_id=244980994]
 wait_time = 0.1

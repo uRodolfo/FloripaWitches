@@ -48,3 +48,8 @@ func _on_contact_area_body_entered(body: Node2D) -> void:
 
 func _on_contact_area_body_exited(body: Node2D) -> void:
 	contact_damage.stop_damage(body)
+	
+
+
+func _on_i_frames_blink_interval_timeout() -> void:
+	pass # Replace with function body.

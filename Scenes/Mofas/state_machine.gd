@@ -79,3 +79,23 @@ func on_child_transition(
 		return
 
 	change_state(new_state)
+
+func change_state_by_name(
+	new_state_name: StringName
+) -> void:
+	var state_key: String = (
+		String(new_state_name).to_lower()
+	)
+
+	var new_state: State = states.get(
+		state_key
+	)
+
+	if not new_state:
+		push_error(
+			"STATE NÃO ENCONTRADA: "
+			+ String(new_state_name)
+		)
+		return
+
+	change_state(new_state)

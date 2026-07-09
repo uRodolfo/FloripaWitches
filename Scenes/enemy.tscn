@@ -40,6 +40,9 @@ shape = SubResource("CircleShape2D_afpow")
 script = ExtResource("3_afpow")
 metadata/_custom_type_script = "uid://b1lkhedpa50kg"
 
+[node name="BlinkInterval" type="Timer" parent="EnemyHealthComponent" unique_id=125384097]
+wait_time = 0.995
+
 [node name="Hurtbox" type="Area2D" parent="." unique_id=1365588004 groups=["Enemy"]]
 
 [node name="HurtboxSize" type="CollisionShape2D" parent="Hurtbox" unique_id=1125726350]
@@ -47,23 +50,29 @@ shape = SubResource("RectangleShape2D_afpow")
 
 [node name="ContactDamageComponent" type="Node2D" parent="." unique_id=750953379]
 script = ExtResource("4_287tu")
+damage_interval = 0.0
+target_group = &"Player"
+health_component_name = &"PlayerHealthComponent"
 metadata/_custom_type_script = "uid://bmnv7cmajsb7k"
 
 [node name="Timer" type="Timer" parent="ContactDamageComponent" unique_id=1551347041]
+wait_time = 0.15
 
 [node name="ContactArea" type="Area2D" parent="ContactDamageComponent" unique_id=637009746]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ContactDamageComponent/ContactArea" unique_id=469522486]
 shape = SubResource("RectangleShape2D_0830c")
 
-[node name="MouseDetector" type="Area2D" parent="." unique_id=1193551411]
+[node name="MouseDetector" type="Area2D" parent="." unique_id=1193551411 node_paths=PackedStringArray("target") groups=["Enemy"]]
 script = ExtResource("5_0830c")
+target = NodePath("..")
 metadata/_custom_type_script = "uid://b6j67k0nbgcpk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MouseDetector" unique_id=348363237]
 shape = SubResource("CircleShape2D_ghaa6")
 
 [connection signal="body_entered" from="SightArea" to="." method="_on_sight_area_body_entered"]
+[connection signal="timeout" from="EnemyHealthComponent/BlinkInterval" to="EnemyHealthComponent" method="_on_blink_interval_timeout"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="body_entered" from="ContactDamageComponent/ContactArea" to="." method="_on_contact_area_body_entered"]
 [connection signal="body_exited" from="ContactDamageComponent/ContactArea" to="." method="_on_contact_area_body_exited"]
