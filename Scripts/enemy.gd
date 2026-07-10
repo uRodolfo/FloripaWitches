@@ -106,16 +106,6 @@ func aggro_player() -> void:
 
 	target = player
 
-	print(
-		name,
-		" FOI ATACADO PELO MOFAS"
-	)
-
-	print(
-		name,
-		" AGORA ESTÁ SEGUINDO O PLAYER"
-	)
-
 
 func _on_hurtbox_area_entered(
 	area: Area2D
@@ -123,8 +113,9 @@ func _on_hurtbox_area_entered(
 	if area.is_in_group(
 		"PlayerBullet"
 	):
-		health._damage(5)
+		health._damage(1)
 
+		aggro_player()
 
 func _on_died() -> void:
 	score.add_points(10)

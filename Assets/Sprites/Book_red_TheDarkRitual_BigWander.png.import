@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cqnx750fjyjr5"
-path="res://.godot/imported/Design sem nome.png-307c950838ec09c87f49868199146938.ctex"
+uid="uid://c87m65f5j6j8x"
+path="res://.godot/imported/Book_red_TheDarkRitual_BigWander.png-8038edf2fdf4f58fcada233454422380.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Design sem nome.png"
-dest_files=["res://.godot/imported/Design sem nome.png-307c950838ec09c87f49868199146938.ctex"]
+source_file="res://Assets/Sprites/Book_red_TheDarkRitual_BigWander.png"
+dest_files=["res://.godot/imported/Book_red_TheDarkRitual_BigWander.png-8038edf2fdf4f58fcada233454422380.ctex"]
 
 [params]
 

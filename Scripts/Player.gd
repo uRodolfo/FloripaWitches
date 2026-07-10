@@ -1,9 +1,10 @@
 extends CharacterBody2D
 class_name Player
 
-var speed = 150
+@export var speed = 100
 
-@export var baseSpeed = 80
+
+@export var baseSpeed = 50
 @export var starting_hp: float = 15
 
 var direction = Vector2.ZERO
@@ -48,7 +49,8 @@ func handle_movement():
 
 func handle_shooting():
 	if Input.is_action_just_pressed("Shoot"):
-		_player_shooting.shoot(get_global_mouse_position())
+		if score.Magic == true:
+			_player_shooting.shoot(get_global_mouse_position())
 
 func _on_died() -> void:
 	queue_free()
