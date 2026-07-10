@@ -2,13 +2,15 @@ extends Node2D
 class_name ContactDamageComponent
 
 
-@export var damage: float = 1
-@export var damage_interval: float = 1
+@export var damage: float = 1.0
+@export var damage_interval: float = 1.0
 
-@export var target_group: StringName 
-@export var health_component_name: StringName  
+@export var target_group: StringName
+@export var health_component_name: StringName
 
 @export var active_on_ready: bool = true
+
+@export var damage_source: Node2D
 
 
 var targets: Array[Node2D] = []
@@ -22,10 +24,15 @@ var damage_enabled: bool = false
 
 
 func _ready() -> void:
+	if not damage_source:
+		damage_source = get_parent() as Node2D
+
 	timer.wait_time = damage_interval
 	timer.one_shot = false
 
-	timer.timeout.connect(_on_timer_timeout)
+	timer.timeout.connect(
+		_on_timer_timeout
+	)
 
 	contact_area.body_entered.connect(
 		_on_body_entered
@@ -110,7 +117,9 @@ func _can_damage_target(
 			return false
 
 	if target_group != &"":
-		if not target.is_in_group(target_group):
+		if not target.is_in_group(
+			target_group
+		):
 			return false
 
 	return true
@@ -126,7 +135,9 @@ func _refresh_targets() -> void:
 
 	for body in contact_area.get_overlapping_bodies():
 		if body is Node2D:
-			start_damage(body as Node2D)
+			start_damage(
+				body as Node2D
+			)
 
 
 func _on_body_entered(
@@ -146,20 +157,62 @@ func _on_timer_timeout() -> void:
 		if not _can_damage_target(target):
 			targets.erase(target)
 			continue
-		var health_component: Node = (
-			target.get_node_or_null(
-				NodePath(
-					String(health_component_name)
-				)
-			)
-		)
-		if health_component == null:
-			continue
-		if health_component.has_method("_damage"):
-			health_component.call("_damage", damage)
-		elif health_component.has_method("take_damage"):
-			health_component.call("take_damage", damage)
-		elif health_component.has_method("damage"):
-			health_component.call("damage", damage)
+
+		_apply_damage(target)
+
 	if targets.is_empty():
 		timer.stop()
+
+
+func _apply_damage(
+	target: Node2D
+) -> void:
+	var health_component: Node = (
+		target.get_node_or_null(
+			NodePath(
+				String(health_component_name)
+			)
+		)
+	)
+
+	if health_component == null:
+		return
+
+	if health_component.has_method(
+		"damage_from"
+	):
+		health_component.call(
+			"damage_from",
+			damage,
+			damage_source
+		)
+
+		return
+
+	if health_component.has_method(
+		"_damage"
+	):
+		health_component.call(
+			"_damage",
+			damage
+		)
+
+		return
+
+	if health_component.has_method(
+		"take_damage"
+	):
+		health_component.call(
+			"take_damage",
+			damage
+		)
+
+		return
+
+	if health_component.has_method(
+		"damage"
+	):
+		health_component.call(
+			"damage",
+			damage
+		)
