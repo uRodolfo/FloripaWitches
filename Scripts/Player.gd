@@ -1,9 +1,9 @@
 extends CharacterBody2D
 class_name Player
 
+signal died
+
 @export var speed = 100
-
-
 @export var baseSpeed = 50
 @export var starting_hp: float = 15
 
@@ -53,6 +53,7 @@ func handle_shooting():
 			_player_shooting.shoot(get_global_mouse_position())
 
 func _on_died() -> void:
+	died.emit()
 	queue_free()
 
 func _on_shoot_key_interval_timeout() -> void:

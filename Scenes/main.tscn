@@ -24,6 +24,7 @@ script/source = "extends Node2D
 
 
 signal enemy_spawn_triggered
+@onready var game_over: Label = $\"CanvasLayer/Control/Game Over\"
 
 
 func _ready() -> void:
@@ -48,6 +49,16 @@ func connect_enemy_spawners() -> void:
 
 func trigger_enemy_spawn() -> void:
 	enemy_spawn_triggered.emit()
+
+
+func _on_player_died() -> void:
+	game_over.visible = true
+	pass # Replace with function body.
+
+func _process(delta: float) -> void:
+	if game_over and Input.is_action_just_pressed(\"restart\"):
+		get_tree().reload_current_scene()
+		
 "
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lquwl"]
@@ -200,6 +211,17 @@ script = ExtResource("11_fdnlq")
 [node name="Timer" type="Timer" parent="CanvasLayer/Control/Instrução 2" unique_id=1984855617]
 wait_time = 5.0
 
+[node name="Game Over" type="Label" parent="CanvasLayer/Control" unique_id=1064214484]
+visible = false
+layout_mode = 0
+offset_left = 49.0
+offset_top = 84.0
+offset_right = 263.0
+offset_bottom = 159.0
+text = "A Yuna foi derrotada!
+
+pressione \"O\" para reiniciar"
+
 [node name="Pergaminho" parent="." unique_id=883931723 instance=ExtResource("11_d1ilt")]
 position = Vector2(682, 214)
 float_height = 2.6
@@ -276,6 +298,7 @@ stats = ExtResource("5_kry3j")
 position = Vector2(453, 659)
 stats = ExtResource("6_21xkr")
 
+[connection signal="died" from="Player" to="." method="_on_player_died"]
 [connection signal="timeout" from="CanvasLayer/Control/Instrucao1/Timer" to="CanvasLayer/Control/Instrucao1" method="_on_timer_timeout"]
 [connection signal="timeout" from="CanvasLayer/Control/Instrução 2/Timer" to="CanvasLayer/Control/Instrução 2" method="_on_timer_timeout"]
 [connection signal="coletado" from="Pergaminho" to="CanvasLayer/Control/Instrução 2" method="_on_pergaminho_coletado"]
