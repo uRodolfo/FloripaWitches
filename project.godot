@@ -15,6 +15,10 @@ run/main_scene="uid://8o50nkobnbia"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://Assets/Sprites/Placeholders/icon.svg"
 
+[autoload]
+
+score="*uid://cvfcwty2jgylf"
+
 [display]
 
 window/size/viewport_width=312

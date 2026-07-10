@@ -37,6 +37,7 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 ##trocar esse 5 por dano passado pelo player
 
 func _on_died() -> void:
+	score.add_points(10)
 	queue_free()
 
 func _on_sight_area_body_entered(body: Node2D) -> void:
