@@ -1,7 +1,8 @@
 extends CharacterBody2D
 class_name Player
 
-var speed = 300
+var speed = 150
+
 @export var baseSpeed = 80
 @export var starting_hp: float = 15
 

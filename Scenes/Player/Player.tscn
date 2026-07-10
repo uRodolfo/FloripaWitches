@@ -1,19 +1,82 @@
 [gd_scene format=3 uid="uid://ccp40osaucduh"]
 
 [ext_resource type="Script" uid="uid://bo8odi78sqg6r" path="res://Scripts/Player.gd" id="1_kpjcp"]
-[ext_resource type="Texture2D" uid="uid://dmuspfsfa8vgx" path="res://Assets/Sprites/Placeholders/18x38_original.png" id="2_kpjcp"]
 [ext_resource type="Script" uid="uid://d0t88v42355xu" path="res://Scripts/Components/shooting_component.gd" id="3_h54ih"]
 [ext_resource type="PackedScene" uid="uid://xm0rajyiecnv" path="res://Scenes/Player/player_bullet.tscn" id="4_ude3g"]
 [ext_resource type="Script" uid="uid://dnffgylu1rt7y" path="res://Scripts/Components/player_health_component.gd" id="5_jmcll"]
+[ext_resource type="Script" uid="uid://b2xhcytvgfg6y" path="res://Scripts/player_animation.gd" id="5_spxdj"]
+[ext_resource type="Texture2D" uid="uid://c8c0tvhbnol44" path="res://Assets/Sprites/Player/Yuna walking down1.png" id="6_0objx"]
+[ext_resource type="Texture2D" uid="uid://cwnvyf0yebbmi" path="res://Assets/Sprites/Player/Yuna walking down2.png" id="7_w71ue"]
+[ext_resource type="Texture2D" uid="uid://bsoom04vnj3qq" path="res://Assets/Sprites/Player/Yuna walking down3.png" id="8_1e6p3"]
+[ext_resource type="Texture2D" uid="uid://ctub82hgxkd7s" path="res://Assets/Sprites/Player/Yuna walking down4.png" id="9_yb677"]
+[ext_resource type="Texture2D" uid="uid://dqq6l0rpuxc0w" path="res://Assets/Sprites/Player/Yuna walking right1.png" id="10_8cj01"]
+[ext_resource type="Texture2D" uid="uid://4mg60xvomdh3" path="res://Assets/Sprites/Player/Yuna walking right2.png" id="11_i2g7t"]
+[ext_resource type="Texture2D" uid="uid://b444y38768c7k" path="res://Assets/Sprites/Player/Yuna walking right3.png" id="12_io2mu"]
+[ext_resource type="Texture2D" uid="uid://dv7rg8t7tpwqb" path="res://Assets/Sprites/Player/Yuna walking right4.png" id="13_e5iqy"]
+[ext_resource type="Texture2D" uid="uid://d25tlwbryghje" path="res://Assets/Sprites/Player/Yuna walking up1.png" id="14_8t5qx"]
+[ext_resource type="Texture2D" uid="uid://cmj76wueticds" path="res://Assets/Sprites/Player/Yuna walking up2.png" id="15_8rd5p"]
+[ext_resource type="Texture2D" uid="uid://c0nqv5k4sy70o" path="res://Assets/Sprites/Player/Yuna walking up3.png" id="16_wwmao"]
+[ext_resource type="Texture2D" uid="uid://n1re2lg6idkl" path="res://Assets/Sprites/Player/Yuna walking up4.png" id="17_7xdrn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jmcll"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ude3g"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_0objx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_w71ue")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_1e6p3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_yb677")
+}],
+"loop": true,
+"name": &"Down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_8cj01")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_i2g7t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_io2mu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_e5iqy")
+}],
+"loop": true,
+"name": &"Run",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_8t5qx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_8rd5p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_wwmao")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_7xdrn")
+}],
+"loop": true,
+"name": &"Up",
+"speed": 5.0
+}]
 
 [node name="Node2D" type="CharacterBody2D" unique_id=896445057 groups=["Player"]]
 input_pickable = true
 script = ExtResource("1_kpjcp")
-
-[node name="18x38Original" type="Sprite2D" parent="." unique_id=1708053447]
-texture = ExtResource("2_kpjcp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2010125955]
 z_as_relative = false
@@ -38,6 +101,13 @@ wait_time = 1.5
 
 [node name="IFramesBlinkInterval" type="Timer" parent="PlayerHealthComponent" unique_id=244980994]
 wait_time = 0.1
+
+[node name="PlayerAnimation" type="Node2D" parent="." unique_id=91055445]
+script = ExtResource("5_spxdj")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PlayerAnimation" unique_id=426433208]
+sprite_frames = SubResource("SpriteFrames_ude3g")
+animation = &"Down"
 
 [connection signal="timeout" from="ShootingComponent/Shootspeed" to="." method="_on_shootspeed_timeout"]
 [connection signal="timeout" from="PlayerHealthComponent/IFramesTimer" to="." method="_on_i_frames_timer_timeout"]
