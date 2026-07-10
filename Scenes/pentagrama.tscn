@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://bicx7c323pqse"]
+
+[ext_resource type="Texture2D" uid="uid://bjq50wmtvce73" path="res://Assets/Sprites/Pentagram_01_TheDarkRitual_BigWander.png" id="1_i1ogw"]
+[ext_resource type="Script" uid="uid://b3nk3u3uyxooe" path="res://Scenes/pentagrama.gd" id="1_v3kvc"]
+[ext_resource type="Texture2D" uid="uid://bsqdd8efdcf2l" path="res://Assets/Sprites/Pentagram_02_TheDarkRitual_BigWander.png" id="2_v3kvc"]
+[ext_resource type="Texture2D" uid="uid://bgiuk3nq48gq1" path="res://Assets/Sprites/Pentagram_03_TheDarkRitual_BigWander.png" id="3_tbj26"]
+[ext_resource type="Texture2D" uid="uid://bcxhy2v1bom5f" path="res://Assets/Sprites/Pentagram_05_TheDarkRitual_BigWander.png" id="4_1kor0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_epd3w"]
+radius = 21.023796
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cxucs"]
+animations = [{
+"frames": [{
+"duration": 0.5,
+"texture": ExtResource("1_i1ogw")
+}, {
+"duration": 0.5,
+"texture": ExtResource("2_v3kvc")
+}, {
+"duration": 0.5,
+"texture": ExtResource("3_tbj26")
+}, {
+"duration": 0.5,
+"texture": ExtResource("4_1kor0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Pentagrama" type="Node2D" unique_id=181011367]
+script = ExtResource("1_v3kvc")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=805822322]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=115501315]
+shape = SubResource("CircleShape2D_epd3w")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2043107616]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_cxucs")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_body_entered"]
