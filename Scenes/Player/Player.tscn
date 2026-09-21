@@ -107,7 +107,7 @@ script = ExtResource("5_spxdj")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PlayerAnimation" unique_id=426433208]
 sprite_frames = SubResource("SpriteFrames_ude3g")
-animation = &"Down"
+animation = &"Up"
 
 [connection signal="timeout" from="ShootingComponent/Shootspeed" to="." method="_on_shootspeed_timeout"]
 [connection signal="timeout" from="PlayerHealthComponent/IFramesTimer" to="." method="_on_i_frames_timer_timeout"]
