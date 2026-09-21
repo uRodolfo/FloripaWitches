@@ -31,16 +31,12 @@ script = ExtResource("1_1f0kj")
 script = ExtResource("2_ghaa6")
 initial_state = NodePath("Roaming")
 
-[node name="Roaming" type="Node" parent="StateMachine" unique_id=643170312 node_paths=PackedStringArray("enemy", "navigation_update_interval", "sight_area")]
+[node name="Roaming" type="Node" parent="StateMachine" unique_id=643170312 node_paths=PackedStringArray("enemy")]
 script = ExtResource("3_auwsv")
 enemy = NodePath("../..")
-navigation_update_interval = NodePath("../../NavigationAgent2D/NavigationUpdateInterval")
-sight_area = NodePath("../../SightArea")
 
-[node name="Chasing" type="Node" parent="StateMachine" unique_id=755193752 node_paths=PackedStringArray("enemy", "navigation_update_interval")]
+[node name="Chasing" type="Node" parent="StateMachine" unique_id=755193752]
 script = ExtResource("4_8uf12")
-enemy = NodePath("../..")
-navigation_update_interval = NodePath("../../NavigationAgent2D/NavigationUpdateInterval")
 
 [node name="Collisor" type="CollisionShape2D" parent="." unique_id=305782812]
 shape = SubResource("CircleShape2D_8uf12")
@@ -93,6 +89,7 @@ shape = SubResource("CircleShape2D_ghaa6")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=993196518]
 path_desired_distance = 10.0
+debug_enabled = true
 
 [node name="NavigationUpdateInterval" type="Timer" parent="NavigationAgent2D" unique_id=1546638835]
 wait_time = 0.25

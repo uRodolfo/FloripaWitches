@@ -36,6 +36,7 @@ func damage_from(
 	damage_amount: float,
 	source: Node2D
 ) -> void:
+	
 	_damage(damage_amount)
 
 	damaged_by.emit(
