@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://c0ts1s8yu8dcc"]
+
+[ext_resource type="Script" uid="uid://doxqf5dpywdg5" path="res://Scenes/menu.gd" id="1_3kf3n"]
+
+[sub_resource type="FontFile" id="FontFile_beu5a"]
+cache/0/variation_coordinates = {}
+cache/0/face_index = 0
+cache/0/embolden = 0.0
+cache/0/transform = Transform2D(1, 0, 0, 1, 0, 0)
+cache/0/spacing_top = 0
+cache/0/spacing_bottom = 0
+cache/0/spacing_space = 0
+cache/0/spacing_glyph = 0
+cache/0/baseline_offset = 0.0
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_3kf3n"]
+font = SubResource("FontFile_beu5a")
+outline_size = 5
+outline_color = Color(0.93645453, 0.5644674, 0.78176683, 1)
+shadow_size = 8
+shadow_color = Color(0, 0, 0, 0.15686275)
+shadow_offset = Vector2(-0.68, 1)
+
+[node name="Control" type="Control" unique_id=522865940]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3kf3n")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1130190824]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=541633541]
+offset_left = 121.0
+offset_top = 62.0
+offset_right = 299.0
+offset_bottom = 240.0
+color = Color(0.13682577, 0.13682574, 0.13682571, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1527798418]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 66.0
+offset_right = 106.0
+offset_bottom = 215.0
+theme_override_constants/separation = 32
+
+[node name="Começar" type="Button" parent="VBoxContainer" unique_id=1255797222]
+layout_mode = 2
+text = "Começar"
+
+[node name="Comandos" type="Button" parent="VBoxContainer" unique_id=1558177844]
+layout_mode = 2
+text = "Comandos
+"
+
+[node name="Sair" type="Button" parent="VBoxContainer" unique_id=1808423570]
+layout_mode = 2
+text = "Sair"
+
+[node name="Label" type="Label" parent="." unique_id=1798377758]
+layout_mode = 0
+offset_right = 312.0
+offset_bottom = 40.0
+text = "SpellCradle"
+label_settings = SubResource("LabelSettings_3kf3n")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="button_down" from="VBoxContainer/Começar" to="." method="_on_começar_button_down"]
+[connection signal="button_down" from="VBoxContainer/Comandos" to="." method="_on_comandos_button_down"]

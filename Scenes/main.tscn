@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://c5u4vk8k5dm1u" path="res://Scripts/Design sem nome.png" id="10_hptm8"]
 [ext_resource type="PackedScene" uid="uid://bpe2gj3fpufxp" path="res://Scenes/pergaminho.tscn" id="11_d1ilt"]
 [ext_resource type="Script" uid="uid://b1ai5tf62bvhd" path="res://Scenes/instrução_2.gd" id="11_fdnlq"]
+[ext_resource type="Texture2D" uid="uid://lkarde7d2uda" path="res://Assets/Sprites/Placeholders/mofas sprite sheet.png" id="12_h1bgf"]
 [ext_resource type="PackedScene" uid="uid://bicx7c323pqse" path="res://Scenes/pentagrama.tscn" id="14_jkdf5"]
 [ext_resource type="PackedScene" uid="uid://bundf0mxnfds4" path="res://Scenes/spawner.tscn" id="15_wsu2k"]
 [ext_resource type="Script" uid="uid://sgf1wkvbnibr" path="res://Resources/Scripts/enemy_stats.gd" id="16_k12tt"]
@@ -57,7 +58,7 @@ func _on_player_died() -> void:
 
 func _process(delta: float) -> void:
 	if game_over and Input.is_action_just_pressed(\"restart\"):
-		get_tree().reload_current_scene()
+		get_tree().change_scene_to_file(\"res://Scenes/Menu.tscn\")
 		
 "
 
@@ -221,6 +222,10 @@ offset_bottom = 159.0
 text = "A Yuna foi derrotada!
 
 pressione \"O\" para reiniciar"
+
+[node name="MofasSpriteSheet" type="Sprite2D" parent="CanvasLayer/Control" unique_id=1328327299]
+position = Vector2(118, 183)
+texture = ExtResource("12_h1bgf")
 
 [node name="Pergaminho" parent="." unique_id=883931723 instance=ExtResource("11_d1ilt")]
 position = Vector2(682, 214)
