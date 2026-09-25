@@ -11,8 +11,8 @@ config_version=5
 [application]
 
 config/name="Floripa Witches"
-run/main_scene="uid://8o50nkobnbia"
-config/features=PackedStringArray("4.7", "Forward Plus")
+run/main_scene="uid://c0ts1s8yu8dcc"
+config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://Assets/Sprites/Placeholders/icon.svg"
 
 [autoload]
@@ -48,6 +48,7 @@ Player=""
 Enemy=""
 PlayerBullet=""
 Mofas=""
+PlayerBullet2=""
 Navigation=""
 
 [input]

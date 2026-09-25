@@ -4,7 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://srfy13rpnura" path="res://Assets/Tilesets/Cavern_Tileset.png" id="3_b3802"]
 [ext_resource type="Texture2D" uid="uid://dudnmgxmoucq" path="res://Assets/Tilesets/16x16 v4.png" id="3_fevyy"]
 [ext_resource type="PackedScene" uid="uid://he6ahc8jvt1t" path="res://Scenes/Camera.tscn" id="3_kry3j"]
-[ext_resource type="PackedScene" uid="uid://qg0cm33v5qei" path="res://Scenes/lunge_enemy.tscn" id="4_jjvhh"]
 [ext_resource type="Resource" uid="uid://dsh84jose4y5k" path="res://Resources/enemy_1.tres" id="5_kry3j"]
 [ext_resource type="Resource" uid="uid://bnp0p2h275p6u" path="res://Resources/enemy_2.tres" id="6_21xkr"]
 [ext_resource type="PackedScene" uid="uid://7h11giytrw4j" path="res://Scenes/Components/Mofas.tscn" id="7_6bp64"]
@@ -261,6 +260,9 @@ font_size = 12
 [sub_resource type="LabelSettings" id="LabelSettings_jkdf5"]
 font_size = 12
 
+[sub_resource type="Resource" id="Resource_h1bgf"]
+metadata/__load_path__ = "res://Scenes/enemy.tscn"
+
 [node name="Main" type="Node2D" unique_id=859268929]
 script = SubResource("GDScript_21xkr")
 
@@ -413,59 +415,8 @@ position = Vector2(878, 670)
 
 [node name="EnemySpawner" parent="." unique_id=1723423879 instance=ExtResource("15_wsu2k")]
 position = Vector2(990, 530)
-enemy_scene = ExtResource("4_jjvhh")
+enemy_scene = SubResource("Resource_h1bgf")
 enemy_variants = Array[ExtResource("16_k12tt")]([ExtResource("5_kry3j"), ExtResource("6_21xkr")])
-
-[node name="Enemy" parent="." unique_id=140973024 instance=ExtResource("4_jjvhh")]
-position = Vector2(488, 161)
-
-[node name="Enemy2" parent="." unique_id=1869677523 instance=ExtResource("4_jjvhh")]
-position = Vector2(592, 104)
-stats = ExtResource("6_21xkr")
-
-[node name="Enemy3" parent="." unique_id=1230469384 instance=ExtResource("4_jjvhh")]
-position = Vector2(296, 136)
-
-[node name="Enemy4" parent="." unique_id=425518941 instance=ExtResource("4_jjvhh")]
-position = Vector2(871, 76)
-
-[node name="Enemy6" parent="." unique_id=1428766013 instance=ExtResource("4_jjvhh")]
-position = Vector2(250, 426)
-stats = ExtResource("6_21xkr")
-
-[node name="Enemy7" parent="." unique_id=18661075 instance=ExtResource("4_jjvhh")]
-position = Vector2(519, 558)
-
-[node name="Enemy16" parent="." unique_id=2112592225 instance=ExtResource("4_jjvhh")]
-position = Vector2(560, 368)
-
-[node name="Enemy14" parent="." unique_id=128097204 instance=ExtResource("4_jjvhh")]
-position = Vector2(640, 376)
-
-[node name="Enemy15" parent="." unique_id=1593605029 instance=ExtResource("4_jjvhh")]
-position = Vector2(65, 650)
-
-[node name="Enemy8" parent="." unique_id=1139960347 instance=ExtResource("4_jjvhh")]
-position = Vector2(398, 363)
-stats = ExtResource("6_21xkr")
-
-[node name="Enemy9" parent="." unique_id=228714691 instance=ExtResource("4_jjvhh")]
-position = Vector2(42, 495)
-
-[node name="Enemy13" parent="." unique_id=1171184407 instance=ExtResource("4_jjvhh")]
-position = Vector2(873, 569)
-stats = ExtResource("6_21xkr")
-
-[node name="Enemy10" parent="." unique_id=876603270 instance=ExtResource("4_jjvhh")]
-position = Vector2(674, 642)
-
-[node name="Enemy11" parent="." unique_id=447704698 instance=ExtResource("4_jjvhh")]
-position = Vector2(329, 667)
-stats = ExtResource("6_21xkr")
-
-[node name="Enemy12" parent="." unique_id=980571217 instance=ExtResource("4_jjvhh")]
-position = Vector2(453, 659)
-stats = ExtResource("6_21xkr")
 
 [connection signal="died" from="Player" to="." method="_on_player_died"]
 [connection signal="timeout" from="CanvasLayer/Control/Instrucao1/Timer" to="CanvasLayer/Control/Instrucao1" method="_on_timer_timeout"]
