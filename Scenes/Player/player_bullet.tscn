@@ -7,6 +7,7 @@
 size = Vector2(6, 8)
 
 [node name="player_bullet" type="Area2D" unique_id=1231129046 groups=["PlayerBullet"]]
+collision_mask = 9
 script = ExtResource("1_jf7v0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=884910315 groups=["PlayerBullet"]]

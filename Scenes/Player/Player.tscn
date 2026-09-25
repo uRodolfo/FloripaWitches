@@ -74,12 +74,23 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Gradient" id="Gradient_spxdj"]
+offsets = PackedFloat32Array(0, 0.6566265)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3sy6q"]
+gradient = SubResource("Gradient_spxdj")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
 [node name="Node2D" type="CharacterBody2D" unique_id=896445057 groups=["Player"]]
+collision_layer = 4
 input_pickable = true
 script = ExtResource("1_kpjcp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2010125955]
 z_as_relative = false
+position = Vector2(0, 8)
 shape = SubResource("CircleShape2D_jmcll")
 
 [node name="ShootingComponent" type="Node2D" parent="." unique_id=2125502849]
@@ -108,6 +119,11 @@ script = ExtResource("5_spxdj")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PlayerAnimation" unique_id=426433208]
 sprite_frames = SubResource("SpriteFrames_ude3g")
 animation = &"Up"
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1176859817]
+energy = 0.5
+texture = SubResource("GradientTexture2D_3sy6q")
+texture_scale = 8.0
 
 [connection signal="timeout" from="ShootingComponent/Shootspeed" to="." method="_on_shootspeed_timeout"]
 [connection signal="timeout" from="PlayerHealthComponent/IFramesTimer" to="." method="_on_i_frames_timer_timeout"]

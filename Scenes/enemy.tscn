@@ -7,13 +7,14 @@
 [ext_resource type="Script" uid="uid://16ovse1fqt2u" path="res://Scripts/enemy_roaming_state.gd" id="3_auwsv"]
 [ext_resource type="Script" uid="uid://b52fn1jvlw52g" path="res://Scripts/enemy_chasing_state.gd" id="4_8uf12"]
 [ext_resource type="Script" uid="uid://bmnv7cmajsb7k" path="res://Scripts/Components/contact_damage_component.gd" id="4_287tu"]
+[ext_resource type="Script" uid="uid://1a4ccjg4bo32" path="res://Scripts/attacking.gd" id="5_8uf12"]
 [ext_resource type="Script" uid="uid://b6j67k0nbgcpk" path="res://Scripts/Components/mouse_detector_area.gd" id="5_0830c"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8uf12"]
 radius = 5.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_afpow"]
-radius = 88.20431
+radius = 120.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_afpow"]
 size = Vector2(18, 8)
@@ -25,6 +26,7 @@ size = Vector2(20, 10)
 radius = 23.021729
 
 [node name="Enemy" type="CharacterBody2D" unique_id=140973024 groups=["Enemy"]]
+collision_layer = 8
 script = ExtResource("1_1f0kj")
 
 [node name="StateMachine" type="Node" parent="." unique_id=1088199231 node_paths=PackedStringArray("initial_state")]
@@ -37,10 +39,36 @@ enemy = NodePath("../..")
 navigation_update_interval = NodePath("../../NavigationAgent2D/NavigationUpdateInterval")
 sight_area = NodePath("../../SightArea")
 
-[node name="Chasing" type="Node" parent="StateMachine" unique_id=755193752 node_paths=PackedStringArray("enemy", "navigation_update_interval")]
+[node name="Chasing" type="Node" parent="StateMachine" unique_id=755193752 node_paths=PackedStringArray("enemy", "navigation_update_interval", "attacking_state")]
 script = ExtResource("4_8uf12")
 enemy = NodePath("../..")
 navigation_update_interval = NodePath("../../NavigationAgent2D/NavigationUpdateInterval")
+attacking_state = NodePath("../Attacking")
+
+[node name="Attacking" type="Node" parent="StateMachine" unique_id=1947235313 node_paths=PackedStringArray("enemy", "telegraph_time", "attacking_interval", "attack_cooldown", "lunge_lock_timer")]
+script = ExtResource("5_8uf12")
+enemy = NodePath("../..")
+lunge_speed = 200.0
+telegraph_time = NodePath("TelegraphTime")
+attacking_interval = NodePath("AttackingInterval")
+attack_cooldown = NodePath("AttackCooldown")
+lunge_lock_timer = NodePath("LungeLockTimer")
+metadata/_custom_type_script = "uid://boqbv877ju5je"
+
+[node name="LungeLockTimer" type="Timer" parent="StateMachine/Attacking" unique_id=2132064066]
+one_shot = true
+
+[node name="TelegraphTime" type="Timer" parent="StateMachine/Attacking" unique_id=47111703]
+wait_time = 0.7
+one_shot = true
+
+[node name="AttackingInterval" type="Timer" parent="StateMachine/Attacking" unique_id=1788488554]
+wait_time = 3.0
+one_shot = true
+
+[node name="AttackCooldown" type="Timer" parent="StateMachine/Attacking" unique_id=1584126355]
+wait_time = 4.0
+one_shot = true
 
 [node name="Collisor" type="CollisionShape2D" parent="." unique_id=305782812]
 shape = SubResource("CircleShape2D_8uf12")
@@ -51,6 +79,7 @@ texture = ExtResource("1_hghv2")
 
 [node name="SightArea" type="Area2D" parent="." unique_id=1796072777]
 visible = false
+collision_mask = 4
 
 [node name="SightSize" type="CollisionShape2D" parent="SightArea" unique_id=1503122958]
 shape = SubResource("CircleShape2D_afpow")
@@ -78,6 +107,8 @@ metadata/_custom_type_script = "uid://bmnv7cmajsb7k"
 wait_time = 0.15
 
 [node name="ContactArea" type="Area2D" parent="ContactDamageComponent" unique_id=637009746]
+collision_layer = 8
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ContactDamageComponent/ContactArea" unique_id=469522486]
 shape = SubResource("RectangleShape2D_0830c")
