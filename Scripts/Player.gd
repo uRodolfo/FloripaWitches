@@ -9,12 +9,14 @@ signal died
 
 var direction = Vector2.ZERO
 
-@onready var _player_shooting := $ShootingComponent
+@onready var shooting_component := $ShootingComponent
 @onready var player_health_component: PlayerHealthComponent = $PlayerHealthComponent
+@onready var weapon_selector = $WeaponSelector
 
 func _ready() -> void:
 	player_health_component.start(starting_hp)
 	player_health_component.died.connect(_on_died)
+	score.Magic = false
 
 func damage(amount: float) -> void:
 	player_health_component.damage(amount)
@@ -50,7 +52,7 @@ func handle_movement():
 func handle_shooting():
 	if Input.is_action_just_pressed("Shoot"):
 		if score.Magic == true:
-			_player_shooting.shoot(get_global_mouse_position())
+			shooting_component.shoot(get_global_mouse_position())
 
 func _on_died() -> void:
 	died.emit()
@@ -58,7 +60,24 @@ func _on_died() -> void:
 
 func _on_shoot_key_interval_timeout() -> void:
 	if Input.is_action_pressed("Shoot"):
-		_player_shooting.is_shooting = !_player_shooting.is_shooting
+		shooting_component.is_shooting = !shooting_component.is_shooting
 
 func _on_shootspeed_timeout() -> void:
-	_player_shooting.canshoot = true
+	shooting_component.canshoot = true
+	
+func _input(event):
+	if event is InputEventMouseButton and event.pressed:
+
+		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+			weapon_selector.previous_weapon()
+
+		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			weapon_selector.next_weapon()
+
+
+func _on_weapon_selector_weapon_changed(index: int) -> void:
+	if index == 0:
+		shooting_component.triple_shot_selected = false
+
+	elif index == 1:
+		shooting_component.triple_shot_selected = true

@@ -228,7 +228,7 @@ position = Vector2(118, 183)
 texture = ExtResource("12_h1bgf")
 
 [node name="Pergaminho" parent="." unique_id=883931723 instance=ExtResource("11_d1ilt")]
-position = Vector2(682, 214)
+position = Vector2(161, 171)
 float_height = 2.6
 float_speed = 3.7
 

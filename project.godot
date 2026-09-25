@@ -46,6 +46,7 @@ Player=""
 Enemy=""
 PlayerBullet=""
 Mofas=""
+PlayerBullet2=""
 
 [input]
 

@@ -108,14 +108,12 @@ func aggro_player() -> void:
 	target = player
 
 
-func _on_hurtbox_area_entered(
-	area: Area2D
-) -> void:
-	if area.is_in_group(
-		"PlayerBullet"
-	):
+func _on_hurtbox_area_entered(area: Area2D) -> void:
+	if area.is_in_group("PlayerBullet"):
+		health._damage(2)
+		aggro_player()
+	if area.is_in_group("PlayerBullet2"):
 		health._damage(1)
-
 		aggro_player()
 
 func _on_died() -> void:
