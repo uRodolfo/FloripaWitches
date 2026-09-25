@@ -1,13 +1,16 @@
 class_name Enemy
 extends CharacterBody2D
 
+signal was_damaged_by(source: Node2D)
 
 var target: Node2D = null
 var player: Node2D = null
 
-
 @export var stats: EnemyStats
 
+@onready var nav_map_rid : RID = get_world_2d().navigation_map
+@onready var navigation_agent_2d: NavigationAgent2D = $NavigationAgent2D
+@onready var navigation_update_interval: Timer = $NavigationAgent2D/NavigationUpdateInterval
 
 @onready var health: EnemyHealthComponent = (
 	$EnemyHealthComponent
@@ -51,8 +54,11 @@ func _ready() -> void:
 		_on_damaged_by
 	)
 
-	if stats.sprite_texture:
-		sprite.texture = stats.sprite_texture
+	if stats.sprite_pallete:
+		sprite.material = sprite.material.duplicate()
+		sprite.material.set_shader_parameter(&"new_palette", stats.sprite_pallete)
+	#if stats.sprite_texture:
+	#	sprite.texture = stats.sprite_texture
 
 
 func _physics_process(
@@ -62,7 +68,7 @@ func _physics_process(
 		follow_player(delta)
 	else:
 		target = null
-		velocity = Vector2.ZERO
+		#velocity = Vector2.ZERO
 
 	move_and_slide()
 
@@ -75,8 +81,19 @@ func follow_player(
 
 		return
 
+	pathfind_and_move_to(target.global_position)
+
+var nav_target_position : Vector2
+func pathfind_and_move_to(to: Vector2) -> void:
+	nav_target_position = to
+	var nav_next_position = navigation_agent_2d.get_next_path_position()
+	
+	if navigation_agent_2d.is_target_reached():
+		velocity = Vector2.ZERO
+		return
+	
 	var direction: Vector2 = (
-		target.global_position
+		nav_next_position
 		- global_position
 	).normalized()
 
@@ -85,6 +102,11 @@ func follow_player(
 		* stats.speed
 	)
 
+func _on_navigation_update_interval_timeout() -> void:
+	if not nav_target_position:
+		return
+	
+	navigation_agent_2d.target_position = nav_target_position
 
 func _on_damaged_by(
 	_damage_amount: float,
@@ -93,12 +115,11 @@ func _on_damaged_by(
 	if not is_instance_valid(source):
 		return
 
-	if not source.is_in_group(
-		"Mofas"
-	):
+	if not (source.is_in_group("Mofas") or source.is_in_group("PlayerBullet")):
 		return
 
-	aggro_player()
+	was_damaged_by.emit(source)
+	#aggro_player()
 
 
 func aggro_player() -> void:
@@ -108,13 +129,15 @@ func aggro_player() -> void:
 	target = player
 
 
-func _on_hurtbox_area_entered(area: Area2D) -> void:
-	if area.is_in_group("PlayerBullet"):
-		health._damage(2)
-		aggro_player()
-	if area.is_in_group("PlayerBullet2"):
-		health._damage(1)
-		aggro_player()
+func _on_hurtbox_area_entered(
+	area: Area2D
+) -> void:
+	if area.is_in_group(
+		"PlayerBullet"
+	):
+		health.damage_from(1, area)
+
+		#aggro_player()
 
 func _on_died() -> void:
 	score.add_points(10)
@@ -122,13 +145,13 @@ func _on_died() -> void:
 	queue_free()
 
 
-func _on_sight_area_body_entered(
-	body: Node2D
-) -> void:
-	if body.is_in_group(
-		"Player"
-	):
-		target = body
+#func _on_sight_area_body_entered(
+	#body: Node2D
+#) -> void:
+	#if body.is_in_group(
+		#"Player"
+	#):
+		#target = body
 
 
 func _on_contact_area_body_entered(

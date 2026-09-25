@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dudnmgxmoucq"
-path="res://.godot/imported/16x16 v4.png-a3204b9fe48f2259d7e002ea2b37ef04.ctex"
+uid="uid://dpf5p8xxn52cb"
+path="res://.godot/imported/SymmetryMirror.svg-2ba85612b4c15f1a7eab344dc47f9a9a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/16x16 v4.png"
-dest_files=["res://.godot/imported/16x16 v4.png-a3204b9fe48f2259d7e002ea2b37ef04.ctex"]
+source_file="res://addons/better-terrain/icons/paint-symmetry/SymmetryMirror.svg"
+dest_files=["res://.godot/imported/SymmetryMirror.svg-2ba85612b4c15f1a7eab344dc47f9a9a.ctex"]
 
 [params]
 
@@ -38,3 +38,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=4.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

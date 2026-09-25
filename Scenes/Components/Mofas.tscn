@@ -11,6 +11,7 @@
 radius = 14.035668
 
 [node name="Mofas" type="CharacterBody2D" unique_id=557517622 groups=["Mofas"]]
+collision_mask = 9
 script = ExtResource("1_6sxjv")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1929018939]
@@ -36,6 +37,7 @@ metadata/_custom_type_script = "uid://bmnv7cmajsb7k"
 [node name="Timer" type="Timer" parent="ContactDamageComponent" unique_id=1193690706]
 
 [node name="ContactArea" type="Area2D" parent="ContactDamageComponent" unique_id=210929721]
+collision_mask = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ContactDamageComponent/ContactArea" unique_id=1987610082]
 shape = SubResource("CircleShape2D_w8tas")

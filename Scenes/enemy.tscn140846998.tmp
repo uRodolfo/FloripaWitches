@@ -2,12 +2,15 @@
 
 [ext_resource type="Script" uid="uid://concb4awmiftn" path="res://Scripts/enemy.gd" id="1_1f0kj"]
 [ext_resource type="Texture2D" uid="uid://crj13u3jwqqka" path="res://Assets/Sprites/Placeholders/icon.svg" id="1_hghv2"]
+[ext_resource type="Script" uid="uid://bvffcldfuo2xe" path="res://Scenes/Mofas/state_machine.gd" id="2_ghaa6"]
 [ext_resource type="Script" uid="uid://b1lkhedpa50kg" path="res://Scripts/Components/enemy_health_component.gd" id="3_afpow"]
+[ext_resource type="Script" uid="uid://16ovse1fqt2u" path="res://Scripts/enemy_roaming_state.gd" id="3_auwsv"]
+[ext_resource type="Script" uid="uid://b52fn1jvlw52g" path="res://Scripts/enemy_chasing_state.gd" id="4_8uf12"]
 [ext_resource type="Script" uid="uid://bmnv7cmajsb7k" path="res://Scripts/Components/contact_damage_component.gd" id="4_287tu"]
 [ext_resource type="Script" uid="uid://b6j67k0nbgcpk" path="res://Scripts/Components/mouse_detector_area.gd" id="5_0830c"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1f0kj"]
-size = Vector2(18, 8)
+[sub_resource type="CircleShape2D" id="CircleShape2D_8uf12"]
+radius = 5.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_afpow"]
 radius = 88.20431
@@ -24,14 +27,26 @@ radius = 23.021729
 [node name="Enemy" type="CharacterBody2D" unique_id=140973024 groups=["Enemy"]]
 script = ExtResource("1_1f0kj")
 
+[node name="StateMachine" type="Node" parent="." unique_id=1088199231 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_ghaa6")
+initial_state = NodePath("Roaming")
+
+[node name="Roaming" type="Node" parent="StateMachine" unique_id=643170312 node_paths=PackedStringArray("enemy")]
+script = ExtResource("3_auwsv")
+enemy = NodePath("../..")
+
+[node name="Chasing" type="Node" parent="StateMachine" unique_id=755193752]
+script = ExtResource("4_8uf12")
+
 [node name="Collisor" type="CollisionShape2D" parent="." unique_id=305782812]
-shape = SubResource("RectangleShape2D_1f0kj")
+shape = SubResource("CircleShape2D_8uf12")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2003387887]
 scale = Vector2(0.14453125, 0.06661987)
 texture = ExtResource("1_hghv2")
 
 [node name="SightArea" type="Area2D" parent="." unique_id=1796072777]
+visible = false
 
 [node name="SightSize" type="CollisionShape2D" parent="SightArea" unique_id=1503122958]
 shape = SubResource("CircleShape2D_afpow")
@@ -69,10 +84,20 @@ target = NodePath("..")
 metadata/_custom_type_script = "uid://b6j67k0nbgcpk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MouseDetector" unique_id=348363237]
+visible = false
 shape = SubResource("CircleShape2D_ghaa6")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=993196518]
+path_desired_distance = 10.0
+debug_enabled = true
+
+[node name="NavigationUpdateInterval" type="Timer" parent="NavigationAgent2D" unique_id=1546638835]
+wait_time = 0.25
+autostart = true
 
 [connection signal="body_entered" from="SightArea" to="." method="_on_sight_area_body_entered"]
 [connection signal="timeout" from="EnemyHealthComponent/BlinkInterval" to="EnemyHealthComponent" method="_on_blink_interval_timeout"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="body_entered" from="ContactDamageComponent/ContactArea" to="." method="_on_contact_area_body_entered"]
 [connection signal="body_exited" from="ContactDamageComponent/ContactArea" to="." method="_on_contact_area_body_exited"]
+[connection signal="timeout" from="NavigationAgent2D/NavigationUpdateInterval" to="." method="_on_navigation_update_interval_timeout"]

@@ -1,0 +1,136 @@
+[gd_scene format=3 uid="uid://ce5eyiulc2572"]
+
+[ext_resource type="Script" uid="uid://concb4awmiftn" path="res://Scripts/enemy.gd" id="1_dw50e"]
+[ext_resource type="Script" uid="uid://bvffcldfuo2xe" path="res://Scenes/Mofas/state_machine.gd" id="2_ta3aj"]
+[ext_resource type="Script" uid="uid://16ovse1fqt2u" path="res://Scripts/enemy_roaming_state.gd" id="3_5pe8n"]
+[ext_resource type="Script" uid="uid://b52fn1jvlw52g" path="res://Scripts/enemy_chasing_state.gd" id="4_jdsun"]
+[ext_resource type="Script" uid="uid://b3krqlhheugbx" path="res://Scripts/enemy_bouncing_state.gd" id="5_dw50e"]
+[ext_resource type="Texture2D" uid="uid://crj13u3jwqqka" path="res://Assets/Sprites/Placeholders/icon.svg" id="6_xk8we"]
+[ext_resource type="Script" uid="uid://b1lkhedpa50kg" path="res://Scripts/Components/enemy_health_component.gd" id="7_x15yp"]
+[ext_resource type="Script" uid="uid://bmnv7cmajsb7k" path="res://Scripts/Components/contact_damage_component.gd" id="8_r4ab3"]
+[ext_resource type="Script" uid="uid://b6j67k0nbgcpk" path="res://Scripts/Components/mouse_detector_area.gd" id="9_32gu6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8uf12"]
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_afpow"]
+radius = 120.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_afpow"]
+size = Vector2(18, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0830c"]
+size = Vector2(20, 10)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ghaa6"]
+radius = 23.021729
+
+[node name="BouncingEnemy" type="CharacterBody2D" unique_id=140973024 groups=["Enemy"]]
+collision_layer = 8
+script = ExtResource("1_dw50e")
+
+[node name="StateMachine" type="Node" parent="." unique_id=1088199231 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_ta3aj")
+initial_state = NodePath("Roaming")
+
+[node name="Roaming" type="Node" parent="StateMachine" unique_id=643170312 node_paths=PackedStringArray("enemy", "navigation_update_interval", "sight_area")]
+script = ExtResource("3_5pe8n")
+enemy = NodePath("../..")
+navigation_update_interval = NodePath("../../NavigationAgent2D/NavigationUpdateInterval")
+sight_area = NodePath("../../SightArea")
+
+[node name="Chasing" type="Node" parent="StateMachine" unique_id=755193752 node_paths=PackedStringArray("enemy", "navigation_update_interval", "attacking_state")]
+script = ExtResource("4_jdsun")
+enemy = NodePath("../..")
+navigation_update_interval = NodePath("../../NavigationAgent2D/NavigationUpdateInterval")
+attacking_state = NodePath("../Attacking")
+
+[node name="Attacking" type="Node" parent="StateMachine" unique_id=1947235313 node_paths=PackedStringArray("enemy", "telegraph_time", "attacking_interval", "attack_cooldown", "lunge_lock_timer")]
+script = ExtResource("5_dw50e")
+enemy = NodePath("../..")
+telegraph_time = NodePath("TelegraphTime")
+attacking_interval = NodePath("AttackingInterval")
+attack_cooldown = NodePath("AttackCooldown")
+lunge_lock_timer = NodePath("LungeLockTimer")
+metadata/_custom_type_script = "uid://boqbv877ju5je"
+
+[node name="TelegraphTime" type="Timer" parent="StateMachine/Attacking" unique_id=47111703]
+wait_time = 0.7
+one_shot = true
+
+[node name="AttackingInterval" type="Timer" parent="StateMachine/Attacking" unique_id=1788488554]
+wait_time = 6.0
+one_shot = true
+
+[node name="AttackCooldown" type="Timer" parent="StateMachine/Attacking" unique_id=1584126355]
+wait_time = 4.0
+one_shot = true
+
+[node name="LungeLockTimer" type="Timer" parent="StateMachine/Attacking" unique_id=2132064066]
+one_shot = true
+
+[node name="Collisor" type="CollisionShape2D" parent="." unique_id=305782812]
+shape = SubResource("CircleShape2D_8uf12")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2003387887]
+scale = Vector2(0.14453125, 0.06661987)
+texture = ExtResource("6_xk8we")
+
+[node name="SightArea" type="Area2D" parent="." unique_id=1796072777]
+visible = false
+collision_mask = 4
+
+[node name="SightSize" type="CollisionShape2D" parent="SightArea" unique_id=1503122958]
+shape = SubResource("CircleShape2D_afpow")
+
+[node name="EnemyHealthComponent" type="Node2D" parent="." unique_id=1027792373]
+script = ExtResource("7_x15yp")
+metadata/_custom_type_script = "uid://b1lkhedpa50kg"
+
+[node name="BlinkInterval" type="Timer" parent="EnemyHealthComponent" unique_id=125384097]
+wait_time = 0.995
+
+[node name="Hurtbox" type="Area2D" parent="." unique_id=1365588004 groups=["Enemy"]]
+
+[node name="HurtboxSize" type="CollisionShape2D" parent="Hurtbox" unique_id=1125726350]
+shape = SubResource("RectangleShape2D_afpow")
+
+[node name="ContactDamageComponent" type="Node2D" parent="." unique_id=750953379]
+script = ExtResource("8_r4ab3")
+damage_interval = 0.0
+target_group = &"Player"
+health_component_name = &"PlayerHealthComponent"
+metadata/_custom_type_script = "uid://bmnv7cmajsb7k"
+
+[node name="Timer" type="Timer" parent="ContactDamageComponent" unique_id=1551347041]
+wait_time = 0.15
+
+[node name="ContactArea" type="Area2D" parent="ContactDamageComponent" unique_id=637009746]
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ContactDamageComponent/ContactArea" unique_id=469522486]
+shape = SubResource("RectangleShape2D_0830c")
+
+[node name="MouseDetector" type="Area2D" parent="." unique_id=1193551411 node_paths=PackedStringArray("target") groups=["Enemy"]]
+script = ExtResource("9_32gu6")
+target = NodePath("..")
+metadata/_custom_type_script = "uid://b6j67k0nbgcpk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MouseDetector" unique_id=348363237]
+visible = false
+shape = SubResource("CircleShape2D_ghaa6")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=993196518]
+path_desired_distance = 10.0
+
+[node name="NavigationUpdateInterval" type="Timer" parent="NavigationAgent2D" unique_id=1546638835]
+wait_time = 0.25
+autostart = true
+
+[connection signal="body_entered" from="SightArea" to="." method="_on_sight_area_body_entered"]
+[connection signal="timeout" from="EnemyHealthComponent/BlinkInterval" to="EnemyHealthComponent" method="_on_blink_interval_timeout"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="body_entered" from="ContactDamageComponent/ContactArea" to="." method="_on_contact_area_body_entered"]
+[connection signal="body_exited" from="ContactDamageComponent/ContactArea" to="." method="_on_contact_area_body_exited"]
+[connection signal="timeout" from="NavigationAgent2D/NavigationUpdateInterval" to="." method="_on_navigation_update_interval_timeout"]

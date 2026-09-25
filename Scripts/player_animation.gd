@@ -61,6 +61,9 @@ func update_animation(input_dir: Vector2):
 		sprite.stop()
 		sprite.frame = 0
 		return
+	else:
+		if not sprite.is_playing():
+			sprite.frame = 1
 
 	match current_direction:
 

@@ -37,10 +37,10 @@ func _process(delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	print(
-		"SM PHYSICS | CURRENT STATE: ",
-		current_state
-	)
+	#print(
+		#"SM PHYSICS | CURRENT STATE: ",
+		#current_state
+	#)
 
 	if current_state:
 		current_state.physics_update(delta)

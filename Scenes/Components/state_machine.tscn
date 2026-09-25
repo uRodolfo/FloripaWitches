@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://c36p6y1m61ndj"]
+
+[ext_resource type="Script" uid="uid://bvffcldfuo2xe" path="res://Scenes/Mofas/state_machine.gd" id="1_0y3np"]
+
+[node name="StateMachine" type="Node" unique_id=957883507 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("1_0y3np")
+initial_state = NodePath("")
