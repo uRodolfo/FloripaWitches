@@ -37,8 +37,8 @@ func _on_i_frames_timer_timeout() -> void:
 	_iframes_blink_interval.stop()
 
 	if owner:
-		owner.modulate.a = 100
+		owner.modulate.a = 1
 
 func _on_i_frames_blink_interval_timeout() -> void:
 	if owner:
-		owner.modulate.a = 0 if owner.modulate.a == 100 else 100
+		owner.modulate.a = 0 if owner.modulate.a == 1 else 1

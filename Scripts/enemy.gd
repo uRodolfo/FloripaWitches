@@ -54,8 +54,11 @@ func _ready() -> void:
 		_on_damaged_by
 	)
 
-	if stats.sprite_texture:
-		sprite.texture = stats.sprite_texture
+	if stats.sprite_pallete:
+		sprite.material = sprite.material.duplicate()
+		sprite.material.set_shader_parameter(&"new_palette", stats.sprite_pallete)
+	#if stats.sprite_texture:
+	#	sprite.texture = stats.sprite_texture
 
 
 func _physics_process(

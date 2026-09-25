@@ -121,7 +121,8 @@ sprite_frames = SubResource("SpriteFrames_ude3g")
 animation = &"Up"
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=1176859817]
-energy = 0.5
+energy = 0.6
+shadow_filter = 1
 texture = SubResource("GradientTexture2D_3sy6q")
 texture_scale = 8.0
 

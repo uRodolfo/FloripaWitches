@@ -67,9 +67,9 @@ func _process(delta: float) -> void:
 		blink_timer.stop()
 
 		if owner:
-			owner.visible = true
+			owner.modulate.a = 1
 
 
 func _on_blink_interval_timeout() -> void:
 	if owner:
-		owner.visible = not owner.visible
+		owner.modulate.a = 0 if owner.modulate.a == 1 else 1

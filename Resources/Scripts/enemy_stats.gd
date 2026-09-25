@@ -5,4 +5,4 @@ extends Resource
 @export var speed: float 
 @export var damage: float 
 @export var visible: bool = true
-@export var sprite_texture: Texture2D
+@export var sprite_pallete: Texture2D

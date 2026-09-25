@@ -18,6 +18,7 @@ config/icon="res://Assets/Sprites/Placeholders/icon.svg"
 [autoload]
 
 score="*uid://cvfcwty2jgylf"
+BetterTerrain="*uid://c331eaytxsd38"
 
 [display]
 
@@ -29,7 +30,7 @@ window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
-enabled=PackedStringArray()
+enabled=PackedStringArray("res://addons/better-terrain/plugin.cfg")
 
 [file_customization]
 
@@ -37,7 +38,8 @@ folder_colors={
 "res://Assets/": "red",
 "res://Resources/": "pink",
 "res://Scenes/": "purple",
-"res://Scripts/": "blue"
+"res://Scripts/": "blue",
+"res://Shaders/": "green"
 }
 
 [global_group]
