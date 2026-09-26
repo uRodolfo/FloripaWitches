@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://byiefcbbq5uuv"]
+
+[ext_resource type="Script" path="res://Scenes/bullet_triple.gd" id="1_hfy4u"]
+[ext_resource type="Texture2D" uid="uid://dep8ed60gkic7" path="res://Assets/Sprites/Placeholders/Red Bullet.png" id="2_248g4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hfy4u"]
+size = Vector2(4, 6)
+
+[node name="Node2D2" type="Area2D" unique_id=2113991072 groups=["PlayerBullet2"]]
+script = ExtResource("1_hfy4u")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=513250720]
+modulate = Color(0.384935, 0.99999994, 0.51600456, 1)
+self_modulate = Color(0.5038434, 0.52084357, 1, 1)
+scale = Vector2(0.8125, 0.8125)
+texture = ExtResource("2_248g4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=398217393 groups=["PlayerBullet"]]
+shape = SubResource("RectangleShape2D_hfy4u")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=327298150]
+rect = Rect2(-2, -2, 4, 4)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
