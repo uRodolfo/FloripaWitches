@@ -1,5 +1,7 @@
 extends Area2D
 
+signal collided()
+
 var direction := Vector2.ZERO
 var speed : float
 
@@ -11,4 +13,5 @@ func _physics_process(delta: float) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is TileMapLayer or body.is_in_group("Enemy"):
+		collided.emit()
 		queue_free()

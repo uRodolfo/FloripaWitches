@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://cmj76wueticds" path="res://Assets/Sprites/Player/Yuna walking up2.png" id="15_8rd5p"]
 [ext_resource type="Texture2D" uid="uid://c0nqv5k4sy70o" path="res://Assets/Sprites/Player/Yuna walking up3.png" id="16_wwmao"]
 [ext_resource type="Texture2D" uid="uid://n1re2lg6idkl" path="res://Assets/Sprites/Player/Yuna walking up4.png" id="17_7xdrn"]
+[ext_resource type="Texture2D" uid="uid://dkjjvef6sivqv" path="res://Assets/Lights/radial_gradient.tres" id="18_0objx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jmcll"]
 
@@ -74,15 +75,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="Gradient" id="Gradient_spxdj"]
-offsets = PackedFloat32Array(0, 0.6566265)
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_3sy6q"]
-gradient = SubResource("Gradient_spxdj")
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-
 [node name="Node2D" type="CharacterBody2D" unique_id=896445057 groups=["Player"]]
 collision_layer = 4
 input_pickable = true
@@ -123,7 +115,7 @@ animation = &"Up"
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=1176859817]
 energy = 0.6
 shadow_filter = 1
-texture = SubResource("GradientTexture2D_3sy6q")
+texture = ExtResource("18_0objx")
 texture_scale = 8.0
 
 [connection signal="timeout" from="ShootingComponent/Shootspeed" to="." method="_on_shootspeed_timeout"]
