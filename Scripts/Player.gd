@@ -2,8 +2,8 @@ extends CharacterBody2D
 class_name Player
 
 signal died
-signal dash_start()
-signal dash_end()
+signal dash_start
+signal dash_end
 
 @export var speed = 100
 @export var baseSpeed = 100
