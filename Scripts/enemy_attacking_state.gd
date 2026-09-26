@@ -39,8 +39,8 @@ func exit() -> void:
 func stop_attacking() -> void:
 	_is_attacking = false
 	transition_to("chasing")
-	
+
 func start_attacking() -> void:
-	_is_attacking = true
-	attacking_interval.start()
-	_direction_to_player = enemy.global_position.direction_to(enemy.player.global_position)
+		_is_attacking = true
+		attacking_interval.start()
+		_direction_to_player = enemy.global_position.direction_to(enemy.player.global_position)
