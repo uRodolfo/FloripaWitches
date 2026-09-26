@@ -199,7 +199,7 @@ wait_time = 0.25
 autostart = true
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=789909232]
-energy = 0.2
+energy = 0.1
 texture = SubResource("GradientTexture2D_eis0l")
 texture_scale = 5.0
 metadata/_edit_lock_ = true

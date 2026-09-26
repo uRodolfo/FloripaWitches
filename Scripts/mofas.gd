@@ -24,7 +24,7 @@ func update_facing_direction() -> void:
 	if abs(velocity.x) < 0.1:
 		return
 
-	#sprite.flip_h = velocity.x > 0.0
+	sprite.flip_h = velocity.x > 0.0
 
 
 func _unhandled_input(
