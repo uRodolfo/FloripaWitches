@@ -75,10 +75,35 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Curve" id="Curve_w71ue"]
+_limits = [-200.0, 200.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 1, Vector2(0.36893204, 1), 0.0, 7.6296315, 1, 1, Vector2(0.49999997, 2), 8.239998, 0.0, 0, 0]
+point_count = 3
+metadata/_snap_count = 100
+
+[sub_resource type="Curve" id="Curve_0objx"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.3065827, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_w71ue"]
+offsets = PackedFloat32Array(0.28333333, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.24259827, 0.24036533, 1, 1)
+
+[sub_resource type="Gradient" id="Gradient_0objx"]
+offsets = PackedFloat32Array(0, 0.4722222)
+colors = PackedColorArray(0, 0.80463713, 0.23100811, 1, 0, 0.6661544, 0.6581091, 1)
+
 [node name="Node2D" type="CharacterBody2D" unique_id=896445057 groups=["Player"]]
 collision_layer = 4
 input_pickable = true
 script = ExtResource("1_kpjcp")
+
+[node name="DashCooldown" type="Timer" parent="." unique_id=470334953]
+wait_time = 0.5
+
+[node name="DashDuration" type="Timer" parent="." unique_id=1094577677]
+wait_time = 0.2
+one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2010125955]
 z_as_relative = false
@@ -118,6 +143,35 @@ shadow_filter = 1
 texture = ExtResource("18_0objx")
 texture_scale = 8.0
 
+[node name="DashParticles" type="CPUParticles2D" parent="." unique_id=1496678997]
+emitting = false
+amount = 150
+lifetime = 10.0
+preprocess = 1.0
+speed_scale = 30.0
+use_fixed_seed = true
+seed = 1935475404
+emission_shape = 3
+emission_rect_extents = Vector2(5, 15)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 1.0
+angular_velocity_min = -20.0
+angular_velocity_max = 20.0
+radial_accel_min = -0.5
+radial_accel_max = -0.5
+radial_accel_curve = SubResource("Curve_w71ue")
+angle_min = -20.0
+angle_max = 20.0
+scale_amount_min = 2.0
+scale_amount_max = 3.0
+scale_amount_curve = SubResource("Curve_0objx")
+color_ramp = SubResource("Gradient_w71ue")
+color_initial_ramp = SubResource("Gradient_0objx")
+
+[connection signal="dash_end" from="." to="DashParticles" method="set_emitting" binds= [false]]
+[connection signal="dash_start" from="." to="DashParticles" method="set_emitting" binds= [true]]
 [connection signal="timeout" from="ShootingComponent/Shootspeed" to="." method="_on_shootspeed_timeout"]
 [connection signal="timeout" from="PlayerHealthComponent/IFramesTimer" to="." method="_on_i_frames_timer_timeout"]
 [connection signal="timeout" from="PlayerHealthComponent/IFramesTimer" to="PlayerHealthComponent" method="_on_i_frames_timer_timeout"]

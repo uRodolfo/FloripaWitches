@@ -1,4 +1,5 @@
 extends CPUParticles2D
+class_name  CPUParticlesController
 
 func _ready() -> void:
 	finished.connect(queue_free)

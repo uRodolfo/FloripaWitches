@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b47on4fteuk6x" path="res://Scripts/player_bullet.gd" id="1_jf7v0"]
 [ext_resource type="Texture2D" uid="uid://dep8ed60gkic7" path="res://Assets/Sprites/Placeholders/Red Bullet.png" id="1_vghvw"]
-[ext_resource type="Script" uid="uid://ddn12rflo201e" path="res://Scripts/oneshot_particles.gd" id="3_lsb28"]
+[ext_resource type="Script" uid="uid://ddn12rflo201e" path="res://Scripts/cpu_particles_controller.gd" id="3_lsb28"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vghvw"]
 size = Vector2(6, 8)

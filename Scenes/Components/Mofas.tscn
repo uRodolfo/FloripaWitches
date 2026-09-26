@@ -300,7 +300,7 @@ offsets = PackedFloat32Array(0.3611111, 1)
 colors = PackedColorArray(0.7058824, 1, 1, 1, 1, 1, 1, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_w8tas"]
-radius = 14.035668
+radius = 18.0
 
 [node name="Mofas" type="CharacterBody2D" unique_id=557517622 groups=["Mofas"]]
 collision_mask = 9
@@ -365,7 +365,6 @@ metadata/_custom_type_script = "uid://bmnv7cmajsb7k"
 [node name="Timer" type="Timer" parent="ContactDamageComponent" unique_id=1193690706]
 
 [node name="ContactArea" type="Area2D" parent="ContactDamageComponent" unique_id=210929721]
-visible = false
 collision_mask = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ContactDamageComponent/ContactArea" unique_id=1987610082]
