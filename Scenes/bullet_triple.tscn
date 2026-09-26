@@ -1,25 +1,110 @@
 [gd_scene format=3 uid="uid://cen87n64suyvm"]
 
 [ext_resource type="Script" uid="uid://cn0pkjdjlyega" path="res://Scenes/bullet_triple.gd" id="1_hfy4u"]
-[ext_resource type="Texture2D" uid="uid://dep8ed60gkic7" path="res://Assets/Sprites/Placeholders/Red Bullet.png" id="2_248g4"]
+[ext_resource type="Texture2D" uid="uid://d28whyh5w7mo5" path="res://Scenes/Player/SPR_SHOT.png" id="2_hfy4u"]
+[ext_resource type="Script" uid="uid://ddn12rflo201e" path="res://Scripts/cpu_particles_controller.gd" id="3_248g4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_248g4"]
+atlas = ExtResource("2_hfy4u")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gxrr1"]
+atlas = ExtResource("2_hfy4u")
+region = Rect2(0, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2641j"]
+atlas = ExtResource("2_hfy4u")
+region = Rect2(0, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jbtbw"]
+atlas = ExtResource("2_hfy4u")
+region = Rect2(0, 72, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vcgfk"]
+atlas = ExtResource("2_hfy4u")
+region = Rect2(0, 96, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ev4qy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_248g4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gxrr1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2641j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jbtbw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vcgfk")
+}],
+"loop": 1,
+"name": &"new_animation",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hfy4u"]
-size = Vector2(4, 6)
+size = Vector2(6, 8)
+
+[sub_resource type="Curve" id="Curve_gxrr1"]
+_data = [Vector2(0, 1), 0.0, 0.13202244, 0, 0, Vector2(0.81382984, 0.764045), -1.1221907, -1.1221907, 0, 0, Vector2(1, 0), -2.8667717, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_2641j"]
+offsets = PackedFloat32Array(0, 0.98566306, 1)
+colors = PackedColorArray(0.98437655, 0.0594074, 0.06711572, 1, 0.84641695, 0.5839927, 0.65976775, 1, 0.8172059, 0.6950665, 0.78525376, 1)
 
 [node name="Node2D" type="Area2D" unique_id=2113991072 groups=["PlayerBullet2"]]
 script = ExtResource("1_hfy4u")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=513250720]
-modulate = Color(0.384935, 0.99999994, 0.51600456, 1)
-self_modulate = Color(0.5038434, 0.52084357, 1, 1)
-scale = Vector2(0.8125, 0.8125)
-texture = ExtResource("2_248g4")
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=797829261]
+modulate = Color(1, 0.4109429, 0.39290264, 1)
+texture_repeat = 2
+rotation = -1.5707964
+scale = Vector2(0.62448126, 0.703467)
+sprite_frames = SubResource("SpriteFrames_ev4qy")
+animation = &"new_animation"
+autoplay = "new_animation"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=398217393 groups=["PlayerBullet"]]
 shape = SubResource("RectangleShape2D_hfy4u")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=327298150]
-rect = Rect2(-2, -2, 4, 4)
+position = Vector2(0, 1)
+rect = Rect2(-3, -5, 6, 8)
 
+[node name="ExplosionParticles" type="CPUParticles2D" parent="." unique_id=585133542]
+emitting = false
+amount = 10
+lifetime = 0.15000000000000002
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 200.0
+initial_velocity_max = 250.0
+scale_amount_min = 0.4
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_gxrr1")
+color = Color(1, 0, 0, 1)
+color_initial_ramp = SubResource("Gradient_2641j")
+script = ExtResource("3_248g4")
+
+[node name="TrailParticles" type="CPUParticles2D" parent="." unique_id=1081733360]
+amount = 10
+lifetime = 0.15000000000000002
+spread = 0.0
+gravity = Vector2(0, 0)
+scale_amount_min = 0.4
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_gxrr1")
+color_ramp = SubResource("Gradient_2641j")
+script = ExtResource("3_248g4")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="collided" from="." to="ExplosionParticles" method="play_particles"]

@@ -26,7 +26,6 @@ func _process(delta: float) -> void:
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
 		score.Magic = true
-		score.Magic2 = true
 		coletado.emit()
 		queue_free()
 	pass # Replace with function body.

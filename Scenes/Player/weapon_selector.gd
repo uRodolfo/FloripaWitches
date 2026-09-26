@@ -12,7 +12,6 @@ signal weapon_changed(index: int)
 
 func _ready() -> void:
 	visible = false
-	hide_timer.timeout.connect(_on_hide_timer_timeout)
 
 
 func next_weapon() -> void:

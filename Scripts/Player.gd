@@ -16,6 +16,7 @@ var _can_dash : bool = true
 @onready var dash_duration: Timer = $DashDuration
 @onready var _player_shooting := $ShootingComponent
 @onready var player_health_component: PlayerHealthComponent = $PlayerHealthComponent
+@onready var weapon_selector = $WeaponSelector
 
 func _ready() -> void:
 	player_health_component.start(starting_hp)
@@ -80,3 +81,20 @@ func handle_dashing() -> void:
 			dash_start.emit()
 			dash_duration.start()
 			dash_cooldown.start()
+
+
+func _on_weapon_selector_weapon_changed(index: int) -> void:
+	if index == 0:
+		_player_shooting.triple_shot_selected = false
+
+	elif index == 1:
+		_player_shooting.triple_shot_selected = true
+		
+func _input(event):
+	if event is InputEventMouseButton and event.pressed:
+
+		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+			weapon_selector.previous_weapon()
+
+		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			weapon_selector.next_weapon()

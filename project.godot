@@ -37,6 +37,7 @@ enabled=PackedStringArray("res://addons/better-terrain/plugin.cfg")
 folder_colors={
 "res://Assets/": "red",
 "res://Fonts/": "yellow",
+"res://Menu e Comandos/": "purple",
 "res://Resources/": "pink",
 "res://Scenes/": "purple",
 "res://Scripts/": "blue",

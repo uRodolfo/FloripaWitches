@@ -1,19 +1,25 @@
 extends Area2D
 
-var direction := Vector2.ZERO
-var speed : float
+signal collided()
 
-func _ready() -> void:
-	#body_entered.connect(_on_body_entered)
-	pass
+var direction := Vector2.ZERO
+var speed: float
+
 func _physics_process(delta: float) -> void:
 	global_position += direction * speed * delta
+	
 
 func _on_body_entered(body: Node2D) -> void:
-	if body is TileMapLayer or body.is_in_group("Enemy"):
-		queue_free()
+	if body is TileMapLayer:
+		hit()
 
+func _on_area_entered(area: Area2D) -> void:
+	if area.is_in_group("Enemy"):
+		hit()
+
+func hit() -> void:
+	collided.emit()
+	queue_free()
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	queue_free()
-	pass # Replace with function body.

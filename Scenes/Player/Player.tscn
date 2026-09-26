@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bo8odi78sqg6r" path="res://Scripts/Player.gd" id="1_kpjcp"]
 [ext_resource type="Script" uid="uid://d0t88v42355xu" path="res://Scripts/Components/shooting_component.gd" id="3_h54ih"]
 [ext_resource type="PackedScene" uid="uid://xm0rajyiecnv" path="res://Scenes/Player/player_bullet.tscn" id="4_ude3g"]
+[ext_resource type="PackedScene" uid="uid://cen87n64suyvm" path="res://Scenes/bullet_triple.tscn" id="4_yb677"]
 [ext_resource type="Script" uid="uid://dnffgylu1rt7y" path="res://Scripts/Components/player_health_component.gd" id="5_jmcll"]
 [ext_resource type="Script" uid="uid://b2xhcytvgfg6y" path="res://Scripts/player_animation.gd" id="5_spxdj"]
 [ext_resource type="Texture2D" uid="uid://c8c0tvhbnol44" path="res://Assets/Sprites/Player/Yuna walking down1.png" id="6_0objx"]
@@ -18,6 +19,8 @@
 [ext_resource type="Texture2D" uid="uid://c0nqv5k4sy70o" path="res://Assets/Sprites/Player/Yuna walking up3.png" id="16_wwmao"]
 [ext_resource type="Texture2D" uid="uid://n1re2lg6idkl" path="res://Assets/Sprites/Player/Yuna walking up4.png" id="17_7xdrn"]
 [ext_resource type="Texture2D" uid="uid://dkjjvef6sivqv" path="res://Assets/Lights/radial_gradient.tres" id="18_0objx"]
+[ext_resource type="Script" uid="uid://beg6uqn3owyxj" path="res://Scenes/Player/weapon_selector.gd" id="19_w71ue"]
+[ext_resource type="Texture2D" uid="uid://dep8ed60gkic7" path="res://Assets/Sprites/Placeholders/Red Bullet.png" id="20_1e6p3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jmcll"]
 
@@ -114,6 +117,7 @@ shape = SubResource("CircleShape2D_jmcll")
 [node name="ShootingComponent" type="Node2D" parent="." unique_id=2125502849]
 script = ExtResource("3_h54ih")
 bullet_scene = ExtResource("4_ude3g")
+bullet_triple_scene = ExtResource("4_yb677")
 bullet_speed = 250.0
 metadata/_custom_type_script = "uid://d0t88v42355xu"
 
@@ -171,6 +175,55 @@ scale_amount_curve = SubResource("Curve_0objx")
 color_ramp = SubResource("Gradient_w71ue")
 color_initial_ramp = SubResource("Gradient_0objx")
 
+[node name="WeaponSelector" type="Control" parent="." unique_id=152552229]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -20.0
+offset_top = -58.0
+offset_right = 20.0
+offset_bottom = -18.0
+script = ExtResource("19_w71ue")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="WeaponSelector" unique_id=1704053087]
+custom_maximum_size = Vector2(1, 1)
+layout_mode = 0
+offset_top = -68.0
+offset_right = 1.0
+offset_bottom = -67.0
+
+[node name="SingleShot" type="Panel" parent="WeaponSelector/HBoxContainer" unique_id=834538934]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="WeaponSelector/HBoxContainer/SingleShot" unique_id=1708226975]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 87.00001
+anchor_bottom = 87.00001
+offset_left = 4.0
+offset_top = 4.9999924
+offset_right = 20.0
+offset_bottom = 20.999992
+texture = ExtResource("20_1e6p3")
+
+[node name="TripleShot" type="Panel" parent="WeaponSelector/HBoxContainer" unique_id=69542092]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="WeaponSelector/HBoxContainer/TripleShot" unique_id=329804422]
+modulate = Color(0.25882354, 1, 0.5411765, 1)
+self_modulate = Color(0.5019608, 0.52156866, 1, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 91.00001
+anchor_bottom = 91.00001
+offset_left = 17.0
+offset_top = 4.9999924
+offset_right = 28.0
+offset_bottom = 15.999992
+texture = ExtResource("20_1e6p3")
+
+[node name="HideTimer" type="Timer" parent="WeaponSelector" unique_id=179959582]
+process_callback = 0
+
 [connection signal="dash_end" from="." to="DashParticles" method="set_emitting" binds= [false]]
 [connection signal="dash_start" from="." to="DashParticles" method="set_emitting" binds= [true]]
 [connection signal="timeout" from="ShootingComponent/Shootspeed" to="." method="_on_shootspeed_timeout"]
@@ -178,3 +231,5 @@ color_initial_ramp = SubResource("Gradient_0objx")
 [connection signal="timeout" from="PlayerHealthComponent/IFramesTimer" to="PlayerHealthComponent" method="_on_i_frames_timer_timeout"]
 [connection signal="timeout" from="PlayerHealthComponent/IFramesBlinkInterval" to="." method="_on_i_frames_blink_interval_timeout"]
 [connection signal="timeout" from="PlayerHealthComponent/IFramesBlinkInterval" to="PlayerHealthComponent" method="_on_i_frames_blink_interval_timeout"]
+[connection signal="weapon_changed" from="WeaponSelector" to="." method="_on_weapon_selector_weapon_changed"]
+[connection signal="timeout" from="WeaponSelector/HideTimer" to="WeaponSelector" method="_on_hide_timer_timeout"]
