@@ -24,12 +24,7 @@ func enter() -> void:
 	attacking_interval.timeout.connect(stop_attacking)
 	attack_cooldown.timeout.connect(func(): can_attack = true)
 	lunge_lock_timer.timeout.connect(func(): _can_stop = true)
-	telegraph_time.timeout.connect(func():
-		_is_attacking = true
-		attacking_interval.start()
-		)
-	
-	_direction_to_player = enemy.global_position.direction_to(enemy.player.global_position)
+	telegraph_time.timeout.connect(start_attacking)
 	
 	telegraph_time.start()
 	attack_cooldown.start()
@@ -44,3 +39,8 @@ func exit() -> void:
 func stop_attacking() -> void:
 	_is_attacking = false
 	transition_to("chasing")
+
+func start_attacking() -> void:
+		_is_attacking = true
+		attacking_interval.start()
+		_direction_to_player = enemy.global_position.direction_to(enemy.player.global_position)
