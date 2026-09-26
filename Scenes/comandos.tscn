@@ -281,5 +281,6 @@ autoplay = "default"
 position = Vector2(27, 160)
 scale = Vector2(1.531, 1.531)
 sprite_frames = SubResource("SpriteFrames_okywk")
+autoplay = "default"
 
 [connection signal="button_down" from="menu" to="." method="_on_menu_button_down"]
