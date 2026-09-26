@@ -82,8 +82,8 @@ point_count = 3
 metadata/_snap_count = 100
 
 [sub_resource type="Curve" id="Curve_0objx"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.3065827, 0.0, 0, 0]
-point_count = 2
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 1, Vector2(0.77669907, 1), 0.0, 0.0, 1, 0, Vector2(1, 0), -10.250395, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="Gradient" id="Gradient_w71ue"]
 offsets = PackedFloat32Array(0.28333333, 1)

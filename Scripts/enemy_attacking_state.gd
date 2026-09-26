@@ -41,6 +41,7 @@ func stop_attacking() -> void:
 	transition_to("chasing")
 
 func start_attacking() -> void:
-		_is_attacking = true
-		attacking_interval.start()
-		_direction_to_player = enemy.global_position.direction_to(enemy.player.global_position)
+		if is_instance_valid(enemy.player):
+			_is_attacking = true
+			attacking_interval.start()
+			_direction_to_player = enemy.global_position.direction_to(enemy.player.global_position)

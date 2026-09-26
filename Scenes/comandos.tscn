@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://btlpdyo7racx6"]
 
 [ext_resource type="Script" uid="uid://dxekvl244mabr" path="res://Scenes/comandos.gd" id="1_05umx"]
-[ext_resource type="Texture2D" uid="uid://c5u4vk8k5dm1u" path="res://Scripts/Design sem nome.png" id="2_2isdm"]
+[ext_resource type="Texture2D" uid="uid://c5u4vk8k5dm1u" path="res://Assets/Sprites/Placeholders/Design sem nome.png" id="2_2isdm"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2isdm"]
 font_size = 12
@@ -40,7 +40,14 @@ label_settings = SubResource("LabelSettings_2isdm")
 [node name="Label2" type="Label" parent="VBoxContainer" unique_id=845409853]
 layout_mode = 2
 text = "Arraste o mouse para um alvo e aperte o botão direito
-do mouse para atacar um alvo."
+do mouse para atacar um alvo com o Mofas!
+"
+label_settings = SubResource("LabelSettings_myhll")
+
+[node name="Label3" type="Label" parent="VBoxContainer" unique_id=1252538542]
+layout_mode = 2
+text = "Mire com o mouse e use o botão esquerdo para
+disparar magias!"
 label_settings = SubResource("LabelSettings_myhll")
 
 [node name="DesignSemNome" type="Sprite2D" parent="." unique_id=609261333]

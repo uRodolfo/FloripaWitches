@@ -76,3 +76,4 @@ vertical_alignment = 1
 
 [connection signal="button_down" from="VBoxContainer/Começar" to="." method="_on_começar_button_down"]
 [connection signal="button_down" from="VBoxContainer/Comandos" to="." method="_on_comandos_button_down"]
+[connection signal="button_down" from="VBoxContainer/Sair" to="." method="_on_sair_button_down"]

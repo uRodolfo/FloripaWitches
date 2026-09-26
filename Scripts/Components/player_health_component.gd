@@ -21,6 +21,7 @@ func damage(amount: float) -> void:
 		return
 
 	super.damage(amount)
+	GlobalEvents.player_hit.emit()
 
 	if dead:
 		return

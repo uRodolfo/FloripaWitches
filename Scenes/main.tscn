@@ -12,10 +12,14 @@
 [ext_resource type="PackedScene" uid="uid://7h11giytrw4j" path="res://Scenes/Components/Mofas.tscn" id="7_6bp64"]
 [ext_resource type="Script" uid="uid://3t46of85okl0" path="res://Scenes/pts.gd" id="8_344ge"]
 [ext_resource type="FontFile" uid="uid://cahu5q36jrawg" path="res://Fonts/HUD Numbers 8x8.png" id="8_fevyy"]
-[ext_resource type="Script" uid="uid://o63kd6v5n2xc" path="res://Scenes/pvs.gd" id="9_ynf5e"]
+[ext_resource type="Texture2D" uid="uid://dhg2nos7btg3r" path="res://Assets/HUD/HUD_flor.png" id="8_hibaj"]
+[ext_resource type="Script" uid="uid://bkpbs0wisfotf" path="res://Scripts/hud_hp.gd" id="9_hibaj"]
+[ext_resource type="Texture2D" uid="uid://bbgi4b0jnjgah" path="res://Assets/HUD/HUD_flor_death.png" id="9_pdsj5"]
 [ext_resource type="Script" uid="uid://bkw2w4p30uq22" path="res://Scenes/instrucao_1.gd" id="10_6iyac"]
 [ext_resource type="PackedScene" uid="uid://bpe2gj3fpufxp" path="res://Scenes/pergaminho.tscn" id="11_d1ilt"]
+[ext_resource type="Script" uid="uid://qw21r0ocqne3" path="res://Scripts/shaking.gd" id="11_ee4r6"]
 [ext_resource type="Script" uid="uid://b1ai5tf62bvhd" path="res://Scenes/instrução_2.gd" id="11_fdnlq"]
+[ext_resource type="Texture2D" uid="uid://cjginr5rlrfbe" path="res://Assets/HUD/HUD petals.png" id="11_gt3je"]
 [ext_resource type="PackedScene" uid="uid://bicx7c323pqse" path="res://Scenes/pentagrama.tscn" id="14_jkdf5"]
 [ext_resource type="PackedScene" uid="uid://bundf0mxnfds4" path="res://Scenes/spawner.tscn" id="15_wsu2k"]
 [ext_resource type="Script" uid="uid://sgf1wkvbnibr" path="res://Resources/Scripts/enemy_stats.gd" id="16_k12tt"]
@@ -237,13 +241,226 @@ metadata/_better_terrain = {
 &"version": "0.2"
 }
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_hibaj"]
+atlas = ExtResource("8_hibaj")
+region = Rect2(132, 0, 33, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pdsj5"]
+atlas = ExtResource("8_hibaj")
+region = Rect2(99, 0, 33, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ee4r6"]
+atlas = ExtResource("8_hibaj")
+region = Rect2(66, 0, 33, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gt3je"]
+atlas = ExtResource("8_hibaj")
+region = Rect2(33, 0, 33, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3pmx8"]
+atlas = ExtResource("8_hibaj")
+region = Rect2(0, 0, 33, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u50mg"]
+atlas = ExtResource("9_pdsj5")
+region = Rect2(0, 0, 33, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cbgmd"]
+atlas = ExtResource("9_pdsj5")
+region = Rect2(33, 0, 33, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1w6v2"]
+atlas = ExtResource("9_pdsj5")
+region = Rect2(66, 0, 33, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ueoa1"]
+atlas = ExtResource("9_pdsj5")
+region = Rect2(99, 0, 33, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6vcvc"]
+atlas = ExtResource("9_pdsj5")
+region = Rect2(132, 0, 33, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7k868"]
+atlas = ExtResource("9_pdsj5")
+region = Rect2(165, 0, 33, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hpc6h"]
+atlas = ExtResource("9_pdsj5")
+region = Rect2(198, 0, 33, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kltya"]
+atlas = ExtResource("9_pdsj5")
+region = Rect2(231, 0, 33, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e08e2"]
+atlas = ExtResource("9_pdsj5")
+region = Rect2(264, 0, 33, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_neg2b"]
+atlas = ExtResource("9_pdsj5")
+region = Rect2(297, 0, 33, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r33sp"]
+atlas = ExtResource("9_pdsj5")
+region = Rect2(330, 0, 33, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hdf80"]
+atlas = ExtResource("9_pdsj5")
+region = Rect2(363, 0, 33, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jwpg7"]
+atlas = ExtResource("9_pdsj5")
+region = Rect2(396, 0, 33, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k2e45"]
+atlas = ExtResource("9_pdsj5")
+region = Rect2(429, 0, 33, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_536cc"]
+atlas = ExtResource("9_pdsj5")
+region = Rect2(462, 0, 33, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aqgau"]
+atlas = ExtResource("9_pdsj5")
+region = Rect2(495, 0, 33, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8cuat"]
+atlas = ExtResource("9_pdsj5")
+region = Rect2(528, 0, 33, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o1aky"]
+atlas = ExtResource("9_pdsj5")
+region = Rect2(561, 0, 33, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kwxat"]
+atlas = ExtResource("9_pdsj5")
+region = Rect2(594, 0, 33, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aa8k8"]
+atlas = ExtResource("9_pdsj5")
+region = Rect2(627, 0, 33, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kqrg6"]
+atlas = ExtResource("9_pdsj5")
+region = Rect2(660, 0, 33, 34)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w11f4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hibaj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pdsj5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ee4r6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gt3je")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3pmx8")
+}],
+"loop": 0,
+"name": &"Alive",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_u50mg")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_cbgmd")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_1w6v2")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_ueoa1")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_6vcvc")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_7k868")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_hpc6h")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_kltya")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_e08e2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_neg2b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r33sp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hdf80")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jwpg7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k2e45")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_536cc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aqgau")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_8cuat")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o1aky")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kwxat")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aa8k8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kqrg6")
+}],
+"loop": 0,
+"name": &"Death",
+"speed": 14.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nwwfm"]
+atlas = ExtResource("11_gt3je")
+region = Rect2(38, 0, 13, 16)
+
+[sub_resource type="Gradient" id="Gradient_bp5kt"]
+offsets = PackedFloat32Array(0, 0.70555556, 0.98888886)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w11f4"]
+atlas = ExtResource("11_gt3je")
+region = Rect2(53, 0, 11, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s8vy0"]
+atlas = ExtResource("11_gt3je")
+region = Rect2(1, 0, 11, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jut3y"]
+atlas = ExtResource("11_gt3je")
+region = Rect2(14, 0, 13, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v2nl5"]
+atlas = ExtResource("11_gt3je")
+region = Rect2(28, 0, 9, 16)
+
 [sub_resource type="LabelSettings" id="LabelSettings_344ge"]
-font_size = 12
-
-[sub_resource type="LabelSettings" id="LabelSettings_d1ilt"]
-font_size = 12
-
-[sub_resource type="LabelSettings" id="LabelSettings_hptm8"]
 font_size = 12
 
 [sub_resource type="LabelSettings" id="LabelSettings_6iyac"]
@@ -267,7 +484,7 @@ position = Vector2(104, 192)
 color = Color(0.3638552, 0.5652031, 0.7760158, 1)
 
 [node name="Player" parent="." unique_id=1032195059 instance=ExtResource("1_8gbba")]
-position = Vector2(96, 152)
+position = Vector2(112, 176)
 starting_hp = 5.0
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1296028309]
@@ -296,6 +513,7 @@ player_node = NodePath("../Player")
 camera_node = NodePath("Camera")
 
 [node name="Camera" parent="CameraRoomController" unique_id=1969811154 node_paths=PackedStringArray("player") instance=ExtResource("3_kry3j")]
+position = Vector2(120, 80)
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 script = ExtResource("6_fevyy")
@@ -306,6 +524,101 @@ z_index = -1
 position = Vector2(64, 160)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=360040449]
+
+[node name="HUD_HP" type="AnimatedSprite2D" parent="CanvasLayer" unique_id=829787406 node_paths=PackedStringArray("shaking_component", "petal_particles")]
+position = Vector2(32, 24)
+sprite_frames = SubResource("SpriteFrames_w11f4")
+animation = &"Alive"
+frame = 4
+script = ExtResource("9_hibaj")
+shaking_component = NodePath("Shaking")
+petal_particles = [NodePath("Particles/Petal1"), NodePath("Particles/Petal2"), NodePath("Particles/Petal3"), NodePath("Particles/Petal4"), NodePath("Particles/Petal5")]
+
+[node name="Particles" type="Node2D" parent="CanvasLayer/HUD_HP" unique_id=313022245]
+position = Vector2(8, 0)
+
+[node name="Petal1" type="CPUParticles2D" parent="CanvasLayer/HUD_HP/Particles" unique_id=1015669576]
+emitting = false
+amount = 1
+texture = SubResource("AtlasTexture_nwwfm")
+lifetime = 0.65
+one_shot = true
+direction = Vector2(0, -1)
+spread = 20.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 50.0
+initial_velocity_max = 50.0
+angular_velocity_min = -25.0
+angular_velocity_max = 25.0
+color_ramp = SubResource("Gradient_bp5kt")
+
+[node name="Petal2" type="CPUParticles2D" parent="CanvasLayer/HUD_HP/Particles" unique_id=1454109302]
+position = Vector2(-2, 8)
+emitting = false
+amount = 1
+texture = SubResource("AtlasTexture_w11f4")
+lifetime = 0.65
+one_shot = true
+direction = Vector2(0, -1)
+spread = 20.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 50.0
+initial_velocity_max = 50.0
+angular_velocity_min = -25.0
+angular_velocity_max = 25.0
+color_ramp = SubResource("Gradient_bp5kt")
+
+[node name="Petal3" type="CPUParticles2D" parent="CanvasLayer/HUD_HP/Particles" unique_id=1829313786]
+position = Vector2(-14, 8)
+emitting = false
+amount = 1
+texture = SubResource("AtlasTexture_s8vy0")
+lifetime = 0.65
+one_shot = true
+direction = Vector2(0, -1)
+spread = 20.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 50.0
+initial_velocity_max = 50.0
+angular_velocity_min = -25.0
+angular_velocity_max = 25.0
+color_ramp = SubResource("Gradient_bp5kt")
+
+[node name="Petal4" type="CPUParticles2D" parent="CanvasLayer/HUD_HP/Particles" unique_id=1263321559]
+position = Vector2(-16, 0)
+emitting = false
+amount = 1
+texture = SubResource("AtlasTexture_jut3y")
+lifetime = 0.65
+one_shot = true
+direction = Vector2(0, -1)
+spread = 20.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 50.0
+initial_velocity_max = 50.0
+angular_velocity_min = -25.0
+angular_velocity_max = 25.0
+color_ramp = SubResource("Gradient_bp5kt")
+
+[node name="Petal5" type="CPUParticles2D" parent="CanvasLayer/HUD_HP/Particles" unique_id=302608376]
+position = Vector2(-8, -8)
+emitting = false
+amount = 1
+texture = SubResource("AtlasTexture_v2nl5")
+lifetime = 0.65
+one_shot = true
+direction = Vector2(0, -1)
+spread = 20.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 50.0
+initial_velocity_max = 50.0
+angular_velocity_min = -25.0
+angular_velocity_max = 25.0
+color_ramp = SubResource("Gradient_bp5kt")
+
+[node name="Shaking" type="Node2D" parent="CanvasLayer/HUD_HP" unique_id=1125332565 node_paths=PackedStringArray("shaking_object")]
+script = ExtResource("11_ee4r6")
+shaking_object = NodePath("..")
 
 [node name="Control" type="Control" parent="CanvasLayer" unique_id=1727602975]
 layout_mode = 3
@@ -330,35 +643,6 @@ theme_override_fonts/font = ExtResource("8_fevyy")
 text = "10"
 label_settings = SubResource("LabelSettings_344ge")
 script = ExtResource("8_344ge")
-metadata/_edit_use_anchors_ = true
-
-[node name="Label3" type="Label" parent="CanvasLayer/Control" unique_id=2096557250]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = -0.734375
-anchor_top = -0.016666668
-anchor_right = 0.17500001
-anchor_bottom = 0.162
-offset_left = 251.0
-offset_top = 20.0
-offset_bottom = 0.11999893
-text = "Pv:"
-label_settings = SubResource("LabelSettings_d1ilt")
-metadata/_edit_use_anchors_ = true
-
-[node name="Pvs" type="Label" parent="CanvasLayer/Control" unique_id=99563895]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = -0.734375
-anchor_top = -0.016666668
-anchor_right = -0.734375
-anchor_bottom = -0.016666668
-offset_left = 273.0
-offset_top = 20.0
-offset_right = 314.0
-offset_bottom = 43.0
-label_settings = SubResource("LabelSettings_hptm8")
-script = ExtResource("9_ynf5e")
 metadata/_edit_use_anchors_ = true
 
 [node name="Instrucao1" type="Label" parent="CanvasLayer/Control" unique_id=1856287047]
@@ -513,6 +797,7 @@ color_ramp = SubResource("Gradient_ks35o")
 color_initial_ramp = SubResource("Gradient_xbwfy")
 
 [connection signal="died" from="Player" to="." method="_on_player_died"]
+[connection signal="died" from="Player" to="CanvasLayer/HUD_HP" method="_on_player_died"]
 [connection signal="timeout" from="CanvasLayer/Control/Instrucao1/Timer" to="CanvasLayer/Control/Instrucao1" method="_on_timer_timeout"]
 [connection signal="timeout" from="CanvasLayer/Control/Instrução 2/Timer" to="CanvasLayer/Control/Instrução 2" method="_on_timer_timeout"]
 [connection signal="coletado" from="Pergaminho" to="CanvasLayer/Control/Instrução 2" method="_on_pergaminho_coletado"]
