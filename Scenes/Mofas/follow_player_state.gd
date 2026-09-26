@@ -1,6 +1,7 @@
 class_name FollowPlayerState
 extends State
 
+signal following_player()
 
 @export var follow_distance: float = 5.0
 @export var slowdown_distance: float = 150.0
@@ -16,6 +17,8 @@ var player: CharacterBody2D
 
 
 func enter() -> void:
+	following_player.emit()
+	
 	player = get_tree().get_first_node_in_group(
 		"Player"
 	) as CharacterBody2D

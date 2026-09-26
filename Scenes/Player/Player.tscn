@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://bo8odi78sqg6r" path="res://Scripts/Player.gd" id="1_kpjcp"]
 [ext_resource type="Script" uid="uid://d0t88v42355xu" path="res://Scripts/Components/shooting_component.gd" id="3_h54ih"]
-[ext_resource type="PackedScene" uid="uid://cen87n64suyvm" path="res://Scenes/bullet_triple.tscn" id="4_0objx"]
 [ext_resource type="PackedScene" uid="uid://xm0rajyiecnv" path="res://Scenes/Player/player_bullet.tscn" id="4_ude3g"]
 [ext_resource type="Script" uid="uid://dnffgylu1rt7y" path="res://Scripts/Components/player_health_component.gd" id="5_jmcll"]
 [ext_resource type="Script" uid="uid://b2xhcytvgfg6y" path="res://Scripts/player_animation.gd" id="5_spxdj"]
@@ -18,8 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://cmj76wueticds" path="res://Assets/Sprites/Player/Yuna walking up2.png" id="15_8rd5p"]
 [ext_resource type="Texture2D" uid="uid://c0nqv5k4sy70o" path="res://Assets/Sprites/Player/Yuna walking up3.png" id="16_wwmao"]
 [ext_resource type="Texture2D" uid="uid://n1re2lg6idkl" path="res://Assets/Sprites/Player/Yuna walking up4.png" id="17_7xdrn"]
-[ext_resource type="Script" uid="uid://beg6uqn3owyxj" path="res://Scenes/Player/weapon_selector.gd" id="19_1e6p3"]
-[ext_resource type="Texture2D" uid="uid://dep8ed60gkic7" path="res://Assets/Sprites/Placeholders/Red Bullet.png" id="20_yb677"]
+[ext_resource type="Texture2D" uid="uid://dkjjvef6sivqv" path="res://Assets/Lights/radial_gradient.tres" id="18_0objx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jmcll"]
 
@@ -38,7 +36,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("9_yb677")
 }],
-"loop": true,
+"loop": 1,
 "name": &"Down",
 "speed": 5.0
 }, {
@@ -55,7 +53,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("13_e5iqy")
 }],
-"loop": true,
+"loop": 1,
 "name": &"Run",
 "speed": 5.0
 }, {
@@ -72,24 +70,40 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("17_7xdrn")
 }],
-"loop": true,
+"loop": 1,
 "name": &"Up",
 "speed": 5.0
 }]
 
-[sub_resource type="Gradient" id="Gradient_spxdj"]
-offsets = PackedFloat32Array(0, 0.6566265)
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+[sub_resource type="Curve" id="Curve_w71ue"]
+_limits = [-200.0, 200.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 1, Vector2(0.36893204, 1), 0.0, 7.6296315, 1, 1, Vector2(0.49999997, 2), 8.239998, 0.0, 0, 0]
+point_count = 3
+metadata/_snap_count = 100
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_3sy6q"]
-gradient = SubResource("Gradient_spxdj")
-fill = 1
-fill_from = Vector2(0.5, 0.5)
+[sub_resource type="Curve" id="Curve_0objx"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.3065827, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_w71ue"]
+offsets = PackedFloat32Array(0.28333333, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.24259827, 0.24036533, 1, 1)
+
+[sub_resource type="Gradient" id="Gradient_0objx"]
+offsets = PackedFloat32Array(0, 0.4722222)
+colors = PackedColorArray(0, 0.80463713, 0.23100811, 1, 0, 0.6661544, 0.6581091, 1)
 
 [node name="Node2D" type="CharacterBody2D" unique_id=896445057 groups=["Player"]]
 collision_layer = 4
 input_pickable = true
 script = ExtResource("1_kpjcp")
+
+[node name="DashCooldown" type="Timer" parent="." unique_id=470334953]
+wait_time = 0.5
+
+[node name="DashDuration" type="Timer" parent="." unique_id=1094577677]
+wait_time = 0.2
+one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2010125955]
 z_as_relative = false
@@ -99,7 +113,6 @@ shape = SubResource("CircleShape2D_jmcll")
 [node name="ShootingComponent" type="Node2D" parent="." unique_id=2125502849]
 script = ExtResource("3_h54ih")
 bullet_scene = ExtResource("4_ude3g")
-bullet_triple_scene = ExtResource("4_0objx")
 bullet_speed = 250.0
 metadata/_custom_type_script = "uid://d0t88v42355xu"
 
@@ -127,56 +140,40 @@ animation = &"Up"
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=1176859817]
 energy = 0.6
 shadow_filter = 1
-texture = SubResource("GradientTexture2D_3sy6q")
+texture = ExtResource("18_0objx")
 texture_scale = 8.0
 
-[node name="WeaponSelector" type="Control" parent="." unique_id=305941766]
-layout_mode = 3
-anchors_preset = 0
-offset_left = -20.0
-offset_top = -58.315
-offset_right = 20.0
-offset_bottom = -18.265
-script = ExtResource("19_1e6p3")
+[node name="DashParticles" type="CPUParticles2D" parent="." unique_id=1496678997]
+emitting = false
+amount = 150
+lifetime = 10.0
+preprocess = 1.0
+speed_scale = 30.0
+use_fixed_seed = true
+seed = 1935475404
+emission_shape = 3
+emission_rect_extents = Vector2(5, 15)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 1.0
+angular_velocity_min = -20.0
+angular_velocity_max = 20.0
+radial_accel_min = -0.5
+radial_accel_max = -0.5
+radial_accel_curve = SubResource("Curve_w71ue")
+angle_min = -20.0
+angle_max = 20.0
+scale_amount_min = 2.0
+scale_amount_max = 3.0
+scale_amount_curve = SubResource("Curve_0objx")
+color_ramp = SubResource("Gradient_w71ue")
+color_initial_ramp = SubResource("Gradient_0objx")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="WeaponSelector" unique_id=1518945364]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.98200005
-offset_top = -0.6850014
-offset_bottom = -0.014102936
-
-[node name="SingleShot" type="Panel" parent="WeaponSelector/HBoxContainer" unique_id=680473947]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="WeaponSelector/HBoxContainer/SingleShot" unique_id=1878069493]
-layout_mode = 0
-offset_left = 8.0
-offset_top = 30.0
-offset_right = 18.9142
-offset_bottom = 40.685
-texture = ExtResource("20_yb677")
-
-[node name="TripleShot" type="Panel" parent="WeaponSelector/HBoxContainer" unique_id=1737991329]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="WeaponSelector/HBoxContainer/TripleShot" unique_id=327439433]
-modulate = Color(0.88927025, 0.81872445, 1, 1)
-self_modulate = Color(0.81776917, 0.5630693, 1, 1)
-layout_mode = 0
-offset_left = 17.0
-offset_top = 31.0
-offset_right = 26.180746
-offset_bottom = 40.0
-texture = ExtResource("20_yb677")
-
-[node name="HideTimer" type="Timer" parent="WeaponSelector" unique_id=782773365]
-
+[connection signal="dash_end" from="." to="DashParticles" method="set_emitting" binds= [false]]
+[connection signal="dash_start" from="." to="DashParticles" method="set_emitting" binds= [true]]
 [connection signal="timeout" from="ShootingComponent/Shootspeed" to="." method="_on_shootspeed_timeout"]
 [connection signal="timeout" from="PlayerHealthComponent/IFramesTimer" to="." method="_on_i_frames_timer_timeout"]
 [connection signal="timeout" from="PlayerHealthComponent/IFramesTimer" to="PlayerHealthComponent" method="_on_i_frames_timer_timeout"]
 [connection signal="timeout" from="PlayerHealthComponent/IFramesBlinkInterval" to="." method="_on_i_frames_blink_interval_timeout"]
 [connection signal="timeout" from="PlayerHealthComponent/IFramesBlinkInterval" to="PlayerHealthComponent" method="_on_i_frames_blink_interval_timeout"]
-[connection signal="weapon_changed" from="WeaponSelector" to="." method="_on_weapon_selector_weapon_changed"]
-[connection signal="timeout" from="WeaponSelector/HideTimer" to="WeaponSelector" method="_on_hide_timer_timeout"]

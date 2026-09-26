@@ -1,6 +1,8 @@
 class_name AttackState
 extends State
 
+signal moving()
+signal attacking()
 
 @export var stop_distance: float = 5.0
 @export var slowdown_distance: float = 100.0
@@ -64,9 +66,11 @@ func physics_update(
 	var target_velocity: Vector2 = Vector2.ZERO
 
 	if distance > stop_distance:
+		moving.emit()
 		var speed_multiplier: float = 1.0
 
 		if distance < slowdown_distance:
+			attacking.emit()
 			speed_multiplier = inverse_lerp(
 				stop_distance,
 				slowdown_distance,

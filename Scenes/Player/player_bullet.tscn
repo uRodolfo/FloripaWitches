@@ -2,15 +2,25 @@
 
 [ext_resource type="Script" uid="uid://b47on4fteuk6x" path="res://Scripts/player_bullet.gd" id="1_jf7v0"]
 [ext_resource type="Texture2D" uid="uid://dep8ed60gkic7" path="res://Assets/Sprites/Placeholders/Red Bullet.png" id="1_vghvw"]
+[ext_resource type="Script" uid="uid://ddn12rflo201e" path="res://Scripts/cpu_particles_controller.gd" id="3_lsb28"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vghvw"]
 size = Vector2(6, 8)
+
+[sub_resource type="Curve" id="Curve_3sy6q"]
+_data = [Vector2(0, 1), 0.0, 0.13202244, 0, 0, Vector2(0.81382984, 0.764045), -1.1221907, -1.1221907, 0, 0, Vector2(1, 0), -2.8667717, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_w11f4"]
+offsets = PackedFloat32Array(0.19753087, 1)
+colors = PackedColorArray(1, 0, 0, 1, 0.8172059, 0.6950665, 0.78525376, 1)
 
 [node name="player_bullet" type="Area2D" unique_id=1231129046 groups=["PlayerBullet"]]
 collision_mask = 9
 script = ExtResource("1_jf7v0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=884910315 groups=["PlayerBullet"]]
+visible = false
 shape = SubResource("RectangleShape2D_vghvw")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=414803050]
@@ -19,5 +29,33 @@ texture = ExtResource("1_vghvw")
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1642533715]
 rect = Rect2(-2, -2, 4, 4)
 
+[node name="ExplosionParticles" type="CPUParticles2D" parent="." unique_id=2004504558]
+emitting = false
+amount = 10
+lifetime = 0.15000000000000002
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 200.0
+initial_velocity_max = 250.0
+scale_amount_min = 0.4
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_3sy6q")
+color_initial_ramp = SubResource("Gradient_w11f4")
+script = ExtResource("3_lsb28")
+
+[node name="TrailParticles" type="CPUParticles2D" parent="." unique_id=1196210650]
+amount = 10
+lifetime = 0.15000000000000002
+spread = 0.0
+gravity = Vector2(0, 0)
+scale_amount_min = 0.4
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_3sy6q")
+color_ramp = SubResource("Gradient_w11f4")
+script = ExtResource("3_lsb28")
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="collided" from="." to="ExplosionParticles" method="play_particles"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="queue_free"]
