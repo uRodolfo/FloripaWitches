@@ -94,6 +94,7 @@ offsets = PackedFloat32Array(0, 0.4722222)
 colors = PackedColorArray(0, 0.80463713, 0.23100811, 1, 0, 0.6661544, 0.6581091, 1)
 
 [node name="Node2D" type="CharacterBody2D" unique_id=896445057 groups=["Player"]]
+position = Vector2(0, -8)
 collision_layer = 4
 input_pickable = true
 script = ExtResource("1_kpjcp")
@@ -138,6 +139,7 @@ sprite_frames = SubResource("SpriteFrames_ude3g")
 animation = &"Up"
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=1176859817]
+position = Vector2(-1, -1)
 energy = 0.6
 shadow_filter = 1
 texture = ExtResource("18_0objx")
