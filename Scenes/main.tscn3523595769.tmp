@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://d3mviccolnux4" path="res://Assets/Props/estalagmite/estalagmite_spritesheet.png" id="4_hpc6h"]
 [ext_resource type="PackedScene" uid="uid://qg0cm33v5qei" path="res://Scenes/lunge_enemy.tscn" id="4_jjvhh"]
 [ext_resource type="Texture2D" uid="uid://bfdt4dyjsxw4e" path="res://Assets/Props/pedra/pedra_spritesheet.png" id="5_kltya"]
+[ext_resource type="Resource" uid="uid://dsh84jose4y5k" path="res://Resources/enemy_1.tres" id="5_kry3j"]
 [ext_resource type="Resource" uid="uid://bnp0p2h275p6u" path="res://Resources/enemy_2.tres" id="6_21xkr"]
 [ext_resource type="Texture2D" uid="uid://i5544bdx68ac" path="res://Assets/Props/poça/poça.png" id="6_e08e2"]
 [ext_resource type="Script" uid="uid://b7gkyawun3j1w" path="res://Scripts/Camera.gd" id="6_fevyy"]
@@ -29,6 +30,8 @@
 [ext_resource type="Texture2D" uid="uid://cjginr5rlrfbe" path="res://Assets/HUD/HUD petals.png" id="11_gt3je"]
 [ext_resource type="PackedScene" uid="uid://bryd8owjiebvk" path="res://Assets/Props/quartzo/light_scenes/quartzo_verde.tscn" id="11_k2e45"]
 [ext_resource type="PackedScene" uid="uid://bicx7c323pqse" path="res://Scenes/pentagrama.tscn" id="14_jkdf5"]
+[ext_resource type="PackedScene" uid="uid://bundf0mxnfds4" path="res://Scenes/spawner.tscn" id="15_wsu2k"]
+[ext_resource type="Script" uid="uid://sgf1wkvbnibr" path="res://Resources/Scripts/enemy_stats.gd" id="16_k12tt"]
 [ext_resource type="PackedScene" uid="uid://ce5eyiulc2572" path="res://Scenes/bouncing_enemy.tscn" id="26_kltya"]
 [ext_resource type="Shader" uid="uid://xf1m8bs1drhk" path="res://Shaders/Palette_swap/Palette_swap.tres" id="33_e08e2"]
 [ext_resource type="Resource" uid="uid://ksa5jmehwgb5" path="res://Resources/enemy_bounce.tres" id="34_neg2b"]
@@ -67,7 +70,7 @@ func trigger_enemy_spawn() -> void:
 	enemy_spawn_triggered.emit()
 
 
-#func _on_player_died() -> void:
+func _on_player_died() -> void:
 	game_over.visible = true
 	pass # Replace with function body.
 
@@ -851,6 +854,11 @@ float_speed = 3.7
 
 [node name="Pentagrama" parent="." unique_id=181011367 instance=ExtResource("14_jkdf5")]
 position = Vector2(878, 670)
+
+[node name="EnemySpawner" parent="." unique_id=1723423879 instance=ExtResource("15_wsu2k")]
+position = Vector2(990, 530)
+enemy_scene = ExtResource("4_jjvhh")
+enemy_variants = Array[ExtResource("16_k12tt")]([ExtResource("5_kry3j"), ExtResource("6_21xkr")])
 
 [node name="Enemies" type="Node2D" parent="." unique_id=1355958955]
 position = Vector2(990, 530)

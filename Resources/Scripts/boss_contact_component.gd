@@ -16,6 +16,15 @@ func _ready() -> void:
 	super._ready()
 
 
+func start_damage(target: Node2D) -> void:
+	if not _can_damage_target(target):
+		return
+
+	# Entrou em contato = dano imediatamente
+	if not targets.has(target):
+		targets.append(target)
+
+
 func _apply_damage(target: Node2D) -> void:
 	if not is_instance_valid(target):
 		return

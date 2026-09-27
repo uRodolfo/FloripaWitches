@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c0ts1s8yu8dcc"]
 
 [ext_resource type="Script" uid="uid://doxqf5dpywdg5" path="res://Scenes/menu.gd" id="1_3kf3n"]
-[ext_resource type="Texture2D" uid="uid://cq72iwii34y10" path="res://Menu e Comandos/tipografia 2.png" id="2_6pedr"]
+[ext_resource type="Texture2D" uid="uid://bj74ab71gf3dr" path="res://Assets/Sprites/image.png" id="2_6pedr"]
 
 [node name="Control" type="Control" unique_id=522865940]
 layout_mode = 3
@@ -48,8 +48,8 @@ layout_mode = 2
 text = "Sair"
 
 [node name="Tipografia2" type="Sprite2D" parent="." unique_id=585419528]
-position = Vector2(162.5, 35)
-scale = Vector2(0.27437323, 0.248)
+position = Vector2(166, 35)
+scale = Vector2(0.15112297, 0.13659677)
 texture = ExtResource("2_6pedr")
 
 [connection signal="button_down" from="VBoxContainer/Começar" to="." method="_on_começar_button_down"]

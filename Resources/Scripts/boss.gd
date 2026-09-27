@@ -1,6 +1,7 @@
 class_name Boss
 extends CharacterBody2D
 
+
 signal was_damaged_by(source: Node2D)
 
 
@@ -11,16 +12,33 @@ signal was_damaged_by(source: Node2D)
 @export var move_speed: float = 40.0
 @export var max_health: float = 20.0
 
+@export var summon_enemy_scene: PackedScene
+@export var summon_amount: int = 3
 
+@onready var summon_area: Area2D = $SummonArea
+@onready var summon_shape: CollisionShape2D = (
+	$SummonArea/CollisionShape2D
+)
 # =========================
-# REFERÊNCIAS
+# ESTADO GERAL
 # =========================
 
 var target: Node2D = null
 var player: Node2D = null
 
-var nav_target_position := Vector2.ZERO
+# Quando virar true, nunca mais deve voltar ao Roaming
+var aggroed: bool = false
 
+var nav_target_position: Vector2 = Vector2.ZERO
+
+
+# =========================
+# NAVEGAÇÃO
+# =========================
+
+@onready var nav_map_rid: RID = (
+	get_world_2d().navigation_map
+)
 
 @onready var navigation_agent_2d: NavigationAgent2D = (
 	$NavigationAgent2D
@@ -29,6 +47,11 @@ var nav_target_position := Vector2.ZERO
 @onready var navigation_update_interval: Timer = (
 	$NavigationAgent2D/NavigationUpdateInterval
 )
+
+
+# =========================
+# COMPONENTES
+# =========================
 
 @onready var health: EnemyHealthComponent = (
 	$EnemyHealthComponent
@@ -52,7 +75,6 @@ var nav_target_position := Vector2.ZERO
 # =========================
 
 func _ready() -> void:
-
 	player = get_tree().get_first_node_in_group(
 		"Player"
 	) as Node2D
@@ -71,48 +93,45 @@ func _ready() -> void:
 		_on_damaged_by
 	)
 
-	# Boss já começa perseguindo o Player
-	target = player
+	# =========================
+	# DANO DE CONTATO SEMPRE ATIVO
+	# =========================
 
-	# Define o primeiro destino
-	nav_target_position = player.global_position
+	contact_damage.activate()
 
-	# Espera o NavigationRegion2D ficar pronto
-	await get_tree().physics_frame
-
-	if is_instance_valid(player):
-		navigation_agent_2d.target_position = (
-			player.global_position
-		)
+	target = null
+	aggroed = false
 
 
 # =========================
-# MOVIMENTO
+# PHYSICS
 # =========================
 
-func _physics_process(delta: float) -> void:
-
-	if is_instance_valid(target):
-		follow_player(delta)
-	else:
-		target = null
-		velocity = Vector2.ZERO
-
+func _physics_process(_delta: float) -> void:
+	# A StateMachine decide a velocity.
+	# O Boss apenas executa o movimento.
 	move_and_slide()
 
-	shoot_player()
 
+# =========================
+# AGGRO
+# =========================
 
-func follow_player(_delta: float) -> void:
-	if not is_instance_valid(target):
-		target = null
-		velocity = Vector2.ZERO
+func aggro_player() -> void:
+	if not is_instance_valid(player):
 		return
 
-	pathfind_and_move_to(target.global_position)
+	aggroed = true
+	target = player
 
 
-func pathfind_and_move_to(to: Vector2) -> void:
+# =========================
+# NAVEGAÇÃO
+# =========================
+
+func pathfind_and_move_to(
+	to: Vector2
+) -> void:
 	nav_target_position = to
 
 	var nav_next_position: Vector2 = (
@@ -124,19 +143,15 @@ func pathfind_and_move_to(to: Vector2) -> void:
 		- global_position
 	).normalized()
 
-	velocity = direction * move_speed
+	velocity = (
+		direction
+		* move_speed
+	)
 
-
-# =========================
-# ATUALIZAÇÃO DA NAVEGAÇÃO
-# =========================
 
 func _on_navigation_update_interval_timeout() -> void:
-
-	if not is_instance_valid(target):
+	if nav_target_position == Vector2.ZERO:
 		return
-
-	nav_target_position = target.global_position
 
 	navigation_agent_2d.target_position = (
 		nav_target_position
@@ -148,7 +163,6 @@ func _on_navigation_update_interval_timeout() -> void:
 # =========================
 
 func shoot_player() -> void:
-
 	if not is_instance_valid(player):
 		return
 
@@ -160,15 +174,19 @@ func shoot_player() -> void:
 	)
 
 
+# Mantive para não quebrar caso você já tenha
+# algum sinal conectado com esse nome.
 func _on_attack_timer_timeout() -> void:
 	shoot_player()
 
 
 # =========================
-# DANO
+# DANO RECEBIDO
 # =========================
 
-func _on_hurtbox_area_entered(area: Area2D) -> void:
+func _on_hurtbox_area_entered(
+	area: Area2D
+) -> void:
 
 	if area.is_in_group("PlayerBullet"):
 		health.damage_from(
@@ -179,7 +197,10 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 		area.queue_free()
 
 	elif area.is_in_group("PlayerBullet2"):
-		health.damage_from(0.5,area)
+		health.damage_from(
+			0.5,
+			area
+		)
 
 		area.queue_free()
 
@@ -199,7 +220,52 @@ func _on_damaged_by(
 	):
 		return
 
-	was_damaged_by.emit(source)
+	was_damaged_by.emit(
+		source
+	)
+
+
+# =========================
+# SUMMON
+# =========================
+
+func summon_enemies() -> void:
+	if summon_enemy_scene == null:
+		push_error("Summon Enemy Scene não foi definida.")
+		return
+
+	var rectangle := summon_shape.shape as RectangleShape2D
+
+	if rectangle == null:
+		push_error("SummonArea precisa usar RectangleShape2D.")
+		return
+
+	var half_size := rectangle.size / 2.0
+
+	for i in summon_amount:
+		var random_offset := Vector2(
+			randf_range(-half_size.x, half_size.x),
+			randf_range(-half_size.y, half_size.y)
+		)
+
+		var random_position := (
+			summon_area.global_position
+			+ random_offset
+		)
+
+		# Pega o ponto navegável mais próximo
+		var valid_position := (
+			NavigationServer2D.map_get_closest_point(
+				nav_map_rid,
+				random_position
+			)
+		)
+
+		var enemy = summon_enemy_scene.instantiate()
+
+		get_tree().current_scene.add_child(enemy)
+
+		enemy.global_position = valid_position
 
 
 # =========================
@@ -207,8 +273,9 @@ func _on_damaged_by(
 # =========================
 
 func _on_died() -> void:
-
-	score.add_points(500)
+	score.add_points(
+		500
+	)
 
 	queue_free()
 
@@ -216,3 +283,27 @@ func _on_died() -> void:
 # =========================
 # DANO DE CONTATO
 # =========================
+
+# Mantidos porque você pode já ter sinais
+# conectados a essas funções.
+
+func _on_contact_area_body_entered(
+	body: Node2D
+) -> void:
+	if contact_damage == null:
+		return
+
+	contact_damage.start_damage(
+		body
+	)
+
+
+func _on_contact_area_body_exited(
+	body: Node2D
+) -> void:
+	if contact_damage == null:
+		return
+
+	contact_damage.stop_damage(
+		body
+	)

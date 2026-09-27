@@ -3,11 +3,20 @@
 [ext_resource type="Script" uid="uid://cy34onnu8dt5b" path="res://Resources/Scripts/boss.gd" id="1_a86vh"]
 [ext_resource type="Texture2D" uid="uid://cmtvdfk1j1ayb" path="res://Assets/Sprites/GDFGDFGDFGDF.png" id="1_fvjq8"]
 [ext_resource type="Script" uid="uid://b1lkhedpa50kg" path="res://Scripts/Components/enemy_health_component.gd" id="1_j0fas"]
+[ext_resource type="PackedScene" uid="uid://qg0cm33v5qei" path="res://Scenes/lunge_enemy.tscn" id="2_ri2lv"]
 [ext_resource type="Script" uid="uid://8k5jl8l0ehtt" path="res://Resources/Scripts/BossShooterComponent.gd" id="3_fvjq8"]
 [ext_resource type="PackedScene" uid="uid://bkv61l2m83hu4" path="res://Scenes/Boss/enemy_bullet.tscn" id="4_6c4ko"]
 [ext_resource type="PackedScene" uid="uid://b1yko38t2lf0j" path="res://Scenes/Boss/boss_bullet_triple.tscn" id="5_itvof"]
 [ext_resource type="Script" uid="uid://b6j67k0nbgcpk" path="res://Scripts/Components/mouse_detector_area.gd" id="8_lf4sq"]
 [ext_resource type="Script" uid="uid://nogyq0jtm73x" path="res://Resources/Scripts/boss_contact_component.gd" id="8_nb8q2"]
+[ext_resource type="Script" uid="uid://bvffcldfuo2xe" path="res://Scenes/Mofas/state_machine.gd" id="9_vutfh"]
+[ext_resource type="Script" uid="uid://d3ufn4rhuhmsa" path="res://Resources/Scripts/boss_roaming_state.gd" id="10_63ph1"]
+[ext_resource type="Script" uid="uid://bbxgou0ntvwgq" path="res://Resources/Scripts/boss_dash_state.gd" id="11_a140j"]
+[ext_resource type="Script" uid="uid://bjoprk2g0suk8" path="res://Resources/Scripts/boss_shooting_state.gd" id="12_jhnrj"]
+[ext_resource type="Script" uid="uid://e0umh6752g1d" path="res://Resources/Scripts/combat.gd" id="13_d8qiu"]
+[ext_resource type="Script" uid="uid://cngj628hbmbl2" path="res://Resources/Scripts/boss_summoning_state.gd" id="13_ri2lv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j6cna"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_itvof"]
 radius = 119.0042
@@ -21,9 +30,17 @@ radius = 23.021729
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lf4sq"]
 size = Vector2(47, 37)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hdf80"]
+size = Vector2(161.5, 155)
+
 [node name="Boss" type="CharacterBody2D" unique_id=34516549 groups=["Enemy"]]
-collision_mask = 4
+collision_layer = 0
 script = ExtResource("1_a86vh")
+summon_enemy_scene = ExtResource("2_ri2lv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=293856375]
+shape = SubResource("RectangleShape2D_j6cna")
+debug_color = Color(0.012677928, 0.54393667, 0.6082113, 0.41960785)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1907911637]
 position = Vector2(4.7683716e-07, 4.7683716e-07)
@@ -79,7 +96,7 @@ target_group = &"Player"
 health_component_name = &"PlayerHealthComponent"
 
 [node name="Timer" type="Timer" parent="BossContactComponent" unique_id=551231154]
-wait_time = 0.15
+wait_time = 0.108
 
 [node name="ContactArea" type="Area2D" parent="BossContactComponent" unique_id=1012914590]
 collision_mask = 4
@@ -87,6 +104,67 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BossContactComponent/ContactArea" unique_id=1360278093]
 position = Vector2(0.5, -0.5)
 shape = SubResource("RectangleShape2D_lf4sq")
+
+[node name="StateMachine" type="Node" parent="." unique_id=1774219139 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("9_vutfh")
+initial_state = NodePath("Roaming")
+
+[node name="Roaming" type="Node" parent="StateMachine" unique_id=1918634314 node_paths=PackedStringArray("boss", "navigation_update_interval")]
+script = ExtResource("10_63ph1")
+boss = NodePath("../..")
+navigation_update_interval = NodePath("../../NavigationAgent2D/NavigationUpdateInterval")
+
+[node name="Dash" type="Node" parent="StateMachine" unique_id=223825357 node_paths=PackedStringArray("boss", "telegraph_time", "attacking_interval", "lunge_lock_timer")]
+script = ExtResource("11_a140j")
+boss = NodePath("../..")
+telegraph_time = NodePath("TelegraphTime")
+attacking_interval = NodePath("AttackingInterval")
+lunge_lock_timer = NodePath("LungeLockTimer")
+
+[node name="TelegraphTime" type="Timer" parent="StateMachine/Dash" unique_id=772892636]
+wait_time = 0.5
+one_shot = true
+
+[node name="AttackingInterval" type="Timer" parent="StateMachine/Dash" unique_id=1393614067]
+one_shot = true
+
+[node name="LungeLockTimer" type="Timer" parent="StateMachine/Dash" unique_id=41245384]
+one_shot = true
+
+[node name="Shooting" type="Node" parent="StateMachine" unique_id=293587706 node_paths=PackedStringArray("boss", "navigation_update_interval", "shooting_duration")]
+script = ExtResource("12_jhnrj")
+boss = NodePath("../..")
+navigation_update_interval = NodePath("../../NavigationAgent2D/NavigationUpdateInterval")
+shooting_duration = NodePath("ShootingDuration")
+
+[node name="ShootingDuration" type="Timer" parent="StateMachine/Shooting" unique_id=1152995978]
+wait_time = 5.38
+one_shot = true
+
+[node name="ShootingInterval" type="Timer" parent="StateMachine/Shooting" unique_id=2003082477]
+
+[node name="Summoning" type="Node" parent="StateMachine" unique_id=910794894 node_paths=PackedStringArray("boss", "summon_cast", "summon_cooldown")]
+script = ExtResource("13_ri2lv")
+boss = NodePath("../..")
+summon_cast = NodePath("SummonTimer")
+summon_cooldown = NodePath("SummonCooldown")
+
+[node name="SummonTimer" type="Timer" parent="StateMachine/Summoning" unique_id=1310190185]
+wait_time = 2.0
+one_shot = true
+
+[node name="SummonCooldown" type="Timer" parent="StateMachine/Summoning" unique_id=1481144045]
+wait_time = 15.0
+one_shot = true
+
+[node name="Combat" type="Node" parent="StateMachine" unique_id=1623439998]
+script = ExtResource("13_d8qiu")
+
+[node name="SummonArea" type="Area2D" parent="." unique_id=109319018]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SummonArea" unique_id=811023374]
+shape = SubResource("RectangleShape2D_hdf80")
+debug_color = Color(0.546933, 0.54968786, 0.3772069, 0.41960785)
 
 [connection signal="timeout" from="EnemyHealthComponent/BlinkInterval" to="EnemyHealthComponent" method="_on_blink_interval_timeout"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
