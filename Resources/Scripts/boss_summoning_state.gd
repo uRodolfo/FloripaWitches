@@ -1,10 +1,11 @@
-class_name BossSummoningState
 extends State
+class_name BossSummoningState
+
 
 @export var boss: Boss
-
 @export var summon_cast: Timer
 @export var summon_cooldown: Timer
+
 
 var can_summon: bool = true
 
@@ -30,7 +31,11 @@ func enter() -> void:
 		transition_to("combat")
 		return
 
+	# PRIMEIRO PARA
 	boss.velocity = Vector2.ZERO
+
+	# DEPOIS TOCA A ANIMAÇÃO
+	boss.play_dash_animation()
 
 	can_summon = false
 
@@ -38,10 +43,13 @@ func enter() -> void:
 
 
 func physics_update(_delta: float) -> void:
+	# Nunca permite movimento durante summon
 	boss.velocity = Vector2.ZERO
 
 
 func summon_enemies() -> void:
+	boss.velocity = Vector2.ZERO
+
 	boss.summon_enemies()
 
 	summon_cooldown.start()
