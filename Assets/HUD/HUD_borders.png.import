@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dngfgr1lb1u47"
-path="res://.godot/imported/chao_tiles.png-8f6a57828dd5554b76777aaab9382130.ctex"
+uid="uid://bqyb12bmlpc8e"
+path="res://.godot/imported/HUD_borders.png-0445a80734a96190dff457e0277cd051.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tilesets/chao_tiles.png"
-dest_files=["res://.godot/imported/chao_tiles.png-8f6a57828dd5554b76777aaab9382130.ctex"]
+source_file="res://Assets/HUD/HUD_borders.png"
+dest_files=["res://.godot/imported/HUD_borders.png-0445a80734a96190dff457e0277cd051.ctex"]
 
 [params]
 

@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cpyfckmjdydos"]
+
+[ext_resource type="Texture2D" uid="uid://gqlf2yxd8l45" path="res://Assets/Props/quartzo/quartzo rosa.png" id="1_rgq7f"]
+[ext_resource type="Texture2D" uid="uid://dkjjvef6sivqv" path="res://Assets/Lights/radial_gradient.tres" id="2_aifns"]
+
+[node name="Sprite2D" type="Sprite2D" unique_id=24704258]
+texture = ExtResource("1_rgq7f")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1706124142]
+color = Color(0.99895734, 0.62875646, 0.73001075, 1)
+energy = 0.5
+shadow_filter = 1
+texture = ExtResource("2_aifns")
+texture_scale = 0.6
