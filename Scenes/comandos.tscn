@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bm8fyvvm8ww0w" path="res://Menu e Comandos/mouse 2 spritesheet.png" id="3_myhll"]
 [ext_resource type="Texture2D" uid="uid://dqiiuo3w2kuug" path="res://Menu e Comandos/mouse roll spritesheet.png" id="4_xllci"]
 [ext_resource type="Texture2D" uid="uid://bpoggetpcv54m" path="res://Menu e Comandos/mouse spritesheet.png" id="5_gdmmp"]
+[ext_resource type="Texture2D" uid="uid://bqyb12bmlpc8e" path="res://Assets/HUD/HUD_borders.png" id="6_gqwac"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2isdm"]
 line_spacing = -4.0
@@ -12,9 +13,11 @@ paragraph_spacing = -1.0
 font_size = 10
 
 [sub_resource type="LabelSettings" id="LabelSettings_myhll"]
+line_spacing = -4.0
 font_size = 10
 
 [sub_resource type="LabelSettings" id="LabelSettings_ev4qy"]
+line_spacing = -4.0
 font_size = 10
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xllci"]
@@ -226,61 +229,86 @@ grow_vertical = 2
 script = ExtResource("1_05umx")
 metadata/_edit_horizontal_guides_ = [-70.0]
 
-[node name="menu" type="Button" parent="." unique_id=147738879]
-layout_mode = 0
-offset_left = 184.0
-offset_top = 205.0
-offset_right = 309.0
-offset_bottom = 237.0
-text = "Menu principal"
+[node name="TextureRect" type="TextureRect" parent="." unique_id=834201696]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_gqwac")
+metadata/_edit_lock_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=258045540]
 layout_mode = 0
-offset_left = 49.0
-offset_top = 13.0
-offset_right = 320.0
-offset_bottom = 105.0
-theme_override_constants/separation = 40
+offset_left = 72.0
+offset_top = 32.0
+offset_right = 336.0
+offset_bottom = 180.0
+theme_override_constants/separation = 28
 
 [node name="Label" type="Label" parent="VBoxContainer" unique_id=2142480639]
 layout_mode = 2
-text = "Aperte o botão direito do mouse em cima dos alvos
+text = "Aperte o botão direito do mouse em
+cima dos alvos ara enviar o Mofas 
 para atacá-los"
 label_settings = SubResource("LabelSettings_2isdm")
 
 [node name="Label2" type="Label" parent="VBoxContainer" unique_id=845409853]
 layout_mode = 2
-text = "Ao coletar uma magia nova, role a rodinha do mouse
+text = "Ao coletar uma magia nova,
+role a rodinha do mouse
 para selecionar entre as magias."
 label_settings = SubResource("LabelSettings_myhll")
 
 [node name="Label3" type="Label" parent="VBoxContainer" unique_id=754555289]
 layout_mode = 2
-text = "Ao coletar uma magia, use o botão direito para atirá-la"
+text = "Ao coletar uma magia, use o botão
+esquerdo para atirá-la"
 label_settings = SubResource("LabelSettings_ev4qy")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1590166170]
+z_index = -1
+z_as_relative = false
+layout_mode = 0
+offset_left = -344.0
+offset_top = -304.0
+offset_right = 664.0
+offset_bottom = 544.0
+color = Color(0, 0, 0, 0.3137255)
 
 [node name="DesignSemNome" type="Sprite2D" parent="." unique_id=609261333]
 z_index = -2
 position = Vector2(160, 121.999985)
 scale = Vector2(0.59117645, 0.65692306)
 texture = ExtResource("2_2isdm")
+metadata/_edit_lock_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=718310679]
-position = Vector2(27, 26)
+position = Vector2(48, 48.000004)
 scale = Vector2(1.5312501, 1.5312501)
 sprite_frames = SubResource("SpriteFrames_ev4qy")
 autoplay = "default"
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="." unique_id=1756311641]
-position = Vector2(27, 92.999985)
+position = Vector2(47.999996, 112)
 scale = Vector2(1.531, 1.531)
 sprite_frames = SubResource("SpriteFrames_j6cna")
 autoplay = "default"
 
 [node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="." unique_id=2118967215]
-position = Vector2(27, 160)
+position = Vector2(47.999996, 168)
 scale = Vector2(1.531, 1.531)
 sprite_frames = SubResource("SpriteFrames_okywk")
 autoplay = "default"
+
+[node name="menu" type="Button" parent="." unique_id=147738879]
+layout_mode = 0
+offset_left = 176.0
+offset_top = 192.0
+offset_right = 301.0
+offset_bottom = 224.0
+keep_pressed_outside = true
+text = "Menu principal"
 
 [connection signal="button_down" from="menu" to="." method="_on_menu_button_down"]
