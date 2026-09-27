@@ -179,6 +179,7 @@ fill_from = Vector2(0.5, 0.5)
 [node name="Boss" type="CharacterBody2D" unique_id=34516549 groups=["Enemy"]]
 collision_layer = 8
 script = ExtResource("1_a86vh")
+max_health = 100.0
 summon_enemy_scene_1 = ExtResource("2_ri2lv")
 summon_enemy_scene_2 = ExtResource("3_1iuv0")
 
@@ -187,7 +188,6 @@ shape = SubResource("RectangleShape2D_j6cna")
 debug_color = Color(0.012677928, 0.54393667, 0.6082113, 0.41960785)
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=350832330]
-scale = Vector2(0.5665266, 0.56652665)
 sprite_frames = SubResource("SpriteFrames_ev4qy")
 animation = &"Dash"
 autoplay = "Run"
@@ -318,6 +318,7 @@ texture = SubResource("GradientTexture2D_guhyc")
 texture_scale = 8.55
 metadata/_edit_lock_ = true
 
+[connection signal="died" from="." to="." method="change_scene_to_thank_you"]
 [connection signal="timeout" from="EnemyHealthComponent/BlinkInterval" to="EnemyHealthComponent" method="_on_blink_interval_timeout"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="timeout" from="BossShootingComponent/Shootspeed" to="BossShootingComponent" method="_on_shotspeed_timeout"]

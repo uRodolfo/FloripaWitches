@@ -1,0 +1,108 @@
+[gd_scene format=3 uid="uid://c1qftc6h7wl77"]
+
+[ext_resource type="Script" uid="uid://d1sjfh1wue6ie" path="res://Scripts/thank_you.gd" id="1_c4g5w"]
+[ext_resource type="Texture2D" uid="uid://xtqudera3v8" path="res://Assets/HUD/thankyou.png" id="2_hp770"]
+[ext_resource type="FontFile" uid="uid://ctsnrudl0ddh5" path="res://Fonts/GomePixel-DYJX1.otf" id="3_hp770"]
+[ext_resource type="Texture2D" uid="uid://3thdjlthmxim" path="res://Assets/HUD/leave_button.png" id="5_xipsy"]
+[ext_resource type="Texture2D" uid="uid://cs3gwk58bkstf" path="res://Assets/HUD/spellcradle_titlecard.png" id="6_kwgoi"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_isk6x"]
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 7
+shadow_color = Color(0, 0, 0, 0.36078432)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sjh0l"]
+atlas = ExtResource("5_xipsy")
+region = Rect2(0, 0, 100, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qki4b"]
+atlas = ExtResource("5_xipsy")
+region = Rect2(0, 38, 100, 38)
+
+[sub_resource type="Gradient" id="Gradient_idohh"]
+offsets = PackedFloat32Array(0, 0.85, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_wfhf6"]
+colors = PackedColorArray(0.09100584, 0.6265028, 0.840789, 1, 0.37834683, 0.9639184, 0.81871015, 1)
+
+[node name="Control" type="Control" unique_id=522865940]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_c4g5w")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1130190824]
+
+[node name="Background" type="TextureRect" parent="CanvasLayer" unique_id=2044938167]
+offset_right = 324.0
+offset_bottom = 244.0
+texture = ExtResource("2_hp770")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1109096234]
+z_as_relative = false
+offset_left = -56.0
+offset_top = -26.0
+offset_right = 376.0
+offset_bottom = 266.0
+color = Color(0, 0, 0, 0.11764706)
+
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=1039844067]
+offset_left = 60.0
+offset_top = 68.0
+offset_right = 262.0
+offset_bottom = 91.0
+theme_override_fonts/font = ExtResource("3_hp770")
+text = "Obrigado por jogar a demo!"
+label_settings = SubResource("LabelSettings_isk6x")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=1761543561]
+offset_left = 112.0
+offset_top = 192.0
+offset_right = 212.0
+offset_bottom = 234.0
+
+[node name="ExitButton" type="TextureButton" parent="CanvasLayer/VBoxContainer" unique_id=1452044953]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_sjh0l")
+texture_pressed = SubResource("AtlasTexture_qki4b")
+
+[node name="Title" type="TextureRect" parent="CanvasLayer" unique_id=1520867766]
+offset_left = 72.0
+offset_top = 4.0
+offset_right = 254.88708
+offset_bottom = 72.0
+texture = ExtResource("6_kwgoi")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="CanvasLayer" unique_id=1234150651]
+position = Vector2(160, 120)
+amount = 30
+lifetime = 30.0
+preprocess = 30.0
+randomness = 0.3
+lifetime_randomness = 0.35
+emission_shape = 3
+emission_rect_extents = Vector2(200, 140)
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 3.0
+initial_velocity_max = 6.0
+angular_velocity_min = -20.0
+angular_velocity_max = 20.0
+damping_max = 0.7
+angle_min = -45.0
+angle_max = -45.0
+scale_amount_max = 2.0
+color = Color(1, 1, 1, 0.6431373)
+color_ramp = SubResource("Gradient_idohh")
+color_initial_ramp = SubResource("Gradient_wfhf6")
+
+[connection signal="button_up" from="CanvasLayer/VBoxContainer/ExitButton" to="." method="_on_sair_button_up"]

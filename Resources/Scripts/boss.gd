@@ -1,7 +1,7 @@
 class_name Boss
 extends CharacterBody2D
 
-
+signal died
 signal was_damaged_by(source: Node2D)
 
 
@@ -75,6 +75,8 @@ var nav_target_position: Vector2 = Vector2.ZERO
 # =========================
 
 func _ready() -> void:
+	died.connect(GlobalEvents.change_scene_to_thank_you)
+	
 	player = get_tree().get_first_node_in_group(
 		"Player"
 	) as Node2D
@@ -319,7 +321,8 @@ func _on_died() -> void:
 	score.add_points(
 		500
 	)
-
+	
+	died.emit()
 	queue_free()
 
 

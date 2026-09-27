@@ -113,7 +113,7 @@ sprite_frames = SubResource("SpriteFrames_61qmw")
 autoplay = "default"
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=1100012758]
-color = Color(1, 0, 0, 1)
+color = Color(0.7403032, 0.46505487, 0, 1)
 energy = 0.6
 texture = ExtResource("3_0djcd")
 texture_scale = 0.7

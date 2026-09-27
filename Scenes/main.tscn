@@ -28,17 +28,14 @@
 [ext_resource type="Script" uid="uid://qw21r0ocqne3" path="res://Scripts/shaking.gd" id="11_ee4r6"]
 [ext_resource type="Texture2D" uid="uid://cjginr5rlrfbe" path="res://Assets/HUD/HUD petals.png" id="11_gt3je"]
 [ext_resource type="PackedScene" uid="uid://bryd8owjiebvk" path="res://Assets/Props/quartzo/light_scenes/quartzo_verde.tscn" id="11_k2e45"]
-[ext_resource type="Texture2D" uid="uid://dnj5ee8n4b80p" path="res://Assets/Sprites/Screenshot_1.jpg" id="13_k2e45"]
 [ext_resource type="PackedScene" uid="uid://bicx7c323pqse" path="res://Scenes/pentagrama.tscn" id="14_jkdf5"]
 [ext_resource type="PackedScene" uid="uid://bundf0mxnfds4" path="res://Scenes/spawner.tscn" id="15_wsu2k"]
 [ext_resource type="Script" uid="uid://sgf1wkvbnibr" path="res://Resources/Scripts/enemy_stats.gd" id="16_k12tt"]
 [ext_resource type="Texture2D" uid="uid://berd4u8ruh1pd" path="res://Assets/HUD/SPR_HUD_JOGO.png" id="21_neg2b"]
-[ext_resource type="Script" uid="uid://cqcur1rm7433g" path="res://addons/dialogue_manager/nodes/actionable/dialogue_actionable_2d.gd" id="33_neg2b"]
-[ext_resource type="Resource" uid="uid://b77fa4k15vccp" path="res://Dialogue/DialogueText/tutorial.dialogue" id="34_r33sp"]
 [ext_resource type="PackedScene" uid="uid://frvlkkyjb8hb" path="res://Assets/Pergaminho_amarelo.tscn" id="27_jwpg7"]
 [ext_resource type="Script" uid="uid://cqcur1rm7433g" path="res://addons/dialogue_manager/nodes/actionable/dialogue_actionable_2d.gd" id="33_neg2b"]
-[ext_resource type="PackedScene" uid="uid://dl4bgstyvxppp" path="res://Resources/Scripts/boss.tscn" id="33_r33sp"]
-[ext_resource type="Resource" uid="uid://b77fa4k15vccp" path="res://Dialogue/DialogueText/testando.dialogue" id="34_r33sp"]
+[ext_resource type="PackedScene" uid="uid://dl4bgstyvxppp" path="res://Scenes/Boss/boss.tscn" id="33_r33sp"]
+[ext_resource type="Resource" uid="uid://b77fa4k15vccp" path="res://Dialogue/DialogueText/tutorial.dialogue" id="34_r33sp"]
 [ext_resource type="PackedScene" uid="uid://ce5eyiulc2572" path="res://Scenes/bouncing_enemy.tscn" id="36_jwpg7"]
 
 [sub_resource type="GDScript" id="GDScript_21xkr"]
@@ -329,17 +326,17 @@ metadata/_better_terrain = {
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_536cc"]
 texture = ExtResource("4_hpc6h")
 0:0/0 = 0
-0:0/0/y_sort_origin = 4
+0:0/0/y_sort_origin = 6
 0:0/0/metadata/_better_terrain = {
 &"type": 0
 }
 1:0/0 = 0
-1:0/0/y_sort_origin = 4
+1:0/0/y_sort_origin = 6
 1:0/0/metadata/_better_terrain = {
 &"type": 0
 }
 2:0/0 = 0
-2:0/0/y_sort_origin = 4
+2:0/0/y_sort_origin = 6
 2:0/0/metadata/_better_terrain = {
 &"type": 0
 }
@@ -642,6 +639,9 @@ colors = PackedColorArray(0.34908575, 0.83938307, 0.4295392, 1, 0.37834683, 0.96
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3sy6q"]
 size = Vector2(16, 48)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w11f4"]
+size = Vector2(24, 96)
+
 [node name="Main" type="Node2D" unique_id=859268929]
 script = SubResource("GDScript_21xkr")
 
@@ -656,18 +656,28 @@ color = Color(0.3638552, 0.5652031, 0.7760158, 1)
 visible = false
 navigation_polygon = SubResource("NavigationPolygon_3sy6q")
 
+[node name="CameraRoomController" type="Node2D" parent="." unique_id=876991148 node_paths=PackedStringArray("player_node", "camera_node")]
+script = ExtResource("4_b3802")
+player_node = NodePath("../Y-Sortable/Player")
+camera_node = NodePath("Camera")
+
+[node name="Camera" parent="CameraRoomController" unique_id=1969811154 node_paths=PackedStringArray("player") instance=ExtResource("3_kry3j")]
+position = Vector2(120, 80)
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+script = ExtResource("6_fevyy")
+player = NodePath("../../Y-Sortable/Player")
+
 [node name="Y-Sortable" type="Node2D" parent="." unique_id=282843544]
 y_sort_enabled = true
-position = Vector2(112, 176)
 
 [node name="Player" parent="Y-Sortable" unique_id=1032195059 instance=ExtResource("1_8gbba")]
 z_as_relative = false
-position = Vector2(700, 156)
+position = Vector2(880, 328)
 starting_hp = 5.0
 
 [node name="TileMaps" type="Node2D" parent="Y-Sortable" unique_id=1017792087]
 y_sort_enabled = true
-position = Vector2(-112, -176)
 
 [node name="Walls" type="TileMapLayer" parent="Y-Sortable/TileMaps" unique_id=1524501490 groups=["Navigation"]]
 z_index = -10
@@ -689,23 +699,6 @@ y_sort_enabled = true
 tile_map_data = PackedByteArray("AAAHAAYAFQAAAAAAAQACAAYAFQAAAAAABAAJAAIACgAAAAAAAAACAAMACgAEAAAAAAAEAAwACgADAAAAAAACAAwACgAEAAAAAAAMAAYACgAAAAAAAAASAAMACgAEAAAAAAAWAAIACgAEAAAAAAAYAAMACgABAAAAAAAXAAIACgABAAAAAAARAAIACgABAAAAAAAWAAoACgAEAAAAAAAXAAYACgACAAAAAAARAAwACgADAAAAAAAlAAwACgADAAAAAAAcAAUADQABAAAAAAAgAAQACgABAAAAAAAcAAMACgABAAAAAAAoAAMACgAAAAAAAAApAAMACgAAAAAAAAAuAAUACgACAAAAAAArAAUACgABAAAAAAAuAAQACgAEAAAAAAAtAAUACgADAAAAAAA4AAIACgACAAAAAAAyAAkACgABAAAAAAAwAAMACgAAAAAAAAAyAAwACgACAAAAAAAxAAsACgACAAAAAAA0ABAACgAAAAAAAAA5ABcACgAEAAAAAAA3ABgACgACAAAAAAA0ABkACgADAAAAAAA0ABYACgABAAAAAAAyABEADQAAAAAAAAAsABMAFQAAAAAAAwAuABIACgABAAAAAAAmABIACgADAAAAAAAlABIAFQAAAAAAAwAjABEACgADAAAAAAAeABkACgACAAAAAAAcABIACgAAAAAAAAAXABQACgAAAAAAAAARABMACgABAAAAAAAJABIACgAEAAAAAAAGABMACgAEAAAAAAAGABQACgAEAAAAAAADABUACgAAAAAAAAAHABEACgAEAAAAAAAHABsACgAEAAAAAAAMABkACgADAAAAAAAOABsACgACAAAAAAAPABgACgAEAAAAAAAHACEACgADAAAAAAAIACMACgAEAAAAAAAEACUACgADAAAAAAAFACMACgADAAAAAAACACkACgADAAAAAAACACoACgAAAAAAAAASACoACgAEAAAAAAATACgACgAAAAAAAAAVACkACgABAAAAAAAUAB8ACgABAAAAAAAQACAACgADAAAAAAAPACMACgADAAAAAAATACAACgABAAAAAAAhAB8ACgADAAAAAAAjACEACgACAAAAAAAjACcACgAAAAAAAAAgACkACgAEAAAAAAArACQACgADAAAAAAAoACYACgAEAAAAAAAyACEAFQAAAAAAAgAyACUACgAEAAAAAAAwACkACgAAAAAAAAAuACoACgACAAAAAAA5AB8ACgAEAAAAAAA5ACUACgACAAAAAAA0ACEACgAAAAAAAAAyACkACgAAAAAAAAArACYADQABAAAAAAArACoADQAAAAAAAAAxACkADQABAAAAAAAdACUADQABAAAAAAAbACcADQAAAAAAAAAUACcADQABAAAAAAAQACoADQAAAAAAAAAEACoADQAAAAAAAAACACYADQABAAAAAAAKABoADQAAAAAAAAANABMADQAAAAAAAAAdABIADQAAAAAAAAAcABYADQAAAAAAAAAxABcADQAAAAAAAAAuABQADQAAAAAAAAAzAAYADQAAAAAAAAAwAAIADQAAAAAAAAArAAkADQAAAAAAAAAbAAwADQAAAAAAAAAUAAoADQAAAAAAAAAKAAYADgAAAAAAAAAcAAYADgAAAAAAAAAqAAwADgAAAAAAAAAeABMADgAAAAAAAAAQACEADgAAAAAAAAAgACoADgAAAAAAAAAUAAQAFQAAAAAAAQAkAAsAFQAAAAAAAQAIABIAFQAAAAAAAQAIACIAFQAAAAAAAQAKACkAFQAAAAAAAQAcACUAFQAAAAAAAQAvACEAFQAAAAAAAQA4ACEAFQAAAAAAAQAqACQAFQAAAAAAAgAuABcAFQAAAAAAAgA2ABEAFQAAAAAAAgAzAAQAFQAAAAAAAgAXAAoAFQAAAAAAAgAFAAUAFQAAAAAAAgAHABUAFQAAAAAAAgAFACEAFQAAAAAAAgALACYAFQAAAAAAAgAGACoAFQAAAAAAAwAWACAAFQAAAAAAAwAyACYAFQAAAAAAAwAtACkAFQAAAAAAAwAsAAUAFQAAAAAAAwAeAAQAFQAAAAAAAwAXAAQAFQAAAAAAAwAHAAMAFQAAAAAAAwARABQAFQAAAAAAAwAfAB8AFQAAAAAAAwATACMAFQAAAAAABAALABQAFQAAAAAABAADABkAFQAAAAAABAA2ABgAFQAAAAAABAAnAAQAFQAAAAAABAAaAB8AFQAAAAAABQAOACkAFQAAAAAABQAuACUAFQAAAAAABQAyABUAFQAAAAAABQAEABQAFQAAAAAABQAPAAcAFQAAAAAABQACAAcAFQAAAAAABQAJAAsAAgABAAAAAAA=")
 tile_set = SubResource("TileSet_ubiv5")
 metadata/_edit_lock_ = true
-
-[node name="Screenshot1" type="Sprite2D" parent="Y-Sortable/TileMaps" unique_id=2112977162]
-position = Vector2(994.00006, 384)
-scale = Vector2(0.8432836, 1)
-texture = ExtResource("13_k2e45")
-
-[node name="CameraRoomController" type="Node2D" parent="." unique_id=876991148 node_paths=PackedStringArray("player_node", "camera_node")]
-script = ExtResource("4_b3802")
-player_node = NodePath("../Y-Sortable/Player")
-camera_node = NodePath("Camera")
-
-[node name="Camera" parent="CameraRoomController" unique_id=1969811154 node_paths=PackedStringArray("player") instance=ExtResource("3_kry3j")]
-position = Vector2(120, 80)
-position_smoothing_enabled = true
-position_smoothing_speed = 10.0
-script = ExtResource("6_fevyy")
-player = NodePath("../../Y-Sortable/Player")
 
 [node name="Mofas" parent="." unique_id=557517622 instance=ExtResource("7_6bp64")]
 z_index = -1
@@ -977,6 +970,27 @@ position = Vector2(444, -111)
 [node name="Node2D" parent="." unique_id=647142341 instance=ExtResource("27_jwpg7")]
 position = Vector2(755, 332)
 
+[node name="Area2D" type="Area2D" parent="." unique_id=409704330]
+position = Vector2(968, 384)
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=345021239]
+position = Vector2(-16, 0)
+shape = SubResource("RectangleShape2D_w11f4")
+
+[node name="Area2D2" type="Area2D" parent="." unique_id=1102772587]
+position = Vector2(968, 384)
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2" unique_id=1903726907]
+position = Vector2(-120, 0)
+shape = SubResource("RectangleShape2D_w11f4")
+
 [connection signal="died" from="Y-Sortable/Player" to="." method="_on_player_died"]
 [connection signal="died" from="Y-Sortable/Player" to="CanvasLayer/HUD_HP" method="_on_player_died"]
 [connection signal="body_entered" from="DialogueActionable2D" to="DialogueActionable2D" method="action" flags=6 unbinds=1]
+[connection signal="body_entered" from="Area2D" to="CameraRoomController" method="lock_camera" unbinds=1]
+[connection signal="body_entered" from="Area2D" to="CameraRoomController" method="set_zoom" unbinds=1 binds= [Vector2(0.5, 0.5)]]
+[connection signal="body_entered" from="Area2D" to="CameraRoomController" method="change_global_position" unbinds=1 binds= [Vector2(1316, 384)]]
+[connection signal="body_entered" from="Area2D2" to="CameraRoomController" method="unlock_camera" unbinds=1]
+[connection signal="body_entered" from="Area2D2" to="CameraRoomController" method="reset_zoom" unbinds=1]
