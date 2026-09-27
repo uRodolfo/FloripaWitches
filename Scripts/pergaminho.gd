@@ -27,6 +27,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
 		score.Magic = true
 		score.Magic2 = true
+		DialogueManager.show_dialogue_balloon(load("res://Dialogue/DialogueText/tutorial.dialogue"), "magia")
 		coletado.emit()
 		queue_free()
 	pass # Replace with function body.

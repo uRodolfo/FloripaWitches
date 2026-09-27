@@ -1,7 +1,42 @@
 [gd_scene format=3 uid="uid://c0ts1s8yu8dcc"]
 
 [ext_resource type="Script" uid="uid://doxqf5dpywdg5" path="res://Scenes/menu.gd" id="1_3kf3n"]
-[ext_resource type="Texture2D" uid="uid://bj74ab71gf3dr" path="res://Assets/Sprites/image.png" id="2_6pedr"]
+[ext_resource type="Texture2D" uid="uid://fpku10jjv21i" path="res://Assets/HUD/menu_background.png" id="2_idohh"]
+[ext_resource type="Texture2D" uid="uid://f5lf43vd2leu" path="res://Assets/HUD/play_button.png" id="2_ma218"]
+[ext_resource type="Texture2D" uid="uid://dfaye7j32yf3t" path="res://Assets/HUD/credits_button.png" id="3_idohh"]
+[ext_resource type="Texture2D" uid="uid://3thdjlthmxim" path="res://Assets/HUD/leave_button.png" id="4_wfhf6"]
+[ext_resource type="Texture2D" uid="uid://cs3gwk58bkstf" path="res://Assets/HUD/spellcradle_titlecard.png" id="5_3jcrr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3sy6q"]
+atlas = ExtResource("2_ma218")
+region = Rect2(0, 0, 100, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w11f4"]
+atlas = ExtResource("2_ma218")
+region = Rect2(0, 38, 100, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aobxe"]
+atlas = ExtResource("3_idohh")
+region = Rect2(0, 0, 100, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ab40c"]
+atlas = ExtResource("3_idohh")
+region = Rect2(0, 38, 100, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sjh0l"]
+atlas = ExtResource("4_wfhf6")
+region = Rect2(0, 0, 100, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qki4b"]
+atlas = ExtResource("4_wfhf6")
+region = Rect2(0, 38, 100, 38)
+
+[sub_resource type="Gradient" id="Gradient_idohh"]
+offsets = PackedFloat32Array(0, 0.85, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_wfhf6"]
+colors = PackedColorArray(0.09100584, 0.6265028, 0.840789, 1, 0.37834683, 0.9639184, 0.81871015, 1)
 
 [node name="Control" type="Control" unique_id=522865940]
 layout_mode = 3
@@ -14,39 +49,80 @@ script = ExtResource("1_3kf3n")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1130190824]
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=541633541]
-offset_left = 127.0
-offset_top = 69.0
-offset_right = 299.0
-offset_bottom = 240.0
-color = Color(0.13682577, 0.13682574, 0.13682571, 1)
+[node name="Background" type="TextureRect" parent="CanvasLayer" unique_id=2044938167]
+offset_right = 324.0
+offset_bottom = 244.0
+texture = ExtResource("2_idohh")
+expand_mode = 3
+stretch_mode = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1527798418]
-layout_mode = 0
-offset_left = 24.0
-offset_top = 84.0
-offset_right = 132.0
-offset_bottom = 262.0
-scale = Vector2(0.715, 0.715)
-theme_override_constants/separation = 18
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1109096234]
+z_as_relative = false
+offset_left = -56.0
+offset_top = -26.0
+offset_right = 376.0
+offset_bottom = 266.0
+color = Color(0, 0, 0, 0.11764706)
 
-[node name="Começar" type="Button" parent="VBoxContainer" unique_id=1255797222]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=1761543561]
+offset_left = 112.0
+offset_top = 96.0
+offset_right = 212.0
+offset_bottom = 218.0
+
+[node name="PlayButton" type="TextureButton" parent="CanvasLayer/VBoxContainer" unique_id=193082426]
+custom_minimum_size = Vector2(100, 38)
+custom_maximum_size = Vector2(100, 38)
 layout_mode = 2
-text = "Jogar"
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = SubResource("AtlasTexture_3sy6q")
+texture_pressed = SubResource("AtlasTexture_w11f4")
+stretch_mode = 0
 
-[node name="Creditos" type="Button" parent="VBoxContainer" unique_id=1808423570]
+[node name="CreditsButton2" type="TextureButton" parent="CanvasLayer/VBoxContainer" unique_id=1037431271]
 layout_mode = 2
-text = "Créditos"
+texture_normal = SubResource("AtlasTexture_aobxe")
+texture_pressed = SubResource("AtlasTexture_ab40c")
 
-[node name="Sair" type="Button" parent="VBoxContainer" unique_id=1222340389]
+[node name="ExitButton" type="TextureButton" parent="CanvasLayer/VBoxContainer" unique_id=1452044953]
 layout_mode = 2
-text = "Sair"
+texture_normal = SubResource("AtlasTexture_sjh0l")
+texture_pressed = SubResource("AtlasTexture_qki4b")
 
-[node name="Tipografia2" type="Sprite2D" parent="." unique_id=585419528]
-position = Vector2(166, 35)
-scale = Vector2(0.15112297, 0.13659677)
-texture = ExtResource("2_6pedr")
+[node name="Title" type="TextureRect" parent="CanvasLayer" unique_id=1520867766]
+offset_left = 62.0
+offset_top = 12.0
+offset_right = 261.02417
+offset_bottom = 86.0
+texture = ExtResource("5_3jcrr")
+expand_mode = 3
+stretch_mode = 4
 
-[connection signal="button_down" from="VBoxContainer/Começar" to="." method="_on_começar_button_down"]
-[connection signal="button_down" from="VBoxContainer/Creditos" to="." method="_on_creditos_button_down"]
-[connection signal="button_down" from="VBoxContainer/Sair" to="." method="_on_sair_button_down"]
+[node name="CPUParticles2D" type="CPUParticles2D" parent="CanvasLayer" unique_id=1234150651]
+position = Vector2(160, 120)
+amount = 30
+lifetime = 30.0
+preprocess = 30.0
+randomness = 0.3
+lifetime_randomness = 0.35
+emission_shape = 3
+emission_rect_extents = Vector2(200, 140)
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 3.0
+initial_velocity_max = 6.0
+angular_velocity_min = -20.0
+angular_velocity_max = 20.0
+damping_max = 0.7
+angle_min = -45.0
+angle_max = -45.0
+scale_amount_max = 2.0
+color = Color(1, 1, 1, 0.6431373)
+color_ramp = SubResource("Gradient_idohh")
+color_initial_ramp = SubResource("Gradient_wfhf6")
+
+[connection signal="button_up" from="CanvasLayer/VBoxContainer/PlayButton" to="." method="_on_começar_button_up"]
+[connection signal="button_up" from="CanvasLayer/VBoxContainer/CreditsButton2" to="." method="_on_creditos_button_up"]
+[connection signal="button_up" from="CanvasLayer/VBoxContainer/ExitButton" to="." method="_on_sair_button_up"]

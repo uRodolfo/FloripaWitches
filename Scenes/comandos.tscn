@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://b43emcbfi5hcg" path="res://Assets/HUD/wasd_spritesheet.png" id="6_mm4fi"]
 [ext_resource type="Texture2D" uid="uid://dkjjvef6sivqv" path="res://Assets/Lights/radial_gradient.tres" id="7_e7ccy"]
 [ext_resource type="Texture2D" uid="uid://d2x4y7giumnk2" path="res://Assets/HUD/spacebar_spritesheet.png" id="8_385bi"]
+[ext_resource type="Texture2D" uid="uid://f5lf43vd2leu" path="res://Assets/HUD/play_button.png" id="12_385bi"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2isdm"]
 line_spacing = 0.0
@@ -428,6 +429,14 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 [sub_resource type="Gradient" id="Gradient_e7ccy"]
 colors = PackedColorArray(0.34908575, 0.83938307, 0.4295392, 1, 0.37834683, 0.9639184, 0.81871015, 1)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_3sy6q"]
+atlas = ExtResource("12_385bi")
+region = Rect2(0, 0, 100, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w11f4"]
+atlas = ExtResource("12_385bi")
+region = Rect2(0, 38, 100, 38)
+
 [node name="Control" type="Control" unique_id=1509207183]
 layout_mode = 3
 anchors_preset = 15
@@ -630,17 +639,6 @@ color = Color(1, 1, 1, 0.6431373)
 color_ramp = SubResource("Gradient_gqwac")
 color_initial_ramp = SubResource("Gradient_e7ccy")
 
-[node name="menu" type="Button" parent="." unique_id=147738879]
-layout_mode = 0
-offset_left = 104.0
-offset_top = 211.0
-offset_right = 217.0
-offset_bottom = 230.0
-theme_override_fonts/font = ExtResource("4_t1m6c")
-theme_override_font_sizes/font_size = 12
-keep_pressed_outside = true
-text = "Jogar"
-
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=341268304]
 position = Vector2(48, 24)
 energy = 0.4
@@ -685,4 +683,13 @@ texture = ExtResource("7_e7ccy")
 texture_scale = 2.0
 metadata/_edit_lock_ = true
 
-[connection signal="button_down" from="menu" to="." method="_on_menu_button_down"]
+[node name="StartButton" type="TextureButton" parent="." unique_id=1964989891]
+layout_mode = 0
+offset_left = 112.0
+offset_top = 200.0
+offset_right = 212.0
+offset_bottom = 240.0
+texture_normal = SubResource("AtlasTexture_3sy6q")
+texture_pressed = SubResource("AtlasTexture_w11f4")
+
+[connection signal="button_up" from="StartButton" to="." method="_on_menu_button_up"]

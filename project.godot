@@ -21,6 +21,7 @@ score="*uid://cvfcwty2jgylf"
 BetterTerrain="*uid://c331eaytxsd38"
 GlobalEvents="*uid://q2avh0v8m7eh"
 DialogueManager="*uid://c3rodes2l3gxb"
+GlobalGameState="*uid://bm7ld8capyv3j"
 
 [dialogue_manager]
 
@@ -116,7 +117,7 @@ menu={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://Dialogue/DialogueText/testando.dialogue")
+locale/translations_pot_files=PackedStringArray("res://Dialogue/DialogueText/tutorial.dialogue")
 
 [layer_names]
 

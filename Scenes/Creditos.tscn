@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bkn5ke8r5ex3p" path="res://Assets/HUD/SPR_MENU_COMANDOS_MOUSE.png" id="4_ce4tk"]
 [ext_resource type="Texture2D" uid="uid://bqyb12bmlpc8e" path="res://Assets/HUD/HUD_borders.png" id="5_1jr5v"]
 [ext_resource type="Texture2D" uid="uid://dkjjvef6sivqv" path="res://Assets/Lights/radial_gradient.tres" id="6_67mw3"]
+[ext_resource type="Texture2D" uid="uid://bb0igdslb7flr" path="res://Assets/HUD/menu_button.png" id="7_sa8v4"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_mklqd"]
 line_spacing = 1.0
@@ -18,6 +19,14 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="Gradient" id="Gradient_cidci"]
 colors = PackedColorArray(0.34908575, 0.83938307, 0.4295392, 1, 0.37834683, 0.9639184, 0.81871015, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3sy6q"]
+atlas = ExtResource("7_sa8v4")
+region = Rect2(0, 0, 100, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w11f4"]
+atlas = ExtResource("7_sa8v4")
+region = Rect2(0, 38, 100, 38)
 
 [node name="Creditos" type="Control" unique_id=1077901886]
 layout_mode = 3
@@ -236,14 +245,13 @@ texture = ExtResource("6_67mw3")
 texture_scale = 2.0
 metadata/_edit_lock_ = true
 
-[node name="Button" type="Button" parent="." unique_id=1709641646]
+[node name="MenuButton" type="TextureButton" parent="." unique_id=1630748781]
 layout_mode = 0
-offset_left = 116.0
-offset_top = 207.0
-offset_right = 204.0
-offset_bottom = 226.0
-theme_override_fonts/font = ExtResource("2_a502u")
-theme_override_font_sizes/font_size = 12
-text = "Menu"
+offset_left = 112.0
+offset_top = 200.0
+offset_right = 212.0
+offset_bottom = 240.0
+texture_normal = SubResource("AtlasTexture_3sy6q")
+texture_pressed = SubResource("AtlasTexture_w11f4")
 
-[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
+[connection signal="button_up" from="MenuButton" to="." method="_on_button_button_up"]
