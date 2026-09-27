@@ -215,7 +215,7 @@ func _on_hurtbox_area_entered(
 
 	elif area.is_in_group("PlayerBullet2"):
 		health.damage_from(
-			0.5,
+			0.75,
 			area
 		)
 
