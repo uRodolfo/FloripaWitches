@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://bo8cudm4rwgoi"]
+
+[ext_resource type="Script" uid="uid://deslrw43elh8e" path="res://Scenes/creditos.gd" id="1_jegiq"]
+
+[node name="Creditos" type="Control" unique_id=1077901886]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jegiq")
+
+[node name="Button" type="Button" parent="." unique_id=1709641646]
+layout_mode = 0
+offset_left = 190.95502
+offset_top = 206.0
+offset_right = 316.95502
+offset_bottom = 237.0
+text = "voltar ao menu"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1158095457]
+layout_mode = 0
+offset_right = 363.0
+offset_bottom = 131.0
+scale = Vector2(0.88, 0.88)
+theme_override_constants/separation = 23
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=474528841]
+layout_mode = 2
+text = "Programação: Nicolas e Gabriel"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="VBoxContainer" unique_id=977995446]
+layout_mode = 2
+text = "Arte: Michel, Eros, Arthur e Rafael"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="VBoxContainer" unique_id=2115617098]
+layout_mode = 2
+text = "Game Design: Michel, Gabriel e Nicolas"
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="VBoxContainer" unique_id=1542353363]
+layout_mode = 2
+text = "Direção: Michel"
+horizontal_alignment = 1
+
+[node name="Label5" type="Label" parent="VBoxContainer" unique_id=1201301258]
+layout_mode = 2
+text = "Conceitualização: Michel, Eros, Rafael e Gabriel"
+horizontal_alignment = 1
+
+[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]

@@ -23,11 +23,12 @@ color = Color(0.13682577, 0.13682574, 0.13682571, 1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1527798418]
 layout_mode = 0
-offset_left = 8.0
-offset_top = 71.0
-offset_right = 99.0
-offset_bottom = 228.0
-theme_override_constants/separation = 32
+offset_left = 24.0
+offset_top = 84.0
+offset_right = 132.0
+offset_bottom = 262.0
+scale = Vector2(0.715, 0.715)
+theme_override_constants/separation = 18
 
 [node name="Começar" type="Button" parent="VBoxContainer" unique_id=1255797222]
 layout_mode = 2
@@ -38,15 +39,20 @@ layout_mode = 2
 text = "Comandos
 "
 
-[node name="Sair" type="Button" parent="VBoxContainer" unique_id=1808423570]
+[node name="Creditos" type="Button" parent="VBoxContainer" unique_id=1808423570]
+layout_mode = 2
+text = "Créditos"
+
+[node name="Sair" type="Button" parent="VBoxContainer" unique_id=1222340389]
 layout_mode = 2
 text = "Sair"
 
 [node name="Tipografia2" type="Sprite2D" parent="." unique_id=585419528]
-position = Vector2(162.5, 34.5)
-scale = Vector2(0.27437323, 0.24400002)
+position = Vector2(162.5, 35.5)
+scale = Vector2(0.27437323, 0.252)
 texture = ExtResource("2_6pedr")
 
 [connection signal="button_down" from="VBoxContainer/Começar" to="." method="_on_começar_button_down"]
 [connection signal="button_down" from="VBoxContainer/Comandos" to="." method="_on_comandos_button_down"]
+[connection signal="button_down" from="VBoxContainer/Creditos" to="." method="_on_creditos_button_down"]
 [connection signal="button_down" from="VBoxContainer/Sair" to="." method="_on_sair_button_down"]
