@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://nhbiooqujqus" path="res://Scripts/pergaminho.gd" id="1_ecb1p"]
 [ext_resource type="Texture2D" uid="uid://g2rl8mdra3uu" path="res://Assets/Sprites/Coletaveis/orbe vermelho.png" id="2_ecb1p"]
+[ext_resource type="Texture2D" uid="uid://dkjjvef6sivqv" path="res://Assets/Lights/radial_gradient.tres" id="3_i3ok3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ldsh0"]
 radius = 17.029387
@@ -110,5 +111,11 @@ shape = SubResource("CircleShape2D_ldsh0")
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1842417767]
 sprite_frames = SubResource("SpriteFrames_ev4qy")
 autoplay = "default"
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=35470721]
+color = Color(1, 0, 0, 1)
+energy = 0.6
+texture = ExtResource("3_i3ok3")
+texture_scale = 0.7
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

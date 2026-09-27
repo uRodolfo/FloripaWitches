@@ -7,6 +7,7 @@
 texture = ExtResource("1_5whhe")
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=1706124142]
+z_index = -5
 color = Color(0.67736363, 0.20556659, 1, 1)
 energy = 0.5
 shadow_filter = 1

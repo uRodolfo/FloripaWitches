@@ -99,7 +99,6 @@ offsets = PackedFloat32Array(0, 0.4722222)
 colors = PackedColorArray(0, 0.80463713, 0.23100811, 1, 0, 0.6661544, 0.6581091, 1)
 
 [node name="Node2D" type="CharacterBody2D" unique_id=896445057 groups=["Player"]]
-position = Vector2(0, -8)
 collision_layer = 4
 input_pickable = true
 script = ExtResource("1_kpjcp")
@@ -113,10 +112,11 @@ one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2010125955]
 z_as_relative = false
-position = Vector2(0, 7)
+position = Vector2(0, -10)
 shape = SubResource("CircleShape2D_jmcll")
 
 [node name="ShootingComponent" type="Node2D" parent="." unique_id=2125502849]
+position = Vector2(0, -10)
 script = ExtResource("3_h54ih")
 bullet_scene = ExtResource("4_ude3g")
 bullet_triple_scene = ExtResource("4_yb677")
@@ -129,6 +129,7 @@ wait_time = 0.265
 [node name="Spawnpos" type="Marker2D" parent="ShootingComponent" unique_id=28439972]
 
 [node name="PlayerHealthComponent" type="Node2D" parent="." unique_id=1137579430]
+position = Vector2(0, -10)
 script = ExtResource("5_jmcll")
 
 [node name="IFramesTimer" type="Timer" parent="PlayerHealthComponent" unique_id=859940221]
@@ -138,19 +139,23 @@ wait_time = 1.5
 wait_time = 0.1
 
 [node name="PlayerAnimation" type="Node2D" parent="." unique_id=91055445]
+position = Vector2(0, -10)
 script = ExtResource("5_spxdj")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PlayerAnimation" unique_id=426433208]
+position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_ude3g")
 animation = &"Up"
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=1176859817]
+position = Vector2(0, -16)
 energy = 0.6
 shadow_filter = 1
 texture = ExtResource("18_0objx")
 texture_scale = 8.0
 
 [node name="DashParticles" type="CPUParticles2D" parent="." unique_id=1496678997]
+position = Vector2(0, -10)
 emitting = false
 amount = 150
 lifetime = 10.0
@@ -181,9 +186,9 @@ color_initial_ramp = SubResource("Gradient_0objx")
 layout_mode = 3
 anchors_preset = 0
 offset_left = -20.0
-offset_top = -58.0
+offset_top = -77.0
 offset_right = 20.0
-offset_bottom = -18.0
+offset_bottom = -37.0
 script = ExtResource("19_w71ue")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="WeaponSelector" unique_id=1704053087]

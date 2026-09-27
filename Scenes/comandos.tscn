@@ -463,7 +463,7 @@ position = Vector2(32, 24)
 scale = Vector2(1.5312501, 1.5312501)
 sprite_frames = SubResource("SpriteFrames_ev4qy")
 autoplay = "default"
-frame_progress = 0.28310814
+frame_progress = 0.053563036
 
 [node name="Panel2" type="Panel" parent="." unique_id=779139671]
 layout_mode = 0
@@ -490,7 +490,7 @@ position = Vector2(32, 28)
 scale = Vector2(1.531, 1.531)
 sprite_frames = SubResource("SpriteFrames_j6cna")
 autoplay = "default"
-frame_progress = 0.6330827
+frame_progress = 0.40353987
 
 [node name="Panel3" type="Panel" parent="." unique_id=71704450]
 layout_mode = 0
@@ -516,7 +516,7 @@ position = Vector2(40, 24)
 scale = Vector2(1.531, 1.531)
 sprite_frames = SubResource("SpriteFrames_f1eyx")
 autoplay = "default"
-frame_progress = 0.23061031
+frame_progress = 0.7719199
 
 [node name="Panel4" type="Panel" parent="." unique_id=236504560]
 layout_mode = 0
@@ -543,7 +543,7 @@ position = Vector2(32, 24)
 scale = Vector2(1.531, 1.531)
 sprite_frames = SubResource("SpriteFrames_okywk")
 autoplay = "default"
-frame_progress = 0.7458489
+frame_progress = 0.5163043
 
 [node name="Panel5" type="Panel" parent="." unique_id=1311736804]
 layout_mode = 0
@@ -570,7 +570,7 @@ position = Vector2(40, 24)
 scale = Vector2(1.531, 1.531)
 sprite_frames = SubResource("SpriteFrames_a502u")
 autoplay = "default"
-frame_progress = 0.69938076
+frame_progress = 0.46983775
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1590166170]
 z_index = -2

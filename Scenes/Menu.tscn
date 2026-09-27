@@ -32,7 +32,7 @@ theme_override_constants/separation = 18
 
 [node name="Começar" type="Button" parent="VBoxContainer" unique_id=1255797222]
 layout_mode = 2
-text = "Começar"
+text = "Jogar"
 
 [node name="Creditos" type="Button" parent="VBoxContainer" unique_id=1808423570]
 layout_mode = 2

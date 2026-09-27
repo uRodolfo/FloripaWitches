@@ -1,0 +1,12 @@
+[gd_resource type="StyleBoxTexture" format=3 uid="uid://bx4gcksaggoda"]
+
+[ext_resource type="Texture2D" uid="uid://bq5vsaq07peh2" path="res://Assets/HUD/SPR_TEXTBOX_FUNDO.png" id="1_wqs5n"]
+
+[resource]
+texture = ExtResource("1_wqs5n")
+texture_margin_left = 20.0
+texture_margin_top = 20.0
+texture_margin_right = 20.0
+texture_margin_bottom = 20.0
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
