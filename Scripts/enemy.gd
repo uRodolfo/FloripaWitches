@@ -28,9 +28,12 @@ var player: Node2D = null
 func _ready() -> void:
 	if stats == null:
 		push_error(
-			"EnemyStats não foi definido."
+			"EnemyStats não foi definido no inimigo: "
+			+ name
 		)
 
+		velocity = Vector2.ZERO
+		set_physics_process(false)
 		return
 
 	player = get_tree().get_first_node_in_group(
@@ -55,10 +58,13 @@ func _ready() -> void:
 	)
 
 	if stats.sprite_pallete:
-		sprite.material = sprite.material.duplicate()
-		sprite.material.set_shader_parameter(&"new_palette", stats.sprite_pallete)
-	#if stats.sprite_texture:
-	#	sprite.texture = stats.sprite_texture
+		if sprite.material:
+			sprite.material = sprite.material.duplicate()
+
+			sprite.material.set_shader_parameter(
+				&"new_palette",
+				stats.sprite_pallete
+			)
 
 
 func _physics_process(
@@ -85,8 +91,16 @@ func follow_player(
 
 var nav_target_position : Vector2
 func pathfind_and_move_to(to: Vector2) -> void:
+	if stats == null:
+		velocity = Vector2.ZERO
+		push_error("Enemy sem EnemyStats: " + name)
+		return
+
 	nav_target_position = to
-	var nav_next_position = navigation_agent_2d.get_next_path_position()
+
+	var nav_next_position := (
+		navigation_agent_2d.get_next_path_position()
+	)
 	
 	if navigation_agent_2d.is_target_reached():
 		velocity = Vector2.ZERO

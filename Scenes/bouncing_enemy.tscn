@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ce5eyiulc2572"]
 
 [ext_resource type="Script" uid="uid://concb4awmiftn" path="res://Scripts/enemy.gd" id="1_dw50e"]
+[ext_resource type="Resource" uid="uid://ksa5jmehwgb5" path="res://Resources/enemy_bounce.tres" id="2_20r6m"]
 [ext_resource type="Script" uid="uid://bvffcldfuo2xe" path="res://Scenes/Mofas/state_machine.gd" id="2_ta3aj"]
 [ext_resource type="Script" uid="uid://16ovse1fqt2u" path="res://Scripts/enemy_roaming_state.gd" id="3_5pe8n"]
 [ext_resource type="Script" uid="uid://b52fn1jvlw52g" path="res://Scripts/enemy_chasing_state.gd" id="4_jdsun"]
@@ -76,6 +77,7 @@ _data = {
 [node name="BouncingEnemy" type="CharacterBody2D" unique_id=140973024 groups=["Enemy"]]
 collision_layer = 8
 script = ExtResource("1_dw50e")
+stats = ExtResource("2_20r6m")
 
 [node name="StateMachine" type="Node" parent="." unique_id=1088199231 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_ta3aj")

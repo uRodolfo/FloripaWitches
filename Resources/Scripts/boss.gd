@@ -11,8 +11,8 @@ signal was_damaged_by(source: Node2D)
 
 @export var move_speed: float = 40.0
 @export var max_health: float = 20.0
-
-@export var summon_enemy_scene: PackedScene
+@export var summon_enemy_scene_1: PackedScene
+@export var summon_enemy_scene_2: PackedScene
 @export var summon_amount: int = 3
 
 @onready var summon_area: Area2D = $SummonArea
@@ -49,16 +49,13 @@ var nav_target_position: Vector2 = Vector2.ZERO
 )
 
 
+
 # =========================
 # COMPONENTES
 # =========================
 
 @onready var health: EnemyHealthComponent = (
 	$EnemyHealthComponent
-)
-
-@onready var sprite: Sprite2D = (
-	$Sprite2D
 )
 
 @onready var contact_damage: ContactDamageComponent = (
@@ -69,6 +66,9 @@ var nav_target_position: Vector2 = Vector2.ZERO
 	$BossShootingComponent
 )
 
+@onready var sprite: AnimatedSprite2D = (
+	$Sprite2D
+)
 
 # =========================
 # READY
@@ -85,13 +85,18 @@ func _ready() -> void:
 
 	health.start(max_health)
 
-	health.died.connect(
-		_on_died
-	)
+	health.died.connect(_on_died)
+	health.damaged_by.connect(_on_damaged_by)
 
-	health.damaged_by.connect(
-		_on_damaged_by
-	)
+	contact_damage.activate()
+
+	# Quando uma animação terminar
+
+	target = null
+	aggroed = false
+
+	# Começa em Run
+	play_run_animation()
 
 	# =========================
 	# DANO DE CONTATO SEMPRE ATIVO
@@ -102,15 +107,27 @@ func _ready() -> void:
 	target = null
 	aggroed = false
 
+func play_run_animation() -> void:
+	if sprite.animation != &"Run":
+		sprite.play(&"Run")
+
+
+func play_dash_animation() -> void:
+	if sprite.animation != &"Dash":
+		sprite.play(&"Dash")
 
 # =========================
 # PHYSICS
 # =========================
 
-func _physics_process(_delta: float) -> void:
-	# A StateMachine decide a velocity.
-	# O Boss apenas executa o movimento.
-	move_and_slide()
+func stop_movement() -> void:
+	velocity = Vector2.ZERO
+
+
+func update_facing() -> void:
+	if abs(velocity.x) > 0.1:
+		sprite.flip_h = velocity.x > 0
+
 
 
 # =========================
@@ -230,8 +247,12 @@ func _on_damaged_by(
 # =========================
 
 func summon_enemies() -> void:
-	if summon_enemy_scene == null:
-		push_error("Summon Enemy Scene não foi definida.")
+	if summon_enemy_scene_1 == null:
+		push_error("Summon Enemy Scene 1 não foi definida.")
+		return
+
+	if summon_enemy_scene_2 == null:
+		push_error("Summon Enemy Scene 2 não foi definida.")
 		return
 
 	var rectangle := summon_shape.shape as RectangleShape2D
@@ -253,7 +274,6 @@ func summon_enemies() -> void:
 			+ random_offset
 		)
 
-		# Pega o ponto navegável mais próximo
 		var valid_position := (
 			NavigationServer2D.map_get_closest_point(
 				nav_map_rid,
@@ -261,11 +281,34 @@ func summon_enemies() -> void:
 			)
 		)
 
-		var enemy = summon_enemy_scene.instantiate()
+		# =========================
+		# SORTEIA ENTRE AS 2 CENAS
+		# =========================
 
-		get_tree().current_scene.add_child(enemy)
+		var possible_enemies: Array[PackedScene] = [
+			summon_enemy_scene_1,
+			summon_enemy_scene_2
+		]
 
-		enemy.global_position = valid_position
+		var selected_scene: PackedScene = (
+			possible_enemies.pick_random()
+		)
+
+		var enemy = (
+			selected_scene.instantiate()
+		)
+
+		# =========================
+		# SPAWN
+		# =========================
+
+		get_tree().current_scene.add_child(
+			enemy
+		)
+
+		enemy.global_position = (
+			valid_position
+		)
 
 
 # =========================

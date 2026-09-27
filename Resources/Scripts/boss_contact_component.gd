@@ -15,14 +15,61 @@ func _ready() -> void:
 
 	super._ready()
 
+	# Garante que a Area2D esteja detectando
+	contact_area.monitoring = true
 
-func start_damage(target: Node2D) -> void:
-	if not _can_damage_target(target):
+	# Garante que o componente esteja ativo
+	activate()
+
+
+func _physics_process(_delta: float) -> void:
+	if not damage_enabled:
 		return
 
-	# Entrou em contato = dano imediatamente
-	if not targets.has(target):
-		targets.append(target)
+	var overlapping_bodies := (
+		contact_area.get_overlapping_bodies()
+	)
+
+	# ====================================
+	# ADICIONA QUEM ESTÁ ENCOSTANDO
+	# ====================================
+
+	for body in overlapping_bodies:
+		if not body is Node2D:
+			continue
+
+		var target := body as Node2D
+
+		if not _can_damage_target(target):
+			continue
+
+		if not targets.has(target):
+			targets.append(target)
+
+			# Dano imediato ao encostar
+			_apply_damage(target)
+
+	# ====================================
+	# REMOVE QUEM NÃO ESTÁ MAIS ENCOSTANDO
+	# ====================================
+
+	for target in targets.duplicate():
+		if not is_instance_valid(target):
+			targets.erase(target)
+			continue
+
+		if not overlapping_bodies.has(target):
+			targets.erase(target)
+
+	# ====================================
+	# CONTROLA O TIMER
+	# ====================================
+
+	if targets.is_empty():
+		timer.stop()
+
+	elif timer.is_stopped():
+		timer.start()
 
 
 func _apply_damage(target: Node2D) -> void:
@@ -32,52 +79,14 @@ func _apply_damage(target: Node2D) -> void:
 	if not target.is_in_group("Player"):
 		return
 
-	var player_health: Node = null
-
-	# Procura automaticamente um componente de vida no Player
 	for child in target.get_children():
-		if (
-			child.has_method("damage_from")
-			or child.has_method("_damage")
-			or child.has_method("take_damage")
-			or child.has_method("damage")
-		):
-			player_health = child
-			break
+		if child is PlayerHealthComponent:
+			var player_health := (
+				child as PlayerHealthComponent
+			)
 
-	if player_health == null:
-		push_error("Boss não encontrou o HealthComponent do Player.")
-		return
+			player_health.damage(
+				boss_damage
+			)
 
-	if player_health.has_method("damage_from"):
-		player_health.call(
-			"damage_from",
-			boss_damage,
-			damage_source
-		)
-		return
-
-	if player_health.has_method("_damage"):
-		player_health.call(
-			"_damage",
-			boss_damage
-		)
-		return
-
-	if player_health.has_method("take_damage"):
-		player_health.call(
-			"take_damage",
-			boss_damage
-		)
-		return
-
-	if player_health.has_method("damage"):
-		player_health.call(
-			"damage",
-			boss_damage
-		)
-		
-func _on_body_entered(body: Node2D) -> void:
-	print("BOSS DETECTOU: ", body.name)
-
-	super._on_body_entered(body)
+			return

@@ -127,7 +127,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_oo0u7")
 }],
-"loop": 2,
+"loop": 1,
 "name": &"Dash",
 "speed": 5.0
 }, {
@@ -180,7 +180,7 @@ debug_color = Color(0.012677928, 0.54393667, 0.6082113, 0.41960785)
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=350832330]
 scale = Vector2(0.5665266, 0.56652665)
 sprite_frames = SubResource("SpriteFrames_ev4qy")
-animation = &"Dash"
+animation = &"Run"
 autoplay = "Run"
 
 [node name="SightArea" type="Area2D" parent="." unique_id=1973319174]
@@ -253,12 +253,13 @@ navigation_update_interval = NodePath("../../NavigationAgent2D/NavigationUpdateI
 [node name="Dash" type="Node" parent="StateMachine" unique_id=223825357 node_paths=PackedStringArray("boss", "telegraph_time", "attacking_interval", "lunge_lock_timer")]
 script = ExtResource("11_a140j")
 boss = NodePath("../..")
+lunge_speed = null
 telegraph_time = NodePath("TelegraphTime")
 attacking_interval = NodePath("AttackingInterval")
 lunge_lock_timer = NodePath("LungeLockTimer")
 
 [node name="TelegraphTime" type="Timer" parent="StateMachine/Dash" unique_id=772892636]
-wait_time = 2.0
+wait_time = 0.5
 one_shot = true
 
 [node name="AttackingInterval" type="Timer" parent="StateMachine/Dash" unique_id=1393614067]
@@ -293,9 +294,8 @@ one_shot = true
 wait_time = 15.0
 one_shot = true
 
-[node name="Combat" type="Node" parent="StateMachine" unique_id=1623439998 node_paths=PackedStringArray("boss")]
+[node name="Combat" type="Node" parent="StateMachine" unique_id=1623439998]
 script = ExtResource("13_d8qiu")
-boss = NodePath("../..")
 
 [node name="SummonArea" type="Area2D" parent="." unique_id=109319018]
 

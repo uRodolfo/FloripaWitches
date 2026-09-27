@@ -33,7 +33,9 @@
 [ext_resource type="PackedScene" uid="uid://bundf0mxnfds4" path="res://Scenes/spawner.tscn" id="15_wsu2k"]
 [ext_resource type="Script" uid="uid://sgf1wkvbnibr" path="res://Resources/Scripts/enemy_stats.gd" id="16_k12tt"]
 [ext_resource type="Script" uid="uid://cqcur1rm7433g" path="res://addons/dialogue_manager/nodes/actionable/dialogue_actionable_2d.gd" id="33_neg2b"]
+[ext_resource type="PackedScene" uid="uid://dl4bgstyvxppp" path="res://Resources/Scripts/boss.tscn" id="33_r33sp"]
 [ext_resource type="Resource" uid="uid://b77fa4k15vccp" path="res://Dialogue/DialogueText/testando.dialogue" id="34_r33sp"]
+[ext_resource type="PackedScene" uid="uid://ce5eyiulc2572" path="res://Scenes/bouncing_enemy.tscn" id="36_jwpg7"]
 
 [sub_resource type="GDScript" id="GDScript_21xkr"]
 script/source = "extends Node2D
@@ -659,6 +661,7 @@ position = Vector2(112, 176)
 
 [node name="Player" parent="Y-Sortable" unique_id=1032195059 instance=ExtResource("1_8gbba")]
 z_as_relative = false
+position = Vector2(-8, -9)
 starting_hp = 5.0
 
 [node name="TileMaps" type="Node2D" parent="Y-Sortable" unique_id=1017792087]
@@ -870,7 +873,7 @@ text = "A Yuna foi derrotada!
 pressione \"O\" para reiniciar"
 
 [node name="Pergaminho" parent="." unique_id=883931723 instance=ExtResource("11_d1ilt")]
-position = Vector2(152, 168)
+position = Vector2(147, 173)
 float_height = 2.6
 float_speed = 3.7
 
@@ -986,6 +989,12 @@ metadata/_custom_type_script = "uid://cqcur1rm7433g"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DialogueActionable2D" unique_id=1971401808]
 shape = SubResource("RectangleShape2D_3sy6q")
+
+[node name="BouncingEnemy" parent="." unique_id=903586769 instance=ExtResource("36_jwpg7")]
+position = Vector2(358.17612, 145.95)
+
+[node name="Boss" parent="." unique_id=34516549 instance=ExtResource("33_r33sp")]
+position = Vector2(195, 122)
 
 [connection signal="died" from="Y-Sortable/Player" to="." method="_on_player_died"]
 [connection signal="died" from="Y-Sortable/Player" to="CanvasLayer/HUD_HP" method="_on_player_died"]

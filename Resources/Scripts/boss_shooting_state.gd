@@ -1,8 +1,6 @@
 extends State
 
-
 @export var boss: Boss
-
 @export var navigation_update_interval: Timer
 @export var shooting_duration: Timer
 
@@ -11,6 +9,12 @@ func enter() -> void:
 	if not is_instance_valid(boss.player):
 		transition_to("combat")
 		return
+
+	# Para qualquer movimento anterior
+	boss.stop_movement()
+
+	# Shooting = Run
+	boss.play_run_animation()
 
 	boss.target = boss.player
 
@@ -25,27 +29,30 @@ func enter() -> void:
 		)
 
 	navigation_update_interval.start()
-
 	shooting_duration.start()
 
 
 func physics_update(_delta: float) -> void:
 	if not is_instance_valid(boss.player):
+		boss.stop_movement()
 		return
 
-	# Segue o Player
 	boss.pathfind_and_move_to(
 		boss.player.global_position
 	)
 
-	# Tenta atirar.
-	# O Shootspeed do componente já controla o cooldown.
+	boss.update_facing()
+
+	# SOMENTE AQUI acontece movimento normal
+	boss.move_and_slide()
+
 	boss.shooting_component.shoot(
 		boss.player.global_position
 	)
 
 
 func finish_shooting() -> void:
+	boss.stop_movement()
 	transition_to("combat")
 
 
@@ -53,4 +60,4 @@ func exit() -> void:
 	shooting_duration.stop()
 	navigation_update_interval.stop()
 
-	boss.velocity = Vector2.ZERO
+	boss.stop_movement()
