@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dkjjvef6sivqv" path="res://Assets/Lights/radial_gradient.tres" id="2_md5m6"]
 
 [node name="Sprite2D" type="Sprite2D" unique_id=24704258]
+z_index = -5
 texture = ExtResource("1_qop7r")
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=1706124142]

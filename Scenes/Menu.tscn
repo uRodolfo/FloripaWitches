@@ -32,12 +32,7 @@ theme_override_constants/separation = 18
 
 [node name="Começar" type="Button" parent="VBoxContainer" unique_id=1255797222]
 layout_mode = 2
-text = "Começar"
-
-[node name="Comandos" type="Button" parent="VBoxContainer" unique_id=1558177844]
-layout_mode = 2
-text = "Comandos
-"
+text = "Jogar"
 
 [node name="Creditos" type="Button" parent="VBoxContainer" unique_id=1808423570]
 layout_mode = 2
@@ -53,6 +48,5 @@ scale = Vector2(0.15112297, 0.13659677)
 texture = ExtResource("2_6pedr")
 
 [connection signal="button_down" from="VBoxContainer/Começar" to="." method="_on_começar_button_down"]
-[connection signal="button_down" from="VBoxContainer/Comandos" to="." method="_on_comandos_button_down"]
 [connection signal="button_down" from="VBoxContainer/Creditos" to="." method="_on_creditos_button_down"]
 [connection signal="button_down" from="VBoxContainer/Sair" to="." method="_on_sair_button_down"]
