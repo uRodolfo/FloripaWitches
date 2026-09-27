@@ -10,9 +10,7 @@ func _ready() -> void:
 		GlobalEvents.player_hit.connect(shaking_component.apply_shake)
 		GlobalEvents.player_hit.connect(_drop_petal)
 	
-	var player := get_tree().get_first_node_in_group(
-		"Player"
-	)
+	var player := get_tree().get_first_node_in_group("Player")
 
 	if not player:
 		push_error("PLAYER NÃO ENCONTRADO")

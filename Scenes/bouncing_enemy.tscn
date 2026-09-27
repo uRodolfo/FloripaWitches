@@ -5,25 +5,73 @@
 [ext_resource type="Script" uid="uid://16ovse1fqt2u" path="res://Scripts/enemy_roaming_state.gd" id="3_5pe8n"]
 [ext_resource type="Script" uid="uid://b52fn1jvlw52g" path="res://Scripts/enemy_chasing_state.gd" id="4_jdsun"]
 [ext_resource type="Script" uid="uid://b3krqlhheugbx" path="res://Scripts/enemy_bouncing_state.gd" id="5_dw50e"]
-[ext_resource type="Texture2D" uid="uid://crj13u3jwqqka" path="res://Assets/Sprites/Placeholders/icon.svg" id="6_xk8we"]
+[ext_resource type="Shader" uid="uid://xf1m8bs1drhk" path="res://Shaders/Palette_swap/Palette_swap.tres" id="6_5pe8n"]
+[ext_resource type="Texture2D" uid="uid://7m8sxdtvnyad" path="res://Shaders/Palette_swap/Palletes/pallete_bounce.png" id="7_20r6m"]
+[ext_resource type="Texture2D" uid="uid://w48866ixqudg" path="res://Shaders/Palette_swap/Palletes/lunge_enemy_palette_1.png" id="7_jdsun"]
 [ext_resource type="Script" uid="uid://b1lkhedpa50kg" path="res://Scripts/Components/enemy_health_component.gd" id="7_x15yp"]
+[ext_resource type="Texture2D" uid="uid://by85gbjin8e4r" path="res://Assets/Sprites/Enemies/Lunge_Enemy.png" id="8_5pe8n"]
 [ext_resource type="Script" uid="uid://bmnv7cmajsb7k" path="res://Scripts/Components/contact_damage_component.gd" id="8_r4ab3"]
 [ext_resource type="Script" uid="uid://b6j67k0nbgcpk" path="res://Scripts/Components/mouse_detector_area.gd" id="9_32gu6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8uf12"]
 radius = 5.0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_20r6m"]
+shader = ExtResource("6_5pe8n")
+shader_parameter/original_palette = ExtResource("7_jdsun")
+shader_parameter/new_palette = ExtResource("7_20r6m")
+shader_parameter/colors_count = 12
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_afpow"]
 radius = 120.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_afpow"]
-size = Vector2(18, 8)
+size = Vector2(16, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0830c"]
-size = Vector2(20, 10)
+size = Vector2(12, 27)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ghaa6"]
 radius = 23.021729
+
+[sub_resource type="Animation" id="Animation_jdsun"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_20r6m"]
+resource_name = "new_animation"
+length = 0.5000083482347428
+loop_mode = 1
+step = 0.083333336
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.083333336, 0.16666667, 0.25, 0.33333334, 0.4166667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 0, 1, 2, 3, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xk8we"]
+_data = {
+&"RESET": SubResource("Animation_jdsun"),
+&"new_animation": SubResource("Animation_20r6m")
+}
 
 [node name="BouncingEnemy" type="CharacterBody2D" unique_id=140973024 groups=["Enemy"]]
 collision_layer = 8
@@ -69,8 +117,9 @@ one_shot = true
 shape = SubResource("CircleShape2D_8uf12")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2003387887]
-scale = Vector2(0.14453125, 0.06661987)
-texture = ExtResource("6_xk8we")
+material = SubResource("ShaderMaterial_20r6m")
+texture = ExtResource("8_5pe8n")
+vframes = 6
 
 [node name="SightArea" type="Area2D" parent="." unique_id=1796072777]
 visible = false
@@ -123,6 +172,10 @@ path_desired_distance = 10.0
 [node name="NavigationUpdateInterval" type="Timer" parent="NavigationAgent2D" unique_id=1546638835]
 wait_time = 0.25
 autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2095842117]
+libraries/ = SubResource("AnimationLibrary_xk8we")
+autoplay = &"new_animation"
 
 [connection signal="body_entered" from="SightArea" to="." method="_on_sight_area_body_entered"]
 [connection signal="timeout" from="EnemyHealthComponent/BlinkInterval" to="EnemyHealthComponent" method="_on_blink_interval_timeout"]

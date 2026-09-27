@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cen87n64suyvm"]
 
 [ext_resource type="Script" uid="uid://cn0pkjdjlyega" path="res://Scenes/bullet_triple.gd" id="1_hfy4u"]
-[ext_resource type="Texture2D" uid="uid://d28whyh5w7mo5" path="res://Scenes/Player/SPR_SHOT.png" id="2_hfy4u"]
+[ext_resource type="Texture2D" uid="uid://d28whyh5w7mo5" path="res://Assets/Sprites/SPR_SHOT.png" id="2_hfy4u"]
 [ext_resource type="Script" uid="uid://ddn12rflo201e" path="res://Scripts/cpu_particles_controller.gd" id="3_248g4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_248g4"]

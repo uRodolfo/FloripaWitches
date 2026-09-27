@@ -48,8 +48,8 @@ layout_mode = 2
 text = "Sair"
 
 [node name="Tipografia2" type="Sprite2D" parent="." unique_id=585419528]
-position = Vector2(162.5, 35.5)
-scale = Vector2(0.27437323, 0.252)
+position = Vector2(162.5, 35)
+scale = Vector2(0.27437323, 0.248)
 texture = ExtResource("2_6pedr")
 
 [connection signal="button_down" from="VBoxContainer/Começar" to="." method="_on_começar_button_down"]

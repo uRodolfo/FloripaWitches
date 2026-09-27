@@ -1,0 +1,100 @@
+[gd_scene format=3 uid="uid://bkv61l2m83hu4"]
+
+[ext_resource type="Script" uid="uid://ddn12rflo201e" path="res://Scripts/cpu_particles_controller.gd" id="1_1nbhp"]
+[ext_resource type="Texture2D" uid="uid://d28whyh5w7mo5" path="res://Assets/Sprites/SPR_SHOT.png" id="2_gtni6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ev4qy"]
+size = Vector2(7, 17)
+
+[sub_resource type="Curve" id="Curve_gtni6"]
+_data = [Vector2(0, 1), 0.0, 0.13202244, 0, 0, Vector2(0.81382984, 0.764045), -1.1221907, -1.1221907, 0, 0, Vector2(1, 0), -2.8667717, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_27bwm"]
+offsets = PackedFloat32Array(0.19753087, 1)
+colors = PackedColorArray(1, 0, 0, 1, 0.8172059, 0.6950665, 0.78525376, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_27bwm"]
+atlas = ExtResource("2_gtni6")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vg2gt"]
+atlas = ExtResource("2_gtni6")
+region = Rect2(0, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hs0pm"]
+atlas = ExtResource("2_gtni6")
+region = Rect2(0, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w64rh"]
+atlas = ExtResource("2_gtni6")
+region = Rect2(0, 72, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nlffs"]
+atlas = ExtResource("2_gtni6")
+region = Rect2(0, 96, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ev4qy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_27bwm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vg2gt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hs0pm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w64rh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nlffs")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Node2D" type="Area2D" unique_id=1761288043]
+
+[node name="Area2D" type="CollisionShape2D" parent="." unique_id=2045408173]
+position = Vector2(0.5, 1.5)
+shape = SubResource("RectangleShape2D_ev4qy")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1500876059]
+
+[node name="ExplosionParticles" type="CPUParticles2D" parent="." unique_id=1078374072]
+emitting = false
+amount = 10
+lifetime = 0.15000000000000002
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 200.0
+initial_velocity_max = 250.0
+scale_amount_min = 0.4
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_gtni6")
+color_initial_ramp = SubResource("Gradient_27bwm")
+script = ExtResource("1_1nbhp")
+
+[node name="TrailParticles" type="CPUParticles2D" parent="." unique_id=467224549]
+amount = 10
+lifetime = 0.15000000000000002
+spread = 0.0
+gravity = Vector2(0, 0)
+scale_amount_min = 0.4
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_gtni6")
+color_ramp = SubResource("Gradient_27bwm")
+script = ExtResource("1_1nbhp")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1430726921]
+modulate = Color(1, 0, 0, 1)
+rotation = -1.5707964
+scale = Vector2(1.1023716, 1.1023716)
+sprite_frames = SubResource("SpriteFrames_ev4qy")
+autoplay = "default"

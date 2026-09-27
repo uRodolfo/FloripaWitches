@@ -2,7 +2,7 @@ class_name Puppet
 extends CharacterBody2D
 
 
-const SPEED: float = 600.0
+const SPEED: float = 800.0
 const JUMP_VELOCITY: float = -400.0
 
 

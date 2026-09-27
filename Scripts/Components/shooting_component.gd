@@ -70,8 +70,3 @@ func change_shot_mode() -> void:
 		return
 
 	triple_shot_selected = !triple_shot_selected
-
-	if triple_shot_selected:
-		print("Tiro triplo selecionado")
-	else:
-		print("Tiro único selecionado")

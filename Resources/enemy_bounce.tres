@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="EnemyStats" format=3 uid="uid://ksa5jmehwgb5"]
+
+[ext_resource type="Script" uid="uid://sgf1wkvbnibr" path="res://Resources/Scripts/enemy_stats.gd" id="1_r1owk"]
+[ext_resource type="Texture2D" uid="uid://7m8sxdtvnyad" path="res://Shaders/Palette_swap/Palletes/pallete_bounce.png" id="2_3rgjt"]
+
+[resource]
+script = ExtResource("1_r1owk")
+max_health = 10.0
+speed = 50.0
+damage = 5.0
+sprite_pallete = ExtResource("2_3rgjt")
+metadata/_custom_type_script = "uid://sgf1wkvbnibr"

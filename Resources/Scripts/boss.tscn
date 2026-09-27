@@ -1,0 +1,90 @@
+[gd_scene format=3 uid="uid://dl4bgstyvxppp"]
+
+[ext_resource type="Script" uid="uid://cy34onnu8dt5b" path="res://Resources/Scripts/boss.gd" id="1_a86vh"]
+[ext_resource type="Texture2D" uid="uid://cmtvdfk1j1ayb" path="res://Assets/Sprites/GDFGDFGDFGDF.png" id="1_fvjq8"]
+[ext_resource type="Script" uid="uid://b1lkhedpa50kg" path="res://Scripts/Components/enemy_health_component.gd" id="1_j0fas"]
+[ext_resource type="Script" uid="uid://8k5jl8l0ehtt" path="res://Resources/Scripts/BossShooterComponent.gd" id="3_fvjq8"]
+[ext_resource type="PackedScene" uid="uid://bkv61l2m83hu4" path="res://Scenes/Boss/enemy_bullet.tscn" id="4_6c4ko"]
+[ext_resource type="PackedScene" uid="uid://b1yko38t2lf0j" path="res://Scenes/Boss/boss_bullet_triple.tscn" id="5_itvof"]
+[ext_resource type="Script" uid="uid://b6j67k0nbgcpk" path="res://Scripts/Components/mouse_detector_area.gd" id="8_lf4sq"]
+[ext_resource type="Script" uid="uid://nogyq0jtm73x" path="res://Resources/Scripts/boss_contact_component.gd" id="8_nb8q2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_itvof"]
+radius = 119.0042
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ev4qy"]
+size = Vector2(24, 27)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vutfh"]
+radius = 23.021729
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lf4sq"]
+size = Vector2(47, 37)
+
+[node name="Boss" type="CharacterBody2D" unique_id=34516549 groups=["Enemy"]]
+collision_mask = 4
+script = ExtResource("1_a86vh")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1907911637]
+position = Vector2(4.7683716e-07, 4.7683716e-07)
+scale = Vector2(0.13305323, 0.13305324)
+texture = ExtResource("1_fvjq8")
+
+[node name="SightArea" type="Area2D" parent="." unique_id=1973319174]
+
+[node name="SightSize" type="CollisionShape2D" parent="SightArea" unique_id=220198861]
+shape = SubResource("CircleShape2D_itvof")
+
+[node name="EnemyHealthComponent" type="Node2D" parent="." unique_id=1296091203]
+script = ExtResource("1_j0fas")
+metadata/_custom_type_script = "uid://b1lkhedpa50kg"
+
+[node name="BlinkInterval" type="Timer" parent="EnemyHealthComponent" unique_id=51502058]
+
+[node name="Hurtbox" type="Area2D" parent="." unique_id=1930055577 groups=["Enemy"]]
+
+[node name="HurtboxSize" type="CollisionShape2D" parent="Hurtbox" unique_id=1250565781]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_ev4qy")
+debug_color = Color(0.842819, 0.3180547, 0.5474126, 0.41960785)
+
+[node name="BossShootingComponent" type="Node2D" parent="." unique_id=949895332]
+script = ExtResource("3_fvjq8")
+bullet_scene = ExtResource("4_6c4ko")
+bullet_triple_scene = ExtResource("5_itvof")
+bullet_speed = 200.0
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1657633924]
+
+[node name="NavigationUpdateInterval" type="Timer" parent="NavigationAgent2D" unique_id=873036374]
+wait_time = 0.1
+autostart = true
+
+[node name="MouseDetector" type="Area2D" parent="." unique_id=1391358827 node_paths=PackedStringArray("target") groups=["Enemy"]]
+script = ExtResource("8_lf4sq")
+target = NodePath("..")
+metadata/_custom_type_script = "uid://b6j67k0nbgcpk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MouseDetector" unique_id=527267322]
+shape = SubResource("CircleShape2D_vutfh")
+
+[node name="BossContactComponent" type="Node2D" parent="." unique_id=1081721652]
+script = ExtResource("8_nb8q2")
+target_group = &"Player"
+health_component_name = &"PlayerHealthComponent"
+
+[node name="Timer" type="Timer" parent="BossContactComponent" unique_id=551231154]
+wait_time = 0.15
+
+[node name="ContactArea" type="Area2D" parent="BossContactComponent" unique_id=1012914590]
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BossContactComponent/ContactArea" unique_id=1360278093]
+position = Vector2(0.5, -0.5)
+shape = SubResource("RectangleShape2D_lf4sq")
+
+[connection signal="timeout" from="EnemyHealthComponent/BlinkInterval" to="EnemyHealthComponent" method="_on_blink_interval_timeout"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="timeout" from="NavigationAgent2D/NavigationUpdateInterval" to="." method="_on_navigation_update_interval_timeout"]
+[connection signal="body_entered" from="BossContactComponent/ContactArea" to="." method="_on_contact_area_body_entered"]
+[connection signal="body_exited" from="BossContactComponent/ContactArea" to="." method="_on_contact_area_body_exited"]

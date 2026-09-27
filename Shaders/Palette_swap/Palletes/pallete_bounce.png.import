@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d28whyh5w7mo5"
-path="res://.godot/imported/SPR_SHOT.png-84dc52f6def3222c2a4f4d56822d477e.ctex"
+uid="uid://7m8sxdtvnyad"
+path="res://.godot/imported/pallete_bounce.png-84e30fd2959c0ce1cac7257f13bff10c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/Player/SPR_SHOT.png"
-dest_files=["res://.godot/imported/SPR_SHOT.png-84dc52f6def3222c2a4f4d56822d477e.ctex"]
+source_file="res://Shaders/Palette_swap/Palletes/pallete_bounce.png"
+dest_files=["res://.godot/imported/pallete_bounce.png-84e30fd2959c0ce1cac7257f13bff10c.ctex"]
 
 [params]
 

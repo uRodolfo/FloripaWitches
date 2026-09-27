@@ -4,7 +4,7 @@ extends State
 signal moving()
 signal attacking()
 
-@export var stop_distance: float = 5.0
+@export var stop_distance: float = 2.0
 @export var slowdown_distance: float = 100.0
 @export var lerp_speed: float = 10.0
 
