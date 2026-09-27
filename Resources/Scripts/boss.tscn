@@ -54,6 +54,11 @@ bullet_scene = ExtResource("4_6c4ko")
 bullet_triple_scene = ExtResource("5_itvof")
 bullet_speed = 200.0
 
+[node name="Spawnpos" type="Marker2D" parent="BossShootingComponent" unique_id=1143028250]
+
+[node name="Shootspeed" type="Timer" parent="BossShootingComponent" unique_id=1549550231]
+one_shot = true
+
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1657633924]
 
 [node name="NavigationUpdateInterval" type="Timer" parent="NavigationAgent2D" unique_id=873036374]
@@ -85,6 +90,7 @@ shape = SubResource("RectangleShape2D_lf4sq")
 
 [connection signal="timeout" from="EnemyHealthComponent/BlinkInterval" to="EnemyHealthComponent" method="_on_blink_interval_timeout"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="timeout" from="BossShootingComponent/Shootspeed" to="BossShootingComponent" method="_on_shotspeed_timeout"]
 [connection signal="timeout" from="NavigationAgent2D/NavigationUpdateInterval" to="." method="_on_navigation_update_interval_timeout"]
 [connection signal="body_entered" from="BossContactComponent/ContactArea" to="." method="_on_contact_area_body_entered"]
 [connection signal="body_exited" from="BossContactComponent/ContactArea" to="." method="_on_contact_area_body_exited"]

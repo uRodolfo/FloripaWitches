@@ -8,7 +8,7 @@ signal was_damaged_by(source: Node2D)
 # ATRIBUTOS DO BOSS
 # =========================
 
-@export var move_speed: float = 80.0
+@export var move_speed: float = 40.0
 @export var max_health: float = 20.0
 
 
@@ -100,6 +100,8 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
+	shoot_player()
+
 
 func follow_player(_delta: float) -> void:
 	if not is_instance_valid(target):
@@ -177,10 +179,7 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 		area.queue_free()
 
 	elif area.is_in_group("PlayerBullet2"):
-		health.damage_from(
-			0.5,
-			area
-		)
+		health.damage_from(0.5,area)
 
 		area.queue_free()
 

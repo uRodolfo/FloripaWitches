@@ -2,7 +2,7 @@ extends ContactDamageComponent
 class_name BossContactDamageComponent
 
 
-@export var boss_damage: float = 2.0
+@export var boss_damage: float = 1.0
 @export var boss_damage_interval: float = 1.0
 
 

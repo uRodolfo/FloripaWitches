@@ -957,7 +957,7 @@ position = Vector2(547, 148)
 stats = ExtResource("34_neg2b")
 
 [node name="Boss" parent="." unique_id=34516549 instance=ExtResource("2_r33sp")]
-position = Vector2(153, 58)
+position = Vector2(142, 69)
 
 [connection signal="died" from="Player" to="." method="_on_player_died"]
 [connection signal="died" from="Player" to="CanvasLayer/HUD_HP" method="_on_player_died"]

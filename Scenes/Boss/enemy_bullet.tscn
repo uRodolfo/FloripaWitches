@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://bkv61l2m83hu4"]
 
 [ext_resource type="Script" uid="uid://ddn12rflo201e" path="res://Scripts/cpu_particles_controller.gd" id="1_1nbhp"]
+[ext_resource type="Script" uid="uid://h0ydyy5jkbe0" path="res://Scenes/Boss/enemy_bullet.gd" id="1_27bwm"]
 [ext_resource type="Texture2D" uid="uid://d28whyh5w7mo5" path="res://Assets/Sprites/SPR_SHOT.png" id="2_gtni6"]
+[ext_resource type="PackedScene" uid="uid://b1yko38t2lf0j" path="res://Scenes/Boss/boss_bullet_triple.tscn" id="2_vg2gt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ev4qy"]
 size = Vector2(7, 17)
@@ -57,7 +59,11 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Node2D" type="Area2D" unique_id=1761288043]
+[node name="Node2D" type="Area2D" unique_id=1761288043 groups=["EnemyBullet"]]
+collision_mask = 5
+script = ExtResource("1_27bwm")
+split_bullet_scene = ExtResource("2_vg2gt")
+split_angle = 50.0
 
 [node name="Area2D" type="CollisionShape2D" parent="." unique_id=2045408173]
 position = Vector2(0.5, 1.5)
@@ -93,8 +99,19 @@ color_ramp = SubResource("Gradient_27bwm")
 script = ExtResource("1_1nbhp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1430726921]
-modulate = Color(1, 0, 0, 1)
+modulate = Color(1, 0, 1, 1)
 rotation = -1.5707964
 scale = Vector2(1.1023716, 1.1023716)
 sprite_frames = SubResource("SpriteFrames_ev4qy")
 autoplay = "default"
+
+[node name="SplitSpawn" type="Marker2D" parent="." unique_id=2076731929]
+
+[node name="SplitTimer" type="Timer" parent="." unique_id=434217478]
+wait_time = 0.3
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="collided" from="." to="ExplosionParticles" method="play_particles"]
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]
+[connection signal="timeout" from="SplitTimer" to="." method="_on_split_timer_timeout"]

@@ -53,6 +53,7 @@ PlayerBullet=""
 Mofas=""
 PlayerBullet2=""
 Navigation=""
+EnemyBullet=""
 
 [input]
 
