@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://hlesmyt4wkpp" path="res://Scenes/Mofas/follow_player_state.gd" id="4_6sxjv"]
 [ext_resource type="Script" uid="uid://cuptdwisb1vjw" path="res://Scenes/Mofas/mofas_attack_state.gd" id="5_bn8xf"]
 [ext_resource type="Script" uid="uid://bmnv7cmajsb7k" path="res://Scripts/Components/contact_damage_component.gd" id="6_tq8be"]
+[ext_resource type="Texture2D" uid="uid://blwja713dcqp4" path="res://Assets/Sprites/Player/Mofas/SPR_MOFAS_ATTACK.png" id="9_6ox0w"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ktqkt"]
 animation = &"attacking"
@@ -302,6 +303,77 @@ colors = PackedColorArray(0.7058824, 1, 1, 1, 1, 1, 1, 1)
 [sub_resource type="CircleShape2D" id="CircleShape2D_w8tas"]
 radius = 18.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_pqtwb"]
+atlas = ExtResource("9_6ox0w")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bs04f"]
+atlas = ExtResource("9_6ox0w")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3pnee"]
+atlas = ExtResource("9_6ox0w")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6xv1r"]
+atlas = ExtResource("9_6ox0w")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ln8uv"]
+atlas = ExtResource("9_6ox0w")
+region = Rect2(0, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1p47s"]
+atlas = ExtResource("9_6ox0w")
+region = Rect2(0, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_68htl"]
+atlas = ExtResource("9_6ox0w")
+region = Rect2(0, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xcn43"]
+atlas = ExtResource("9_6ox0w")
+region = Rect2(0, 224, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bbssp"]
+atlas = ExtResource("9_6ox0w")
+region = Rect2(0, 256, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3sy6q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pqtwb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bs04f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3pnee")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6xv1r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ln8uv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1p47s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_68htl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xcn43")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bbssp")
+}],
+"loop": 0,
+"name": &"impact",
+"speed": 24.0
+}]
+
 [node name="Mofas" type="CharacterBody2D" unique_id=557517622 groups=["Mofas"]]
 collision_mask = 9
 script = ExtResource("1_6sxjv")
@@ -370,6 +442,14 @@ collision_mask = 9
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ContactDamageComponent/ContactArea" unique_id=1987610082]
 shape = SubResource("CircleShape2D_w8tas")
 
+[node name="ImpactAnimation" type="AnimatedSprite2D" parent="." unique_id=1547659470]
+z_index = 1
+sprite_frames = SubResource("SpriteFrames_3sy6q")
+animation = &"impact"
+frame = 8
+frame_progress = 1.0
+
 [connection signal="following_player" from="State Machine/FollowPlayer" to="MofasAnimation" method="_on_follow_player_following_player"]
 [connection signal="attacking" from="State Machine/Attack" to="MofasAnimation" method="_on_attack_attacking"]
 [connection signal="moving" from="State Machine/Attack" to="MofasAnimation" method="_on_attack_moving"]
+[connection signal="applied_damage" from="ContactDamageComponent" to="." method="_on_contact_damage_component_applied_damage"]

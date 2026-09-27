@@ -2,14 +2,11 @@ class_name Puppet
 extends CharacterBody2D
 
 
-const SPEED: float = 600.0
+const SPEED: float = 800.0
 const JUMP_VELOCITY: float = -400.0
 
-
-@onready var state_machine: StateMachine = (
-	$"State Machine"
-)
-
+@onready var impact_animation: AnimatedSprite2D = $ImpactAnimation
+@onready var state_machine: StateMachine = $"State Machine"
 @onready var sprite: Sprite2D = $Sprite2D
 
 
@@ -91,3 +88,11 @@ func has_attack_target() -> bool:
 		return false
 
 	return true
+
+func _on_contact_damage_component_applied_damage() -> void:
+	var impact_animation_dup = impact_animation.duplicate()
+	impact_animation_dup.global_position = impact_animation.global_position
+	impact_animation_dup.visible =  true
+	impact_animation_dup.play("impact")
+	impact_animation_dup.animation_finished.connect(impact_animation_dup.queue_free)
+	get_tree().current_scene.add_child(impact_animation_dup)

@@ -16,6 +16,12 @@ func _ready() -> void:
 
 func next_weapon() -> void:
 	visible = true
+	
+	# Resetar tween e valor alfa quando jogador trocar spells
+	if fade_tween:
+		fade_tween.kill()
+	self.modulate.a = 1
+	
 	hide_timer.wait_time = 1
 	hide_timer.start()
 

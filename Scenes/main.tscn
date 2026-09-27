@@ -11,7 +11,7 @@
 [ext_resource type="Resource" uid="uid://dsh84jose4y5k" path="res://Resources/enemy_1.tres" id="5_kry3j"]
 [ext_resource type="Resource" uid="uid://bnp0p2h275p6u" path="res://Resources/enemy_2.tres" id="6_21xkr"]
 [ext_resource type="Texture2D" uid="uid://i5544bdx68ac" path="res://Assets/Props/poça/poça.png" id="6_e08e2"]
-[ext_resource type="Script" uid="uid://b7gkyawun3j1w" path="res://Scripts/camera.gd" id="6_fevyy"]
+[ext_resource type="Script" uid="uid://b7gkyawun3j1w" path="res://Scripts/Camera.gd" id="6_fevyy"]
 [ext_resource type="PackedScene" uid="uid://7h11giytrw4j" path="res://Scenes/Components/Mofas.tscn" id="7_6bp64"]
 [ext_resource type="PackedScene" uid="uid://cobmkijyhf8y6" path="res://Assets/Props/quartzo/light_scenes/quartzo_azul.tscn" id="7_neg2b"]
 [ext_resource type="Script" uid="uid://3t46of85okl0" path="res://Scenes/pts.gd" id="8_344ge"]
@@ -73,7 +73,9 @@ func _on_player_died() -> void:
 func _process(delta: float) -> void:
 	if game_over and Input.is_action_just_pressed(\"restart\"):
 		get_tree().reload_current_scene()
-		
+	
+	if Input.is_action_just_pressed(\"menu\"):
+		get_tree().change_scene_to_file(\"res://Scenes/Menu.tscn\")
 "
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_3sy6q"]

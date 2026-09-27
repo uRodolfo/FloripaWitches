@@ -20,9 +20,11 @@
 [ext_resource type="Texture2D" uid="uid://n1re2lg6idkl" path="res://Assets/Sprites/Player/Yuna walking up4.png" id="17_7xdrn"]
 [ext_resource type="Texture2D" uid="uid://dkjjvef6sivqv" path="res://Assets/Lights/radial_gradient.tres" id="18_0objx"]
 [ext_resource type="Script" uid="uid://beg6uqn3owyxj" path="res://Scenes/Player/weapon_selector.gd" id="19_w71ue"]
-[ext_resource type="Texture2D" uid="uid://dep8ed60gkic7" path="res://Assets/Sprites/Placeholders/Red Bullet.png" id="20_1e6p3"]
+[ext_resource type="Texture2D" uid="uid://cs41mdbt6dwhe" path="res://Assets/Sprites/Player/spell_1.png" id="21_8cj01"]
+[ext_resource type="Texture2D" uid="uid://fclikygh1b27" path="res://Assets/Sprites/Player/spell_2.png" id="22_i2g7t"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jmcll"]
+radius = 11.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ude3g"]
 animations = [{
@@ -111,7 +113,7 @@ one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2010125955]
 z_as_relative = false
-position = Vector2(0, 8)
+position = Vector2(0, 7)
 shape = SubResource("CircleShape2D_jmcll")
 
 [node name="ShootingComponent" type="Node2D" parent="." unique_id=2125502849]
@@ -186,10 +188,16 @@ script = ExtResource("19_w71ue")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="WeaponSelector" unique_id=1704053087]
 custom_maximum_size = Vector2(1, 1)
-layout_mode = 0
-offset_top = -68.0
-offset_right = 1.0
-offset_bottom = -67.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.10300001
+anchor_top = 0.59800005
+anchor_right = 0.90700006
+anchor_bottom = 1.0
+offset_left = -4.1200004
+offset_top = -91.92
+offset_right = -35.280003
+offset_bottom = -107.0
 
 [node name="SingleShot" type="Panel" parent="WeaponSelector/HBoxContainer" unique_id=834538934]
 layout_mode = 2
@@ -203,26 +211,24 @@ offset_left = 4.0
 offset_top = 4.9999924
 offset_right = 20.0
 offset_bottom = 20.999992
-texture = ExtResource("20_1e6p3")
+texture = ExtResource("21_8cj01")
 
 [node name="TripleShot" type="Panel" parent="WeaponSelector/HBoxContainer" unique_id=69542092]
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="WeaponSelector/HBoxContainer/TripleShot" unique_id=329804422]
-modulate = Color(0.25882354, 1, 0.5411765, 1)
-self_modulate = Color(0.5019608, 0.52156866, 1, 1)
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 91.00001
-anchor_bottom = 91.00001
-offset_left = 17.0
-offset_top = 4.9999924
-offset_right = 28.0
+anchor_top = 92.00001
+anchor_bottom = 92.00001
+offset_left = 16.0
+offset_right = 32.0
 offset_bottom = 15.999992
-texture = ExtResource("20_1e6p3")
+texture = ExtResource("22_i2g7t")
 
 [node name="HideTimer" type="Timer" parent="WeaponSelector" unique_id=179959582]
 process_callback = 0
+one_shot = true
 
 [connection signal="dash_end" from="." to="DashParticles" method="set_emitting" binds= [false]]
 [connection signal="dash_start" from="." to="DashParticles" method="set_emitting" binds= [true]]

@@ -1,6 +1,7 @@
 extends Node2D
 class_name ContactDamageComponent
 
+signal applied_damage
 
 @export var damage: float = 1.0
 @export var damage_interval: float = 1.0
@@ -167,6 +168,7 @@ func _on_timer_timeout() -> void:
 func _apply_damage(
 	target: Node2D
 ) -> void:
+	applied_damage.emit()
 	var health_component: Node = (
 		target.get_node_or_null(
 			NodePath(
