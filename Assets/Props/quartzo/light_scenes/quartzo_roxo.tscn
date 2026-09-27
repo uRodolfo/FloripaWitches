@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://xpfq8xtshxu0"]
+
+[ext_resource type="Texture2D" uid="uid://ia2frahny17d" path="res://Assets/Props/quartzo/roxo.png" id="1_5whhe"]
+[ext_resource type="Texture2D" uid="uid://dkjjvef6sivqv" path="res://Assets/Lights/radial_gradient.tres" id="2_b5vvv"]
+
+[node name="Sprite2D" type="Sprite2D" unique_id=24704258]
+texture = ExtResource("1_5whhe")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1706124142]
+color = Color(0.67736363, 0.20556659, 1, 1)
+energy = 0.5
+shadow_filter = 1
+texture = ExtResource("2_b5vvv")
+texture_scale = 0.6
