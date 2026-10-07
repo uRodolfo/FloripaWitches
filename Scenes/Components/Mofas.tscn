@@ -375,6 +375,7 @@ animations = [{
 }]
 
 [node name="Mofas" type="CharacterBody2D" unique_id=557517622 groups=["Mofas"]]
+z_as_relative = false
 collision_mask = 9
 script = ExtResource("1_6sxjv")
 
@@ -393,7 +394,6 @@ parameters/Moving/blend_position = Vector2(0, 0)
 libraries/ = SubResource("AnimationLibrary_68htl")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1929018939]
-z_index = 1
 z_as_relative = false
 texture = ExtResource("2_tq8be")
 hframes = 18
