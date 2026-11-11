@@ -129,16 +129,19 @@ color_initial_ramp = SubResource("Gradient_wfhf6")
 
 [node name="ColorRect2" type="ColorRect" parent="CanvasLayer" unique_id=802858117]
 offset_left = 127.0
-offset_top = 12.0
+offset_top = 78.0
 offset_right = 313.0
 offset_bottom = 233.0
 color = Color(0.05882353, 0.05882353, 0.05882353, 0.49411765)
 
-[node name="HighScores" type="Label" parent="CanvasLayer" unique_id=1269661603]
-offset_left = 130.0
-offset_top = 16.0
-offset_right = 310.0
-offset_bottom = 230.0
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer" unique_id=81530846]
+offset_left = 129.0
+offset_top = 81.0
+offset_right = 311.0
+offset_bottom = 231.0
+
+[node name="HighScores" type="Label" parent="CanvasLayer/ScrollContainer" unique_id=1269661603]
+layout_mode = 2
 label_settings = SubResource("LabelSettings_ev4qy")
 script = ExtResource("8_aobxe")
 
