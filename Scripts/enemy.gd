@@ -129,7 +129,7 @@ func _on_damaged_by(
 	if not is_instance_valid(source):
 		return
 
-	if not (source.is_in_group("Mofas") or source.is_in_group("PlayerBullet")):
+	if not (source.is_in_group("Mofas") or source.is_in_group("PlayerBullet")) or source.is_in_group("PlayerBullet2"):
 		return
 
 	was_damaged_by.emit(source)

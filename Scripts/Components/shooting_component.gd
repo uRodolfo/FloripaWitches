@@ -39,7 +39,7 @@ func shoot_single(direction: Vector2) -> void:
 func shoot_triple(direction: Vector2) -> void:
 	create_bullet(
 		bullet_triple_scene,
-		direction.rotated(deg_to_rad(-30))
+		direction.rotated(deg_to_rad(-10))
 	)
 
 	create_bullet(
@@ -49,7 +49,7 @@ func shoot_triple(direction: Vector2) -> void:
 
 	create_bullet(
 		bullet_triple_scene,
-		direction.rotated(deg_to_rad(30))
+		direction.rotated(deg_to_rad(10))
 	)
 
 

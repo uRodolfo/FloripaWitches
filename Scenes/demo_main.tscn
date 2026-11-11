@@ -680,7 +680,7 @@ y_sort_enabled = true
 
 [node name="Player" parent="Y-Sortable" unique_id=1032195059 instance=ExtResource("5_xmfam")]
 z_as_relative = false
-position = Vector2(216, 80)
+position = Vector2(-1125, -1217)
 starting_hp = 5.0
 
 [node name="TileMaps" type="Node2D" parent="Y-Sortable" unique_id=1017792087]
@@ -856,7 +856,7 @@ float_height = 2.6
 float_speed = 3.7
 
 [node name="Pergaminho2" parent="." unique_id=76231234 instance=ExtResource("26_h424u")]
-position = Vector2(-488, -104)
+position = Vector2(-1088, -1176)
 float_height = 2.6
 float_speed = 3.7
 
@@ -989,7 +989,7 @@ position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_3sy6q")
 
 [node name="Node2D" parent="." unique_id=647142341 instance=ExtResource("37_6brly")]
-position = Vector2(-1416, -136)
+position = Vector2(-1075, -1229)
 
 [node name="Area2D" type="Area2D" parent="." unique_id=409704330]
 position = Vector2(-912, -1168)
@@ -1055,17 +1055,17 @@ position = Vector2(-1920, -1200)
 [connection signal="body_entered" from="DialogueActionable2D" to="DialogueActionable2D" method="action" flags=6 unbinds=1]
 [connection signal="body_entered" from="DialogueActionable2D2" to="DialogueActionable2D2" method="action" flags=6 unbinds=1]
 [connection signal="body_entered" from="Area2D" to="CameraRoomController" method="lock_camera" unbinds=1]
-[connection signal="body_entered" from="Area2D" to="CameraRoomController" method="change_global_position" unbinds=1 binds= [Vector2(-640, -960)]]
 [connection signal="body_entered" from="Area2D" to="CameraRoomController" method="set_zoom" unbinds=1 binds= [Vector2(0.5, 0.5)]]
+[connection signal="body_entered" from="Area2D" to="CameraRoomController" method="change_global_position" unbinds=1 binds= [Vector2(-640, -960)]]
 [connection signal="body_entered" from="Area2D2" to="CameraRoomController" method="reset_zoom" unbinds=1]
 [connection signal="body_entered" from="Area2D2" to="CameraRoomController" method="unlock_camera" unbinds=1]
 [connection signal="body_entered" from="Area2D6" to="CameraRoomController" method="reset_zoom" unbinds=1]
 [connection signal="body_entered" from="Area2D6" to="CameraRoomController" method="unlock_camera" unbinds=1]
 [connection signal="body_entered" from="Area2D5" to="CameraRoomController" method="lock_camera" unbinds=1]
-[connection signal="body_entered" from="Area2D5" to="CameraRoomController" method="change_global_position" unbinds=1 binds= [Vector2(-1920, -1200)]]
 [connection signal="body_entered" from="Area2D5" to="CameraRoomController" method="set_zoom" unbinds=1 binds= [Vector2(0.75, 0.75)]]
+[connection signal="body_entered" from="Area2D5" to="CameraRoomController" method="change_global_position" unbinds=1 binds= [Vector2(-1920, -1200)]]
 [connection signal="body_entered" from="Area2D3" to="CameraRoomController" method="lock_camera" unbinds=1]
-[connection signal="body_entered" from="Area2D3" to="CameraRoomController" method="change_global_position" unbinds=1 binds= [Vector2(-1920, -1200)]]
 [connection signal="body_entered" from="Area2D3" to="CameraRoomController" method="set_zoom" unbinds=1 binds= [Vector2(0.75, 0.75)]]
+[connection signal="body_entered" from="Area2D3" to="CameraRoomController" method="change_global_position" unbinds=1 binds= [Vector2(-1920, -1200)]]
 [connection signal="body_entered" from="Area2D4" to="CameraRoomController" method="reset_zoom" unbinds=1]
 [connection signal="body_entered" from="Area2D4" to="CameraRoomController" method="unlock_camera" unbinds=1]

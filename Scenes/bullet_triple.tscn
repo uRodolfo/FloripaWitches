@@ -70,7 +70,7 @@ sprite_frames = SubResource("SpriteFrames_ev4qy")
 animation = &"new_animation"
 autoplay = "new_animation"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=398217393 groups=["PlayerBullet"]]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=398217393 groups=["PlayerBullet2"]]
 shape = SubResource("RectangleShape2D_hfy4u")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=327298150]
