@@ -19,6 +19,7 @@
 [ext_resource type="Script" uid="uid://cngj628hbmbl2" path="res://Resources/Scripts/boss_summoning_state.gd" id="13_ri2lv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j6cna"]
+size = Vector2(71, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5nabj"]
 atlas = ExtResource("4_guhyc")
@@ -153,16 +154,16 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_itvof"]
-radius = 119.0042
+radius = 448.00113
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ev4qy"]
-size = Vector2(24, 27)
+size = Vector2(83, 30)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vutfh"]
 radius = 23.021729
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lf4sq"]
-size = Vector2(47, 37)
+size = Vector2(65, 30)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hdf80"]
 size = Vector2(161.5, 155)
@@ -184,6 +185,7 @@ summon_enemy_scene_1 = ExtResource("2_ri2lv")
 summon_enemy_scene_2 = ExtResource("3_1iuv0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=293856375]
+position = Vector2(-2.5, 0)
 shape = SubResource("RectangleShape2D_j6cna")
 debug_color = Color(0.012677928, 0.54393667, 0.6082113, 0.41960785)
 
@@ -206,7 +208,7 @@ metadata/_custom_type_script = "uid://b1lkhedpa50kg"
 [node name="Hurtbox" type="Area2D" parent="." unique_id=1930055577 groups=["Enemy"]]
 
 [node name="HurtboxSize" type="CollisionShape2D" parent="Hurtbox" unique_id=1250565781]
-position = Vector2(0, -0.5)
+position = Vector2(-4.5, -1)
 shape = SubResource("RectangleShape2D_ev4qy")
 debug_color = Color(0.842819, 0.3180547, 0.5474126, 0.41960785)
 
@@ -247,7 +249,7 @@ wait_time = 0.108
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BossContactComponent/ContactArea" unique_id=1360278093]
-position = Vector2(0.5, -0.5)
+position = Vector2(-1.5, -1)
 shape = SubResource("RectangleShape2D_lf4sq")
 
 [node name="StateMachine" type="Node" parent="." unique_id=1774219139 node_paths=PackedStringArray("initial_state")]

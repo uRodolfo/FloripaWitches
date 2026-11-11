@@ -63,7 +63,8 @@ animations = [{
 collision_mask = 5
 script = ExtResource("1_27bwm")
 split_bullet_scene = ExtResource("2_vg2gt")
-split_angle = 50.0
+split_speed = 250.0
+split_angle = 45.0
 
 [node name="Area2D" type="CollisionShape2D" parent="." unique_id=2045408173]
 position = Vector2(0.5, 1.5)
@@ -108,7 +109,7 @@ autoplay = "default"
 [node name="SplitSpawn" type="Marker2D" parent="." unique_id=2076731929]
 
 [node name="SplitTimer" type="Timer" parent="." unique_id=434217478]
-wait_time = 0.3
+wait_time = 0.556
 one_shot = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

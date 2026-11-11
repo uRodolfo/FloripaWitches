@@ -7,7 +7,7 @@ var speed: float
 
 @export var split_bullet_scene: PackedScene
 @export var split_speed: float = 300.0
-@export var split_angle: float = 30.0
+@export var split_angle: float = 10.0
 @export var damage_amount: float = 1.0
 @onready var split_spawn: Marker2D = $SplitSpawn
 @onready var split_timer: Timer = $SplitTimer

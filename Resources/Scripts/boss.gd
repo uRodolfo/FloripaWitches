@@ -9,7 +9,7 @@ signal was_damaged_by(source: Node2D)
 # ATRIBUTOS DO BOSS
 # =========================
 
-@export var move_speed: float = 40.0
+@export var move_speed: float = 60.0
 @export var max_health: float = 20.0
 @export var summon_enemy_scene_1: PackedScene
 @export var summon_enemy_scene_2: PackedScene

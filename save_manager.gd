@@ -29,7 +29,7 @@ func save_scores():
 	file.store_string(json_string)
 	file.close()
 
-func add_or_update_score(player_name: String, new_score: float):
+func add_or_update_score(player_name: String, new_score: int):
 	var found = false
 	for i in range(current_scores.size()):
 		if current_scores[i]["name"] == player_name:
@@ -41,11 +41,11 @@ func add_or_update_score(player_name: String, new_score: float):
 		current_scores.append({"name": player_name, "score": new_score})
 	save_scores()
 
-func get_high_score_for_name(player_name: String) -> float:
+func get_high_score_for_name(player_name: String) -> int:
 	for entry in current_scores:
 		if entry["name"] == player_name:
 			return entry["score"]
-	return 0.0
+	return 0
 
 func get_all_scores() -> Array:
 	return current_scores
