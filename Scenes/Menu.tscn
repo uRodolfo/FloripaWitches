@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://dfaye7j32yf3t" path="res://Assets/HUD/credits_button.png" id="3_idohh"]
 [ext_resource type="Texture2D" uid="uid://3thdjlthmxim" path="res://Assets/HUD/leave_button.png" id="4_wfhf6"]
 [ext_resource type="Texture2D" uid="uid://cs3gwk58bkstf" path="res://Assets/HUD/spellcradle_titlecard.png" id="5_3jcrr"]
+[ext_resource type="FontFile" uid="uid://bga6hf7xcjtoo" path="res://Fonts/ChonkyBitsFontBold-lxeZ5.otf" id="7_3jcrr"]
+[ext_resource type="Script" uid="uid://dplhvud0df4gg" path="res://Scenes/high_scores.gd" id="8_aobxe"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3sy6q"]
 atlas = ExtResource("2_ma218")
@@ -38,6 +40,10 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 [sub_resource type="Gradient" id="Gradient_wfhf6"]
 colors = PackedColorArray(0.09100584, 0.6265028, 0.840789, 1, 0.37834683, 0.9639184, 0.81871015, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_ev4qy"]
+font = ExtResource("7_3jcrr")
+font_size = 8
+
 [node name="Control" type="Control" unique_id=522865940]
 layout_mode = 3
 anchors_preset = 15
@@ -65,14 +71,12 @@ offset_bottom = 266.0
 color = Color(0, 0, 0, 0.11764706)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=1761543561]
-offset_left = 112.0
+offset_left = 20.14
 offset_top = 96.0
-offset_right = 212.0
+offset_right = 120.140015
 offset_bottom = 218.0
 
 [node name="PlayButton" type="TextureButton" parent="CanvasLayer/VBoxContainer" unique_id=193082426]
-custom_minimum_size = Vector2(100, 38)
-custom_maximum_size = Vector2(100, 38)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -91,9 +95,9 @@ texture_normal = SubResource("AtlasTexture_sjh0l")
 texture_pressed = SubResource("AtlasTexture_qki4b")
 
 [node name="Title" type="TextureRect" parent="CanvasLayer" unique_id=1520867766]
-offset_left = 62.0
+offset_left = 2.245
 offset_top = 12.0
-offset_right = 261.02417
+offset_right = 201.26929
 offset_bottom = 86.0
 texture = ExtResource("5_3jcrr")
 expand_mode = 3
@@ -122,6 +126,21 @@ scale_amount_max = 2.0
 color = Color(1, 1, 1, 0.6431373)
 color_ramp = SubResource("Gradient_idohh")
 color_initial_ramp = SubResource("Gradient_wfhf6")
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer" unique_id=802858117]
+offset_left = 127.0
+offset_top = 12.0
+offset_right = 313.0
+offset_bottom = 233.0
+color = Color(0.05882353, 0.05882353, 0.05882353, 0.49411765)
+
+[node name="HighScores" type="Label" parent="CanvasLayer" unique_id=1269661603]
+offset_left = 130.0
+offset_top = 16.0
+offset_right = 310.0
+offset_bottom = 230.0
+label_settings = SubResource("LabelSettings_ev4qy")
+script = ExtResource("8_aobxe")
 
 [connection signal="button_up" from="CanvasLayer/VBoxContainer/PlayButton" to="." method="_on_começar_button_up"]
 [connection signal="button_up" from="CanvasLayer/VBoxContainer/CreditsButton2" to="." method="_on_creditos_button_up"]

@@ -4,12 +4,15 @@
 [ext_resource type="Texture2D" uid="uid://xtqudera3v8" path="res://Assets/HUD/thankyou.png" id="2_hp770"]
 [ext_resource type="FontFile" uid="uid://ctsnrudl0ddh5" path="res://Fonts/GomePixel-DYJX1.otf" id="3_hp770"]
 [ext_resource type="Texture2D" uid="uid://3thdjlthmxim" path="res://Assets/HUD/leave_button.png" id="5_xipsy"]
+[ext_resource type="FontFile" uid="uid://bga6hf7xcjtoo" path="res://Fonts/ChonkyBitsFontBold-lxeZ5.otf" id="6_isk6x"]
 [ext_resource type="Texture2D" uid="uid://cs3gwk58bkstf" path="res://Assets/HUD/spellcradle_titlecard.png" id="6_kwgoi"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_isk6x"]
 outline_color = Color(0, 0, 0, 1)
 shadow_size = 7
 shadow_color = Color(0, 0, 0, 0.36078432)
+
+[sub_resource type="Theme" id="Theme_4yvsi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sjh0l"]
 atlas = ExtResource("5_xipsy")
@@ -25,6 +28,11 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="Gradient" id="Gradient_wfhf6"]
 colors = PackedColorArray(0.09100584, 0.6265028, 0.840789, 1, 0.37834683, 0.9639184, 0.81871015, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ev4qy"]
+font = ExtResource("6_isk6x")
+shadow_size = 7
+shadow_color = Color(0, 0, 0, 0.36078432)
 
 [node name="Control" type="Control" unique_id=522865940]
 layout_mode = 3
@@ -63,9 +71,14 @@ label_settings = SubResource("LabelSettings_isk6x")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=1761543561]
 offset_left = 112.0
-offset_top = 192.0
+offset_top = 165.59
 offset_right = 212.0
-offset_bottom = 234.0
+offset_bottom = 238.59001
+
+[node name="Type" type="LineEdit" parent="CanvasLayer/VBoxContainer" unique_id=628808652]
+layout_mode = 2
+theme = SubResource("Theme_4yvsi")
+theme_override_fonts/font = ExtResource("6_isk6x")
 
 [node name="ExitButton" type="TextureButton" parent="CanvasLayer/VBoxContainer" unique_id=1452044953]
 layout_mode = 2
@@ -104,5 +117,30 @@ scale_amount_max = 2.0
 color = Color(1, 1, 1, 0.6431373)
 color_ramp = SubResource("Gradient_idohh")
 color_initial_ramp = SubResource("Gradient_wfhf6")
+
+[node name="Pontos" type="Label" parent="CanvasLayer" unique_id=957637691]
+offset_left = 60.0
+offset_top = 102.0
+offset_right = 104.0
+offset_bottom = 125.0
+text = "Pontos:"
+label_settings = SubResource("LabelSettings_ev4qy")
+
+[node name="ScorePoints" type="Label" parent="CanvasLayer" unique_id=425629296]
+offset_left = 109.0
+offset_top = 103.0
+offset_right = 262.0
+offset_bottom = 120.0
+label_settings = SubResource("LabelSettings_ev4qy")
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer" unique_id=1682852859]
+offset_top = 144.66
+offset_right = 319.0
+offset_bottom = 160.66
+
+[node name="DigiteSeuNome" type="Label" parent="CanvasLayer/CenterContainer" unique_id=1126204232]
+layout_mode = 2
+text = "Digite seu nome:"
+label_settings = SubResource("LabelSettings_ev4qy")
 
 [connection signal="button_up" from="CanvasLayer/VBoxContainer/ExitButton" to="." method="_on_sair_button_up"]
